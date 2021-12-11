@@ -67,12 +67,52 @@ class Solution:
     def rotate(self, A: List[List[int]]) -> None:
         """
         Do not return anything, modify matrix in-place instead.
+        Best solutions: https://leetcode.com/problems/rotate-image/discuss/18884
         """
-        n = len(A)
-        for i in range(n//2):
-            for j in range(n - n//2):
-                A[i][j], A[~j][i], A[~i][~j], A[j][~i] = \
-                         A[~j][i], A[~i][~j], A[j][~i], A[i][j], 
+        pythonic = 0
+        # =========== python cheat =====================
+        # although it's kinda cheating by using [::-1]
+        # filp and transpose is the same as rotating 90 degrees clockwise
+
+        if pythonic == 0:
+            A[:] = zip(*A[::-1])
+        elif pythonic == 1:
+        
+        # Questions:
+        # [:] assignment like pointer?
+        # zip() with *... I don't understand how it's doing that
+
+        # zip wants a bunch of arguments to zip together, but what you have is a single
+        # argument (a list, whose elements are also lists). The * in a function call
+        # "unpacks" a list (or other iterable), making each of its elements a separate
+        # argument. So without the *, you're doing zip( [[1,2,3],[4,5,6]] ). With the *,
+        # you're doing zip([1,2,3], [4,5,6]).
+        # https://stackoverflow.com/questions/29139350/difference-between-ziplist-and-ziplist/29139418
+    
+
+        # ================ direct solution ================
+            n = len(A)
+            for i in range(n//2):
+                for j in range(n - n//2):
+                    A[i][j], A[~j][i], A[~i][~j], A[j][~i] = \
+                             A[~j][i], A[~i][~j], A[j][~i], A[i][j] 
+        
+        # ================ flip and transpose =================
+        else:
+            self.transpose(A)
+            self.reflect(A)
+            
+            def transpose(self, matrix):
+                n = len(matrix)
+                for i in range(n):
+                    for j in range(i + 1, n):
+                        matrix[j][i], matrix[i][j] = matrix[i][j], matrix[j][i]
+
+            def reflect(self, matrix):
+                n = len(matrix)
+                for i in range(n):
+                    for j in range(n // 2):
+                        matrix[i][j], matrix[i][-j - 1] = matrix[i][-j - 1], matrix[i][j]
 
 # @lc code=end
 
