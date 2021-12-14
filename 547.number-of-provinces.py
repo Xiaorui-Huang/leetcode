@@ -103,9 +103,13 @@ class Solution:
         return count
 
 
-s = Solution()
-a = s.findCircleNum([[1, 1, 0], [1, 1, 0], [0, 0, 1]])
-print(a)
+def main():
+    s = Solution()
+    a = s.findCircleNum([[1, 1, 0], [1, 1, 0], [0, 0, 1]])
+    print(a)
 
+
+if __name__ == "__main__":
+    main()
 
 # @lc code=end

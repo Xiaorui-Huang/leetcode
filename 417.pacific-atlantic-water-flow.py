@@ -62,7 +62,7 @@
 
 from enum import Enum
 from queue import Queue
-from typing import List, Tuple, overload
+from typing import List, Tuple
 
 approaches = Enum("app", "BFS DFS DFS_STACK")
 APPROACH = approaches.BFS
@@ -76,7 +76,6 @@ mountains where water can go down, i.e higher mountains than the current ones.
 and if starting from some beach of the pacific and some beach of the atlantic
 and ultimately land you on the same mountain then rain fall on that mountian
 will go to both oceans """
-
 
 
 class Solution:
@@ -104,8 +103,8 @@ class Solution:
         for i in range(num_rows):
             pacific_beaches.append((i, 0))
             atlantic_beaches.append((i, num_cols - 1))
-        
-        def dfs(stack:List[Tuple[int]]) -> set:
+
+        def dfs(stack: List[Tuple[int]]) -> set:
             flowed = set()
             while stack:
                 cur = stack.pop()
@@ -125,18 +124,16 @@ class Solution:
                         continue
                     if heights[next_row][next_col] >= heights[row][col]:
                         stack.append((next_row, next_col))
-            
+
             # Note usually the stack implementation should loop through all node
             # that is not visited, in case there are unconected parts of the
             # graph that should be searched. But here we have initialize all the
             # nodes to care about in the stack so we don't need to loop agian.
             return flowed
-        
+
         pacific_flowed = dfs(pacific_beaches)
         atlantic_flowed = dfs(atlantic_beaches)
         return list(pacific_flowed.intersection(atlantic_flowed))
-        
-
 
     def pacificAtlantic_DFS(self, heights: List[List[int]]) -> List[Tuple[int]]:
         num_rows = len(heights)
@@ -225,17 +222,19 @@ class Solution:
         return list(pacific_flowed.intersection(atlantic_flowed))
 
 
-sol = Solution()
-a = sol.pacificAtlantic(
-    [
-        [1, 2, 2, 3, 5],
-        [3, 2, 3, 4, 4],
-        [2, 4, 5, 3, 1],
-        [6, 7, 1, 4, 5],
-        [5, 1, 1, 2, 4],
-    ]
-)
-print(a)
+def main():
+    sol = Solution()
+    a = sol.pacificAtlantic(
+        [
+            [1, 2, 2, 3, 5],
+            [3, 2, 3, 4, 4],
+            [2, 4, 5, 3, 1],
+            [6, 7, 1, 4, 5],
+            [5, 1, 1, 2, 4],
+        ]
+    )
+    print(a)
 
-
+if __name__ == "__main__":
+    main()
 # @lc code=end
