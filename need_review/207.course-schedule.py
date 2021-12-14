@@ -61,8 +61,9 @@
 from enum import Enum
 from typing import List
 
-approaches = Enum('app', 'DFS OPT_DFS')
+approaches = Enum("app", "DFS OPT_DFS")
 APPROACH = approaches.OPT_DFS
+
 
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
@@ -71,7 +72,11 @@ class Solution:
             return self.canFinish_DFS(numCourses, prerequisites)
         elif APPROACH == approaches.OPT_DFS:
             return self.canFinish_OPT_DFS(numCourses, prerequisites)
-    def canFinish_OPT_DFS(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+
+    # lc discussion sol src: https://leetcode.com/problems/course-schedule/discuss/58586/Python-20-lines-DFS-solution-sharing-with-explanation/60058
+    def canFinish_OPT_DFS(
+        self, numCourses: int, prerequisites: List[List[int]]
+    ) -> bool:
         graph = [[] for _ in range(numCourses)]
         visited = [0 for _ in range(numCourses)]
         for x, y in prerequisites:
@@ -127,11 +132,13 @@ class Solution:
                 return False
         return True
 
+
 # @lc code=end
+
 
 def main():
     sol = Solution()
-    a = sol.canFinish(5, [[1,4],[2,4],[3,1],[3,2]])
+    a = sol.canFinish(5, [[1, 4], [2, 4], [3, 1], [3, 2]])
     print(a)
 
     a = sol.canFinish(2, [[1, 0]])
@@ -143,5 +150,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
