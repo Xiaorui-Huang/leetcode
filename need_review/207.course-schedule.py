@@ -74,11 +74,20 @@ class Solution:
             return self.canFinish_OPT_DFS(numCourses, prerequisites)
 
     # lc discussion sol src: https://leetcode.com/problems/course-schedule/discuss/58586/Python-20-lines-DFS-solution-sharing-with-explanation/60058
-    def canFinish_OPT_DFS(
-        self, numCourses: int, prerequisites: List[List[int]]
-    ) -> bool:
+    def canFinish_OPT_DFS(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        """Return if the student can finish all the courses given the prerequisites
+        This is really about building a graph and looking for directing
+        cycles/rings in a graph
+
+        Args:
+            numCourses (int): number of courses
+            prerequisites (List[List[int,int]]): the prerequiste pairs
+
+        Returns:
+            bool: if the student can finishe all courses with prerequisites
+        """
         graph = [[] for _ in range(numCourses)]
-        visited = [0 for _ in range(numCourses)]
+        visited = [0] * numCourses
         for x, y in prerequisites:
             graph[x].append(y)
 
@@ -87,6 +96,7 @@ class Solution:
             if visited[i] == -1:
                 return False
             # if it is done visted, then do not visit again
+            # course i is not in any cycle. Therefore do not visit it again.
             if visited[i] == 1:
                 return True
             # mark as being visited
