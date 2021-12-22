@@ -87,7 +87,7 @@ class Solution:
         two_house_before, one_house_before = nums[0], max(nums[0], nums[1])
 
         for i in range(2, n):
-            # to rob or not to rob that is the question
+            # to rob or not to rob, that is the question
             money_on_hand = max(one_house_before, two_house_before + nums[i])
             two_house_before = one_house_before
             one_house_before = money_on_hand

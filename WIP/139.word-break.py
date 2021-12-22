@@ -60,9 +60,19 @@
 # 
 #
 
+from typing import List
 # @lc code=start
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        pass
         
 # @lc code=end
 
+def main():
+    sol = Solution()
+    ans = sol.wordBreak("applepenapple", ["apple", "pen"])
+    print(ans)
+
+
+if __name__ == "__main__":
+    main()
