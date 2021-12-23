@@ -50,21 +50,53 @@
 #
 
 from typing import List
+from enum import Enum
+
+approaches = Enum("approaches", "LC TWO_SEARCH")
+APPROACH = approaches.LC
+
 
 
 # @lc code=start
 class Solution:
     def searchMatrix(self, A: List[List[int]], target: int) -> bool:
+        if APPROACH == approaches.LC:
+            return self.searchMatrix_lc(A, target)
+        elif APPROACH == approaches.TWO_SEARCH:
+            return self.searchMatrix_two_search(A, target)
+
+    def searchMatrix_lc(self, A: List[List[int]], target: int) -> bool:
+        if not A or target is None:
+            return False
+
+        rows, cols = len(A), len(A[0])
+        # note high is row * cols - 1
+        low, high = 0, rows * cols - 1
+        
+        while low <= high:
+            mid = (low + high) // 2
+            num = A[mid // cols][mid % cols]
+
+            if num == target:
+                return True
+            elif num < target:
+                low = mid + 1
+            else:
+                high = mid - 1
+        
+        return False
+
+    def searchMatrix_two_search(self, A: List[List[int]], target: int) -> bool:
         if not A or not A[0]:
             return False
         rows = len(A)
         cols = len(A[0])
-
         def binary_row_search(A: List[List[int]], target: int) -> int:
             """Find the appropriate row to binary search next
 
             Find the highest number that is less than the target
-            refer to problem 33
+            refer to problem 34
+            https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/description/
             """
             up, down = 0, rows - 1
             while up <= down:
@@ -77,8 +109,6 @@ class Solution:
                     down = mid - 1
 
             return up - 1
-
-
 
         def binary_search(nums: List[int], target: int) -> int:
             left, right = 0, cols - 1
@@ -109,7 +139,7 @@ def main():
     ans = sol.searchMatrix(
         # test examples
         [[1, 3, 5, 7], [10, 11, 16, 20], [23, 30, 34, 60]],
-        20,
+        23,
     )
     print(ans)
 
