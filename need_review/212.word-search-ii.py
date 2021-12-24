@@ -60,7 +60,21 @@ from typing import List
 
 class Solution:
     def findWords(self, board: List[List[str]], words: List[str]) -> List[str]:
-        pass
+        # constructing a trie
+        trie = {}
+        for word in words:
+            cur = trie
+            for c in word:
+                if c not in cur:
+                    cur[c] = {}
+                cur = cur[c]
+            cur["-"] = True  # marks the end of a word
+
+        A = board
+        rows = len(A)
+        cols = len(A[0])
+        
+        # def backtrack(i, j, )
 
 
 # @lc code=end
@@ -73,7 +87,7 @@ def main():
             ["i", "h", "k", "r"],
             ["i", "f", "l", "v"],
         ],
-        ["oath", "pea", "eat", "rain"],
+        ["app", "apple", "oath", "pea", "eat", "rain"],
     )
     print(ans)
 

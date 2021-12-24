@@ -61,13 +61,15 @@
 # larger board?
 #
 #
-from typing import List
+from typing import Dict, List
 
 # @lc code=start
 from enum import Enum
 
-approaches = Enum("approaches", "BACKTRACK_SET BACKTRACK_LC PRUNING")
-APPROACH = approaches.BACKTRACK_LC
+approaches = Enum(
+    "approaches", "BACKTRACK_SET BACKTRACK_HASH BACKTRACK_LC PRUNING BACKTRACK_TRIE"
+)
+APPROACH = approaches.BACKTRACK_TRIE
 
 
 class Solution:
@@ -76,10 +78,98 @@ class Solution:
             return self.exist_BT_LC(board, word)
         elif APPROACH == approaches.BACKTRACK_SET:
             return self.exist_BT_SET(board, word)
+        elif APPROACH == approaches.BACKTRACK_HASH:
+            return self.exist_BT_HASH(board, word)
         elif APPROACH == approaches.PRUNING:
             return self.exist_STACK_PRUNING(board, word)
+        elif APPROACH == approaches.BACKTRACK_TRIE:
+            return self.exist_BT_TRIE(board, word)
+
+    def exist_BT_TRIE(self, board: List[List[str]], word: str) -> bool:
+
+        rows = len(board)
+        cols = len(board[0])
+        if len(word) > rows * cols:
+            return False
+
+        trie = {}
+        cur = trie
+        for c in word:
+            if c not in cur:
+                cur[c] = {}
+            cur = cur[c]
+        # mark the end of the word
+        cur["-"] = True
+
+        def backtrack(i: int, j: int, trie: Dict) -> bool:
+            if board[i][j] not in trie:
+                return False
+
+            letter = board[i][j]
+            if "-" in trie[letter]:
+                return True
+
+            board[i][j] = "#"  # mark as exploring
+
+            for row_offset, col_offset in [(0, 1), (1, 0), (0, -1), (-1, 0)]:
+                row, col = i + row_offset, j + col_offset
+                if (
+                    row < 0  # ensure that the search is within bounds
+                    or rows <= row
+                    or col < 0
+                    or cols <= col
+                ):
+                    continue
+                # although not an issue here in an actual trie there may be multiple letters we can keep on searching for
+                for subtrie in trie.values():
+                    if backtrack(row, col, subtrie):
+                        return True
+            board[i][j] = letter  # revert back to avaliable for exploration
+            return False
+
+        for i in range(rows):
+            for j in range(cols):
+                if backtrack(i, j, trie):
+                    return True
+        return False
+
+    def exist_BT_HASH(self, board: List[List[str]], word: str) -> bool:
+        rows = len(board)
+        cols = len(board[0])
+        if len(word) > rows * cols:
+            return False
+
+        def backtrack(i: int, j: int, index: int) -> bool:
+            if board[i][j] != word[index]:
+                return False
+            # if we dfs to the last index of the word and the last letter equals
+            if ~index == -len(word):  # (redundant check) and board[i][j] == word[-1]:
+                return True
+
+            board[i][j] = "#"  # mark as exploring
+
+            for row_offset, col_offset in [(0, 1), (1, 0), (0, -1), (-1, 0)]:
+                row, col = i + row_offset, j + col_offset
+                if (
+                    row < 0  # ensure that the search is within bounds
+                    or rows <= row
+                    or col < 0
+                    or cols <= col
+                ):
+                    continue
+                if backtrack(row, col, index + 1):
+                    return True
+            board[i][j] = word[index]  # revert back to avaliable for exploration
+            return False
+
+        for i in range(rows):
+            for j in range(cols):
+                if backtrack(i, j, 0):
+                    return True
+        return False
 
     def exist_BT_SET(self, board: List[List[str]], word: str) -> bool:
+
         """Return if we can find the word in a sequential manner within the board (each letter is only allow to be used once)
 
         Idea:
@@ -148,7 +238,7 @@ class Solution:
         cols = len(board[0])
         stack = []
         board_counter = {}
-        
+
         # O(mn)
         for i in range(rows):
             for j in range(cols):
@@ -169,7 +259,7 @@ class Solution:
             if board_counter[char] < word_counter[char]:
                 return False
 
-        #Confused AF
+        # Confused AF
         visited = []
         while stack:
             i, j, index = stack.pop()
@@ -253,11 +343,11 @@ class Solution:
 
 def main():
     sol = Solution()
-    ans = sol.exist_STACK_PRUNING(
+    ans = sol.exist(
         # [["A", "B", "C", "E"], ["S", "F", "C", "S"], ["A", "D", "E", "E"]], "ABZ"
         # [["a", "b"]], "ba",
         [["A", "B", "C", "E"], ["S", "F", "C", "S"], ["A", "D", "E", "E"]],
-        "SEE",
+        "ABCCED",
     )
     print(ans)
 
