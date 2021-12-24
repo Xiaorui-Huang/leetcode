@@ -84,7 +84,9 @@ class Solution:
         dp = [True]
         for i in range(1, len(s) + 1):
             dp.append(
-                any([dp[j] and (s[j:i] in wordDict) for j in range(i)])
+                any(
+                    (dp[j] and (s[j:i] in wordDict) for j in range(i)) # using a generator instead to save memory
+                )
             )  # basically dp[i] = True if any combination of split before i are valid
 
         return dp[-1]

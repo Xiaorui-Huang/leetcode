@@ -95,9 +95,7 @@ class Solution:
         trie = {}
         cur = trie
         for c in word:
-            if c not in cur:
-                cur[c] = {}
-            cur = cur[c]
+            cur = cur.setdefault(c, {})
         # mark the end of the word
         cur["-"] = True
 
