@@ -119,6 +119,7 @@ class Solution:
                 ):
                     continue
                 # although not an issue here in an actual trie there may be multiple letters we can keep on searching for
+                # TODO:this can be optimized to not use a for loop... I'm just too lazy... refer to word search ii instead
                 for subtrie in trie.values():
                     if backtrack(row, col, subtrie):
                         return True
