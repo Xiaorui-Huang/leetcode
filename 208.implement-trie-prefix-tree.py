@@ -80,9 +80,13 @@ class Trie:
         def insert(self, word: str) -> None:
             trie = self.trie
             for c in word:
-                if c not in trie:
-                    trie[c] = {}
-                trie = trie[c]
+                # if c not in trie:
+                #     trie[c] = {}
+                # trie = trie[c]
+
+                # Using more consice code
+                trie = trie.setdefault(c, {})
+
             trie["-"] = True
 
 
