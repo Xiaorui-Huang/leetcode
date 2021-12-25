@@ -53,13 +53,24 @@
 #
 #
 #
-from typing import Dict, List
+
 
 # @lc code=start
+from typing import Dict, List
+from enum import Enum
+
+approaches = Enum("approaches", "LC OWN")
+APPROACH = approaches.LC
 
 
 class Solution:
     def findWords(self, board: List[List[str]], words: List[str]) -> List[str]:
+        if APPROACH == approaches.LC:
+            return self.findWords_LC(board, words)
+        elif APPROACH == approaches.OWN:
+            return self.findWords_OWN(board, words)
+
+    def findWords_OWN(self, board: List[List[str]], words: List[str]) -> List[str]:
         # constructing a trie
         trie = {}
         for word in words:
@@ -72,11 +83,14 @@ class Solution:
 
         rows = len(board)
         cols = len(board[0])
-        found = set()  # just to manage possible duplicate words in the broad
+        found = list()
 
         def backtrack(i: int, j: int, trie: Dict, prefix: str) -> None:
             if None in trie:
-                found.add(prefix + board[i][j])
+                trie.pop(
+                    None
+                )  # found the word no need to add it again, if there is a duplicate
+                found.append(prefix + board[i][j])
                 # don't stop searching so we don't return
 
             letter = board[i][j]
@@ -92,19 +106,7 @@ class Solution:
                     or board[row][col] not in trie
                 ):
                     continue
-
-                # brach to each possible letter
-                for c in trie:
-                    # only continue searching valid letters in trie according to
-                    # the next cell we are searching for 
-
-                    # Note: Cannot use if c is not None: -> we maybe going down
-                    # a hole thar uses a None ending for a word, but actually
-                    # searching a cell with a different letter, i.e. using word
-                    # hf's None ending, but seaching cell k. so we end up with
-                    # word hf
-                    if c == board[row][col]:
-                        backtrack(row, col, trie[c], prefix + letter)
+                backtrack(row, col, board[row][col], prefix + letter)
 
             board[i][j] = letter
 
@@ -116,6 +118,63 @@ class Solution:
                     backtrack(i, j, trie[letter], "")
 
         return found
+
+    def findWords_LC(self, board: List[List[str]], words: List[str]) -> List[str]:
+        WORD_KEY = "$"
+
+        # smart! implementing the word as the word ending marker
+        trie = {}
+        for word in words:
+            node = trie
+            for letter in word:
+                # retrieve the next node; If not found, create a empty node.
+                node = node.setdefault(letter, {})
+            # mark the existence of a word in trie node
+            node[WORD_KEY] = word
+
+        rows = len(board)
+        cols = len(board[0])
+
+        matched = []
+
+        def backtracking(row, col, parent):
+
+            letter = board[row][col]
+            currNode = parent[letter]
+
+            # check if we find a match of word
+            word_match = currNode.pop(WORD_KEY, False)
+            if word_match:
+                # also we removed the matched word to avoid duplicates,
+                #   as well as avoiding using set() for results.
+                matched.append(word_match)
+
+            # Before the EXPLORATION, mark the cell as visited
+            board[row][col] = "#"
+
+            # Explore the neighbors in 4 directions, i.e. up, right, down, left
+            for (rowOffset, colOffset) in [(-1, 0), (0, 1), (1, 0), (0, -1)]:
+                newRow, newCol = row + rowOffset, col + colOffset
+                if newRow < 0 or newRow >= rows or newCol < 0 or newCol >= cols:
+                    continue
+                if not board[newRow][newCol] in currNode:
+                    continue
+                backtracking(newRow, newCol, currNode)
+
+            # End of EXPLORATION, we restore the cell
+            board[row][col] = letter
+
+            # Optimization: incrementally remove the matched leaf node in Trie.
+            if not currNode:
+                parent.pop(letter)
+
+        for row in range(rows):
+            for col in range(cols):
+                # starting from each of the cells
+                if board[row][col] in trie:
+                    backtracking(row, col, trie)
+
+        return matched
 
 
 # @lc code=end
