@@ -72,7 +72,7 @@ class Solution:
         width = r
         area = 0
 
-        # intuitive logic: love the side of the bar that is short
+        # intuitive logic: move the side of the bar that is short
         # while l < r:
         #     area = max(area, min(height[l], height[r]) * w)
         #     if height[l] > height[r]:
@@ -91,9 +91,9 @@ class Solution:
                 l +=1
         return area
         
-# s = Solution()
-# a = s.maxArea([1,3,2,5,25,24,5])
-
-# print(a)
 # @lc code=end
+s = Solution()
+a = s.maxArea([1,3,2,5,25,24,5])
+
+print(a)
 
