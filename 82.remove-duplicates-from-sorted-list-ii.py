@@ -60,31 +60,29 @@ class ListNode:
 # Definition for singly-linked list.
 class Solution:
     def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        parent = None # init as the parent of head
-        cur = head
+        # a Dummy to keep the head
+        sentinel = ListNode(0, head)
+        
+        # the predecessor: anchor before the great duplicates
+        prede = sentinel
 
-        while cur and cur.next:
-            # duplicate
-            # TODO: need to remove cur and the rest of the duplicates
-            if cur.val == cur.next.val:
-                dup_val = cur.val
+        while head:
+            # skipping to the last of the duplicates
+            if head.next and head.val == head.next.val:
+                while head.next and head.val == head.next.val:
+                    head = head.next
+                # connecting the predecessor to the next LinkNode
+                prede.next = head.next
+            else:
+                # no dups? move the prede like a normal person
+                prede = prede.next
 
-                # skip to the end of the duplicates
-                while cur.next and cur.next.val == dup_val:
-                    cur = cur.next
+            # yep next
+            head = head.next
+                
+        return sentinel.next
 
-                # move the pointer to the next (even if its None)
-                cur = cur.next
-                if parent:
-                    parent.next = cur
-                else:
-                    # reset parent as the head is a dup
-                    parent = None
-                    head = cur
-            else:# not a dup just move on
-                parent = cur
-                cur = cur.next
-        return head
+# @lc code=end
 
 
 def build_linked_list(vals: List[int]) -> Optional[ListNode]:
@@ -100,9 +98,6 @@ def build_linked_list(vals: List[int]) -> Optional[ListNode]:
             cur = cur.next
 
     return head
-
-
-# @lc code=end
 
 
 def main():
