@@ -56,70 +56,80 @@
 #
 
 # @lc code=start
+from enum import Enum
+
+appr = Enum("approaches", "CENTER DP")
+APPR = appr.DP
+
 class Solution:
-    def longestPalindrome(self, s: str) -> str:
-        if s == s[::-1]:
-            return s
-        
+    if APPR == appr.CENTER:
+        def longestPalindrome(self, s: str) -> str:
+            if s == s[::-1]:
+                return s
+            
 
-        # start index and current length of current longest palindrome
-        start, cur_len = 1, 1
-        
-        # each i acts as a endpoint
-        # we go back the current longest lengh amount of character from i
-        #  [... odd_s/even_s ...(cur_len)... i ...]
-        # we consider two cases:
-        # 1) the start is odd
-        # 2) the start is even
-        # Now check if it's a palendrome, where the centre is at (even_s + i)/2 
-        #  
-        # 1) odd start we went back further therefore cur_len += 2
-        # 2) even start a little less therefore cur_len += 1
-        # 
-        # Note: jumping back may cause -1 index to we want start >= 0
+            # start index and current length of current longest palindrome
+            start, cur_len = 1, 1
+            
+            # each i acts as a endpoint
+            # we go back the current longest length amount of character from i
+            #  [... odd_s/even_s ...(cur_len)... i ...]
+            #      <------------------------------
+            # we consider two cases:
+            # 1) the start is odd
+            # 2) the start is even
+            # Now check if it's a palendrome, where the centre is at (even_s + i)/2 
+            #  
+            # 1) odd start - we went back further therefore cur_len += 2
+            # 2) even start - a little less therefore cur_len += 1
+            # 
+            # Note: jumping back may cause -1 index to we want start >= 0
 
-        for i in range(len(s)):
-            odd_s = i - cur_len - 1
-            even_s = i - cur_len
-            endpoint = i + 1
-            odd, even = s[odd_s:endpoint], s[even_s:endpoint]
-            if odd_s >= 0 and odd == odd[::-1]:
-                start = odd_s
-                cur_len += 2
-            elif even_s >= 0 and even == even[::-1]:
-                start = even_s
-                cur_len += 1
+            for i in range(len(s)):
+                odd_s = i - cur_len - 1
+                even_s = i - cur_len
+                endpoint = i + 1
+                # length of odd: endpoint - odd_s = i + 1 - (i - cur_len - 1) = cur_len + 2
+                # length of even: endpoint - even_s = i + 1 - (i - cur_len) = cur_len + 1
+                odd, even = s[odd_s:endpoint], s[even_s:endpoint]
+                if odd_s >= 0 and odd == odd[::-1]:
+                    start = odd_s
+                    cur_len += 2
+                elif even_s >= 0 and even == even[::-1]:
+                    start = even_s
+                    cur_len += 1
 
-        return s[start : start + cur_len]
+            return s[start : start + cur_len]
+    elif APPR == appr.DP:
+        # ==================== DP =======================
+        def longestPalindrome(self, s: str) -> str:
+            if s == s[::-1]:
+                return s
 
+            n = len(s)
 
-# ==================== DP =======================
-# def longestPalindrome(self, s: str) -> str:
-#     if s == s[::-1]:
-#         return s
+            # dp[i][j] === s[i:j+1] is a palentrome
+            dp = [[False] * n for i in range(n)]
 
-#     n = len(s)
-
-#     dp = [[False] * n for i in range(n)]
-
-#     # handles the base case of a single char palindrome
-#     ans = s[0]
-#     # Running columns from 1 to n
-#     for j in range(1, n):
-#         # runnng rows from 0 to j
-#         for i in range(0, j):
-#             # if base case 2 or 3 character substring or the dp is a palindrome
-#             # 2 or 3, since we didn't initialize the 2 char case, so we start at 3 character
-#             l = j - i + 1
-#             if l <= 3 or dp[i + 1][j - 1]:
-#                 # check for the second condition
-#                 if s[i] == s[j]:
-#                     # Then the dp is true
-#                     dp[i][j] = True
-#                     # if we have a longer palindrome update
-#                     if len(ans) < l:
-#                         ans = s[i : j + 1]
-#     return ans
+            # handles the base case of a single char palindrome
+            # ans = s[0]
+            start_max, end_max = 0, 1
+            # Running columns from 1 to n
+            for start in range(1, n):
+                # runing rows from 0 to j
+                for end in range(0, start):
+                    # if base case: 2 or 3 character substring or the dp is a palindrome
+                    # 2 or 3, since we didn't initialize the 2 char case, so we start at 3 character
+                    cur_length = (start + 1) - end 
+                    if cur_length <= 3 or dp[end + 1][start - 1]:
+                        # check for the second condition
+                        if s[start] == s[end]:
+                            # Then the dp is true
+                            dp[end][start] = True
+                            # if we have a longer palindrome update
+                            if (end_max - start_max) < cur_length:
+                                start_max, end_max = end, start + 1
+            return s[start_max: end_max]
 
 
 s = Solution()
