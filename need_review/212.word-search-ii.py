@@ -60,7 +60,7 @@ from typing import Dict, List
 from enum import Enum
 
 approaches = Enum("approaches", "LC OWN")
-APPROACH = approaches.LC
+APPROACH = approaches.OWN
 
 
 class Solution:
@@ -79,21 +79,22 @@ class Solution:
                 cur = cur.setdefault(letter, {})
             cur[None] = None  # marks the end of a word
 
-        del word, letter, cur  # clean ups
+        del word, letter, cur  # clean ups from trie construction
 
         rows = len(board)
         cols = len(board[0])
         found = list()
 
-        def backtrack(i: int, j: int, trie: Dict, prefix: str) -> None:
-            if None in trie:
-                trie.pop(
-                    None
-                )  # found the word no need to add it again, if there is a duplicate
-                found.append(prefix + board[i][j])
-                # don't stop searching so we don't return
-
+        def backtrack(i: int, j: int, parent_trie: Dict, prefix: str) -> None:
             letter = board[i][j]
+            cur_trie = parent_trie[letter]
+            word = prefix + letter
+            if None in cur_trie:
+                # end of word -> found the word. to prevent duplicates remove the end of word marker
+                cur_trie.pop(None)
+                # not a single word search so we don't return and keep searching
+                found.append(word)
+
             board[i][j] = "#"
 
             for row_offset, col_offset in [(0, 1), (1, 0), (0, -1), (-1, 0)]:
@@ -103,19 +104,23 @@ class Solution:
                     or col < 0
                     or row >= rows
                     or col >= cols
-                    or board[row][col] not in trie
+                    or board[row][col] not in cur_trie
                 ):
                     continue
-                backtrack(row, col, board[row][col], prefix + letter)
+                backtrack(row, col, cur_trie, word)
 
             board[i][j] = letter
+
+            # Optimization: incrementally remove the matched leaf node in Trie.
+            if not cur_trie:
+                parent_trie.pop(letter)
 
         # run search on each cell
         for i in range(rows):
             for j in range(cols):
                 letter = board[i][j]
                 if letter in trie:
-                    backtrack(i, j, trie[letter], "")
+                    backtrack(i, j, trie, "")
 
         return found
 
@@ -130,7 +135,7 @@ class Solution:
                 # retrieve the next node; If not found, create a empty node.
                 node = node.setdefault(letter, {})
             # mark the existence of a word in trie node
-            node[WORD_KEY] = word
+            node[WORD_KEY] = word  # here
 
         rows = len(board)
         cols = len(board[0])
@@ -147,7 +152,7 @@ class Solution:
             if word_match:
                 # also we removed the matched word to avoid duplicates,
                 #   as well as avoiding using set() for results.
-                matched.append(word_match)
+                matched.append(word_match)  # word is stored at WORD_KEY
 
             # Before the EXPLORATION, mark the cell as visited
             board[row][col] = "#"
@@ -155,9 +160,13 @@ class Solution:
             # Explore the neighbors in 4 directions, i.e. up, right, down, left
             for (rowOffset, colOffset) in [(-1, 0), (0, 1), (1, 0), (0, -1)]:
                 newRow, newCol = row + rowOffset, col + colOffset
-                if newRow < 0 or newRow >= rows or newCol < 0 or newCol >= cols:
-                    continue
-                if not board[newRow][newCol] in currNode:
+                if (
+                    newRow < 0
+                    or newRow >= rows
+                    or newCol < 0
+                    or newCol >= cols
+                    or not board[newRow][newCol] in currNode
+                ):
                     continue
                 backtracking(newRow, newCol, currNode)
 
