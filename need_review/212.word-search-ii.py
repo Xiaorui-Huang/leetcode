@@ -130,12 +130,14 @@ class Solution:
         # smart! implementing the word as the word ending marker
         trie = {}
         for word in words:
-            node = trie
+            cur = trie
             for letter in word:
                 # retrieve the next node; If not found, create a empty node.
-                node = node.setdefault(letter, {})
+                cur = cur.setdefault(letter, {})
             # mark the existence of a word in trie node
-            node[WORD_KEY] = word  # here
+            cur[WORD_KEY] = word  # NB
+
+        del cur, word, letter
 
         rows = len(board)
         cols = len(board[0])
