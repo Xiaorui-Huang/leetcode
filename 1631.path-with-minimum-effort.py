@@ -75,7 +75,86 @@ from typing import List
 
 # @lc code=start
 class Solution:
+    # complexity O(n log n) - binary search on dfs
+    # space complexity O(n) - cost of binary search
     def minimumEffortPath(self, heights: List[List[int]]) -> int:
+        rows = len(heights)
+        if not rows:
+            return float("inf")
+        cols = len(heights[0])
+        target = (rows - 1, cols - 1)
+
+        def dfs(max_effort: int) -> bool:
+            """Search the landscape and determine if we can reach the bottom right within max_effort
+
+            Args:
+                max_effort (int): maximum allowed effort for this dfs
+
+            Returns:
+                bool: whether we can reach the bottom right with just max_effort
+            """
+            visited = set()
+
+            def dfs_helper(i, j, max_effort) -> bool:
+                if (i, j) == target:
+                    return True
+
+                visited.add((i, j))
+                for row_offset, col_offset in [(0, 1), (1, 0), (-1, 0), (0, -1)]:
+                    row, col = i + row_offset, j + col_offset
+
+                    if (
+                        row < 0
+                        or col < 0
+                        or rows <= row
+                        or cols <= col
+                        or (row, col) in visited
+                    ):
+                        continue
+                    effort = abs(heights[i][j] - heights[row][col])
+                    # only dfs if within max_effort
+                    # and return true if any dfs visited the bottom right
+                    if effort <= max_effort:
+                        if dfs_helper(row, col, max_effort):
+                            return True
+                return False
+
+            return dfs_helper(0, 0, max_effort)
+
+        # Binary search on the min_effort value directly
+        # i.e. the smallest input to dfs that returns True
+
+        # base case/edge case
+        if dfs(max_effort=0):
+            return 0
+
+        # exponential initialization
+        upper = 1
+        while not dfs(upper):
+            upper *= 2
+
+        lower = upper // 2
+        # lower = min_effort < upper
+
+        # lower ...   ... min_effort ... upper
+        # false false ...   true ... ... true
+        while lower < upper:
+            mid = (upper + lower) // 2
+            # min_effort in upper half
+            if dfs(mid):
+                upper = mid - 1
+                # if dfs(mid + 1) is false return mid
+            else:
+                lower = mid + 1
+                # if dfs(mid - 1) is true return mid - 1
+        # min_effort == lower == upper
+        min_effort = lower
+        return min_effort
+
+    # failed attempt
+    # complexity O(3^n) - worst case at each node there is 3 cases
+    # space complexity O(n) - backtrack stack could visit all n nodes
+    def minimumEffortPath_backtrack(self, heights: List[List[int]]) -> int:
         min_effort = float("inf")
         rows = len(heights)
 
