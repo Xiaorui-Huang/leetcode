@@ -5,9 +5,9 @@ name = "pypi"
 
 [packages]
 numpy = "*"
+ipykernel = "*"
 
 [dev-packages]
-ipykernel = "*"
 black = "*"
 
 [requires]
