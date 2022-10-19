@@ -122,7 +122,7 @@ class Solution:
         rows = len(s2)
 
         # Just need two columns to do space optimized bottom up DP
-        # with padding???
+        # with padding
         prev_LCS = [0] * (rows + 1)
         curr_LCS = [0] * (rows + 1)
         for col in range(cols):
