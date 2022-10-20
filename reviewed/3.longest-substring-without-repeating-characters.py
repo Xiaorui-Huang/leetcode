@@ -63,34 +63,33 @@
 # @lc code=start
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        if not s:
-            return 0
-        n = len(s)
-        leng = 1
-
+        max_len = 0
         # a dictionary storing the last position we saw the letter
-        mem = {}
+        last_pos = {}
         # left and right pointer for the shifting window
-        l = 0
-        for r in range(n):
-            cur = s[r]
-            
-            # if we have seen the letter in our current substirng
-            # then move the left pointer the shorten the current substring so there is no duplicates
-            if cur in mem and mem[cur] >= l:
-                l = mem[cur] + 1
+        left_pt = 0
+        for right_pt in range(len(s)):
+            char = s[right_pt]
 
-            mem[cur] = r
-            leng = max(leng, r - l + 1)
-            r += 1
+            last_seen: int = last_pos.get(char, -1)  # let -1 indicate not seen
+            seen = last_seen != -1
 
-        return leng
+            # if we have seen the letter in our current substring
+            # then move the left pointer to shorten the current substring so there is no duplicates
+            # use >= since, being equal to the left pointer is still a duplicate and needs to be removed
+            if seen and last_seen >= left_pt:
+                left_pt = last_seen + 1
+
+            last_pos[char] = right_pt
+            max_len = max(max_len, right_pt - left_pt + 1)
+
+        return max_len
 
 
 # @lc code=end
 def main():
     sol = Solution()
-    a = sol.lengthOfLongestSubstring("dvdf")
+    a = sol.lengthOfLongestSubstring("abcabcbb")
     print(a)
 
 
