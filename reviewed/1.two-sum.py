@@ -67,11 +67,11 @@ class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
         """This works without a full hash index since even if the initial value
         that has a compliment didn't return because the later compliment wasn't
-        in the hash yet, when we get the compliment laster it will always find
+        in the hash yet, when we get the compliment later it will always find
         the previous value that is actually in the hash
-        
+
         Pre-condition: there is exactly one pair of indices that adds to target
-        
+
         Return the pair of indices that adds to up to the target
         """
         hashmap = {}
