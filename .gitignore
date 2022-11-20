@@ -152,6 +152,7 @@ dmypy.json
 *.lo
 *.o
 *.obj
+Info.plist
 
 # Precompiled Headers
 *.gch
