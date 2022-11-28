@@ -72,12 +72,11 @@ class Solution:
             char = s[right_pt]
 
             last_seen: int = last_pos.get(char, -1)  # let -1 indicate not seen
-            seen = last_seen != -1
 
             # if we have seen the letter in our current substring
             # then move the left pointer to shorten the current substring so there is no duplicates
             # use >= since, being equal to the left pointer is still a duplicate and needs to be removed
-            if seen and last_seen >= left_pt:
+            if last_seen >= left_pt:
                 left_pt = last_seen + 1
 
             last_pos[char] = right_pt
