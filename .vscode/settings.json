@@ -1,0 +1,7 @@
+{
+    "python.formatting.provider": "black",
+    "cSpell.words": [
+        "APPR"
+    ],
+    "C_Cpp.default.configurationProvider": "ms-vscode.makefile-tools"
+}
