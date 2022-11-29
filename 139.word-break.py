@@ -63,19 +63,19 @@
 from enum import Enum
 from typing import List
 
-approaches = Enum("approaches", "DP_NAIVE DP_TRIE")
+approaches = Enum("approaches", "DP DP_TRIE")
 APPROACH = approaches.DP_TRIE
 
 
 # @lc code=start
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
-        if APPROACH == approaches.DP_NAIVE:
-            return self.wordBreak_naive(s, wordDict)
+        if APPROACH == approaches.DP:
+            return self.wordBreak_DP(s, wordDict)
         elif APPROACH == approaches.DP_TRIE:
             return self.wordBreak_trie(s, wordDict)
 
-    def wordBreak_naive(self, s: str, wordDict: List[str]) -> bool:
+    def wordBreak_DP(self, s: str, wordDict: List[str]) -> bool:
         """
         Idea: define dp[i] as if we can separate string s[:1]
         dp[i] = dp[j] and remaining string is in wordDict; for some j, 0 <= j < i
@@ -84,9 +84,7 @@ class Solution:
         dp = [True]
         for i in range(1, len(s) + 1):
             dp.append(
-                any(
-                    (dp[j] and (s[j:i] in wordDict) for j in range(i)) # using a generator instead to save memory
-                )
+                any((dp[j] and (s[j:i] in wordDict) for j in range(i)))  # using a generator instead to save memory
             )  # basically dp[i] = True if any combination of split before i are valid
 
         return dp[-1]
