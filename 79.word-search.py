@@ -158,7 +158,7 @@ class Solution:
                     continue
                 if backtrack(row, col, index + 1):
                     return True
-            board[i][j] = word[index]  # revert back to avaliable for exploration
+            board[i][j] = word[index]  # revert back to available for exploration
             return False
 
         for i in range(rows):
@@ -173,7 +173,7 @@ class Solution:
 
         Idea:
             backtracking, we keep a set of visited cell, and for each cell we
-            explore furthur using DFS algorithm in the 3 possible directions. if
+            explore further using DFS algorithm in the 3 possible directions. if
             along any stack the word at index doesn't match the cell, then
             return false, revert the visited (so that the cell can be visited
             again) and keep searching. If all we reach the last char of the word
