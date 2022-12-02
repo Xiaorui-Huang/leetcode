@@ -56,7 +56,6 @@
 
 
 # @lc code=start
-from typing import Dict, List
 from enum import Enum
 
 approaches = Enum("approaches", "LC OWN")
@@ -64,15 +63,16 @@ APPROACH = approaches.OWN
 
 
 class Solution:
-    def findWords(self, board: List[List[str]], words: List[str]) -> List[str]:
+    def findWords(self, board: list[list[str]], words: list[str]) -> list[str]:
         if APPROACH == approaches.LC:
             return self.findWords_LC(board, words)
         elif APPROACH == approaches.OWN:
             return self.findWords_OWN(board, words)
+        return []  # never reached
 
-    def findWords_OWN(self, board: List[List[str]], words: List[str]) -> List[str]:
+    def findWords_OWN(self, board: list[list[str]], words: list[str]) -> list[str]:
         # constructing a trie
-        trie = {}
+        trie: dict = {}
         for word in words:
             cur = trie
             for letter in word:
@@ -85,7 +85,7 @@ class Solution:
         cols = len(board[0])
         found = list()
 
-        def backtrack(i: int, j: int, parent_trie: Dict, prefix: str) -> None:
+        def backtrack(i: int, j: int, parent_trie: dict, prefix: str) -> None:
             letter = board[i][j]
             cur_trie = parent_trie[letter]
             word = prefix + letter
@@ -99,13 +99,7 @@ class Solution:
 
             for row_offset, col_offset in [(0, 1), (1, 0), (0, -1), (-1, 0)]:
                 row, col = i + row_offset, j + col_offset
-                if (
-                    row < 0
-                    or col < 0
-                    or row >= rows
-                    or col >= cols
-                    or board[row][col] not in cur_trie
-                ):
+                if row < 0 or col < 0 or row >= rows or col >= cols or board[row][col] not in cur_trie:
                     continue
                 backtrack(row, col, cur_trie, word)
 
@@ -124,11 +118,11 @@ class Solution:
 
         return found
 
-    def findWords_LC(self, board: List[List[str]], words: List[str]) -> List[str]:
+    def findWords_LC(self, board: list[list[str]], words: list[str]) -> list[str]:
         WORD_KEY = "$"
 
         # smart! implementing the word as the word ending marker
-        trie = {}
+        trie: dict = {}
         for word in words:
             cur = trie
             for letter in word:

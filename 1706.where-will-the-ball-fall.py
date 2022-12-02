@@ -83,7 +83,6 @@
 
 # @lc code=start
 from ast import For
-from typing import List
 
 LEFT = -1
 RIGHT = 1
@@ -91,7 +90,7 @@ RIGHT = 1
 
 # Could also use DFS to solve
 class Solution:
-    def findBall(self, grid: List[List[int]]) -> List[int]:
+    def findBall(self, grid: list[list[int]]) -> list[int]:
         rows = len(grid)
         cols = len(grid[0])
         dp = [ball_num for ball_num in range(cols)]

@@ -45,8 +45,6 @@
 #
 #
 
-from typing import List
-
 # @lc code=start
 from enum import Enum
 
@@ -61,7 +59,7 @@ class Solution:
         elif APPR == appr.DISJOINT_SET:
             self.longestConsecutive = self.longestConsecutive_union_find
 
-    def longestConsecutive_union_find(self, nums: List[int]) -> int:
+    def longestConsecutive_union_find(self, nums: list[int]) -> int:
         dset = DisjointSet()
         nodes = {}
         max_size = 0
@@ -78,23 +76,7 @@ class Solution:
 
         return max_size
 
-    def longestConsecutive_hash_implicit_disjoint_set(self, nums: List[int]) -> int:
-        hashset = set(nums)
-        longest_streak = 0
-
-        for num in hashset:
-            # check if num belong to a streak
-            # only proceed to check for streak if it's not already part of a streak
-            if (num - 1) not in hashset:
-                # count the current streak from num (i.e. a starting streak of 1)
-                cur_streak = 1
-                while (num + cur_streak) in hashset:
-                    cur_streak += 1
-                longest_streak = max(longest_streak, cur_streak)
-
-        return longest_streak
-
-    def longestConsecutive_hash_implicit_disjoint_set(self, nums: List[int]) -> int:
+    def longestConsecutive_hash_implicit_disjoint_set(self, nums: list[int]) -> int:
         hashset = set(nums)
         longest_streak = 0
 

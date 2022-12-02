@@ -71,7 +71,6 @@
 #
 
 # @lc code=start
-from typing import List
 from bisect import bisect
 from enum import Enum
 
@@ -79,9 +78,10 @@ approaches = Enum("approaches", "BS TRICK")
 APPROACH = approaches.TRICK
 
 
-class Solution(object):
+class Solution:
     if APPROACH == approaches.BS:
-        def findMin(self, nums: List[int]) -> int:
+
+        def findMin(self, nums: list[int]) -> int:
             if nums[0] <= nums[-1]:
                 return nums[0]
             first = nums[0]
@@ -94,33 +94,37 @@ class Solution(object):
                     # the bingo
                     return nums[mid + 1]
                 # we are on the left half, search the right half
-                if val >= first: #need to round up, in the case that the first mid is the min
+                if val >= first:  # need to round up, in the case that the first mid is the min
                     low = mid + 1
                 else:  # vice versa
                     high = mid - 1
+            return 0  # never reached
+
     elif APPROACH == approaches.TRICK:
-        def findMin(self, nums):
+
+        def findMin(self, nums: list[int]) -> int:
             """Use binary search to find the first number that's less than or equal to the last.
-            
+
             bisect.bisect_left(a, x, lo=0, hi=len(a), *, key=None)
-            Note: key argument is added since 3.10 
+            Note: key argument is added since 3.10
 
             Locate the insertion point for x in a to maintain sorted order. The
             parameters lo and hi may be used to specify a subset of the list
             which should be considered; by default the entire list is used. If x
             is already present in a, the insertion point will be before (to the
-                    left of) any existing entries. The return value is suitable
-            for use as the first parameter to list.insert() assuming that a is
+                    left of) any existing entries. The return value is suitable for use as the first parameter to list.insert() assuming that a is
             already sorted.
 
             The returned insertion point i partitions the array a into two
             halves so that all(val <= x for val in a[lo : i]) for the left side
-            and all(val > x for val in a[i : hi]) for the right side. """
+            and all(val > x for val in a[i : hi]) for the right side."""
             self.nums = nums
-            return nums[bisect(self, False, 0, len(nums))]
+            return nums[bisect(self, False, 0, len(nums))]  # type: ignore
 
     def __getitem__(self, i):
         return self.nums[i] <= self.nums[-1]
+
+
 # @lc code=end
 
 
@@ -133,9 +137,6 @@ def main():
         # [4, 5, 1, 2, 3]
     )
     print(ans)
-    
-
-
 
 
 if __name__ == "__main__":

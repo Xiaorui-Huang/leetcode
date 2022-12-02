@@ -48,26 +48,25 @@
 #
 
 # @lc code=start
-from typing import List
 
 
 class Solution:
-    def canJump(self, nums: List[int]) -> bool:
+    def canJump(self, nums: list[int]) -> bool:
         """Return if we can jump to the last index from the first index given
         the max jump length at each index
 
         Idea: Using Dynamic Programming define:
             DP[i] = Furthest index we can reach given at index i
-            
+
             Then DP(i) = max[DP(i - 1), i + nums[i]]
             Base case: DP[0] = 0
             Final Result: DP[len(nums)] > len(nums) - 1 i.e. the last index
-            
+
             Conceptually requires linear space, but we can use constant space
             (bottom up \w for loop)
 
         Args:
-            nums (List[int]): Max jump distance at each index
+            nums (list[int]): Max jump distance at each index
 
         Returns:
             bool: if we can reach the last index
@@ -76,13 +75,13 @@ class Solution:
         dp = 0
         for i, num in enumerate(nums):
             dp = max(dp, i + num)
-            
+
             # we can already reach the end (this is checked first as that is the
             # YES exit condition)
 
-            if dp >= len(nums) - 1: 
+            if dp >= len(nums) - 1:
                 return True
-            
+
             # if cannot go any furthur at index i (the furthest index we can
             # reach is itself then False)
             if dp == i:
@@ -90,7 +89,9 @@ class Solution:
 
         return True
 
+
 # @lc code=end
+
 
 def main():
     sol = Solution()

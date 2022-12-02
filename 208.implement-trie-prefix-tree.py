@@ -63,7 +63,6 @@
 #
 
 # @lc code=start
-from typing import Dict, Tuple
 from enum import Enum
 
 approaches = Enum("approaches", "NAIVE FAST")
@@ -72,10 +71,10 @@ APPROACH = approaches.FAST
 
 class Trie:
     if APPROACH == approaches.FAST:
-        trie: Dict
+        trie: dict
 
         def __init__(self):
-            self.trie: Dict = {}
+            self.trie: dict = {}
 
         def insert(self, word: str) -> None:
             trie = self.trie
@@ -88,7 +87,6 @@ class Trie:
                 trie = trie.setdefault(c, {})
 
             trie["-"] = True
-
 
         def search(self, word: str) -> bool:
             trie = self.trie
@@ -109,7 +107,7 @@ class Trie:
     elif APPROACH == approaches.NAIVE:
 
         def __init__(self):
-            self.tries: Dict[Tuple[Trie, bool]] = {}
+            self.tries: dict[tuple[Trie, bool]] = {}
 
         def insert(self, word: str) -> None:
             if not word:

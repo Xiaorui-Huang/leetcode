@@ -99,7 +99,7 @@ class Solution {
         // i is the length of the substring from 0
         for (size_t i = 0; i <= n; i++)
             // j counts up to j, so as to check the partitioning of the substring
-            for (size_t j = 0; j < i; j++)
+            for (size_t j = 0; !dp[i] && j < i; j++)
                 if (dp[j] && find(wordDict.begin(), wordDict.end(), s.substr(j, i - j)) != wordDict.end())
                     dp[i] = true;
         return dp[n];

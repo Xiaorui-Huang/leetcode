@@ -56,24 +56,23 @@
 #
 
 # @lc code=start
-from typing import List
 from enum import Enum
 
 approaches = Enum("approaches", "DFS BFS")
 
 APPROACH = approaches.BFS
 APPROACH = approaches.DFS
-import queue
+from queue import Queue
 
 
 class Solution:
-    def findCircleNum(self, isConnected: List[List[int]]) -> int:
+    def findCircleNum(self, isConnected: list[list[int]]) -> int:
         n = len(isConnected)
         visited = [0] * n
         count = 0
 
         if APPROACH == approaches.BFS:
-            q = queue.Queue()
+            q: Queue = Queue()
             # BFS loop every node and search
             for i in range(n):
                 if not visited[i]:

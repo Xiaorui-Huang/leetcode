@@ -62,7 +62,6 @@
 
 from enum import Enum
 from queue import Queue
-from typing import List, Tuple
 
 approaches = Enum("app", "BFS DFS DFS_STACK")
 APPROACH = approaches.BFS
@@ -79,7 +78,7 @@ will go to both oceans """
 
 
 class Solution:
-    def pacificAtlantic(self, heights: List[List[int]]) -> List[List[int]]:
+    def pacificAtlantic(self, heights: list[list[int]]) -> list[tuple[int, int]]:
         if not heights or not heights[0]:
             return []
 
@@ -89,8 +88,9 @@ class Solution:
             return self.pacificAtlantic_DFS(heights)
         elif APPROACH == approaches.DFS_STACK:
             return self.pacificAtlantic_DFS_STACK(heights)
+        return [(0, 0)]  # never reached
 
-    def pacificAtlantic_DFS_STACK(self, heights: List[List[int]]) -> List[Tuple[int]]:
+    def pacificAtlantic_DFS_STACK(self, heights: list[list[int]]) -> list[tuple[int, int]]:
         # initialization of beaches near the ocean to start searching
         num_rows = len(heights)
         num_cols = len(heights[0])
@@ -104,7 +104,7 @@ class Solution:
             pacific_beaches.append((i, 0))
             atlantic_beaches.append((i, num_cols - 1))
 
-        def dfs(stack: List[Tuple[int]]) -> set:
+        def dfs(stack: list[tuple[int, int]]) -> set:
             flowed = set()
             while stack:
                 cur = stack.pop()
@@ -135,7 +135,7 @@ class Solution:
         atlantic_flowed = dfs(atlantic_beaches)
         return list(pacific_flowed.intersection(atlantic_flowed))
 
-    def pacificAtlantic_DFS(self, heights: List[List[int]]) -> List[Tuple[int]]:
+    def pacificAtlantic_DFS(self, heights: list[list[int]]) -> list[tuple[int, int]]:
         num_rows = len(heights)
         num_cols = len(heights[0])
         pacific_beaches, atlantic_beaches = [], []
@@ -148,10 +148,10 @@ class Solution:
             pacific_beaches.append((i, 0))
             atlantic_beaches.append((i, num_cols - 1))
 
-        def dfs(beaches: List[Tuple[int]]) -> set:
+        def dfs(beaches: list[tuple[int, int]]) -> set:
             flowed = set()
 
-            def dfs_util(cur: Tuple) -> None:
+            def dfs_util(cur: tuple) -> None:
                 flowed.add(cur)
                 row, col = cur
                 for x, y in [(0, 1), (1, 0), (-1, 0), (0, -1)]:
@@ -178,11 +178,12 @@ class Solution:
         atlantic_flowed = dfs(atlantic_beaches)
         return list(pacific_flowed.intersection(atlantic_flowed))
 
-    def pacificAtlantic_BFS(self, heights: List[List[int]]) -> List[Tuple[int]]:
+    def pacificAtlantic_BFS(self, heights: list[list[int]]) -> list[tuple[int, int]]:
         num_rows = len(heights)
         num_cols = len(heights[0])
 
-        pacific_q, atlantic_q = Queue(), Queue()
+        pacific_q: Queue = Queue()
+        atlantic_q: Queue = Queue()
 
         # initializing all the node from the ocean
         for i in range(num_cols):
@@ -234,6 +235,7 @@ def main():
         ]
     )
     print(a)
+
 
 if __name__ == "__main__":
     main()

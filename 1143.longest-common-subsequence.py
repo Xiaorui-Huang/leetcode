@@ -86,9 +86,6 @@ LCS(i,j) =
 
 
 class Solution:
-
-    mem = {}
-
     def longestCommonSubsequence(self, text1: str, text2: str) -> int:
         if APPR == appr.DP_SPACE:
             return self.longestCommonSubsequence_DP_space(text1, text2)

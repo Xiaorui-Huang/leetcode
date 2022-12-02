@@ -16,32 +16,33 @@
 # Given the root of a binary search tree, rearrange the tree in in-order so
 # that the leftmost node in the tree is now the root of the tree, and every
 # node has no left child and only one right child.
-# 
-# 
+#
+#
 # Example 1:
-# 
-# 
+#
+#
 # Input: root = [5,3,6,2,4,null,8,1,null,null,null,7,9]
 # Output: [1,null,2,null,3,null,4,null,5,null,6,null,7,null,8,null,9]
-# 
-# 
+#
+#
 # Example 2:
-# 
-# 
+#
+#
 # Input: root = [5,1,7]
 # Output: [1,null,5,null,7]
-# 
-# 
-# 
+#
+#
+#
 # Constraints:
-# 
-# 
+#
+#
 # The number of nodes in the given tree will be in the range [1, 100].
 # 0 <= Node.val <= 1000
-# 
+#
 #
 
-from lib.bst import TreeNode, build_bst, null
+from utils.bst import TreeNode, build_bst, null  # type: ignore
+
 # @lc code=start
 # Definition for a binary tree node.
 # class TreeNode:
@@ -50,12 +51,13 @@ from lib.bst import TreeNode, build_bst, null
 #         self.left = left
 #         self.right = right
 
+
 class Solution:
     def increasingBST(self, root: TreeNode) -> TreeNode:
-        # dummy root for the increasing TreeNode 
-        dummy = TreeNode() 
+        # dummy root for the increasing TreeNode
+        dummy = TreeNode()
 
-        def in_order_insertion(bst: TreeNode, cur:TreeNode) -> TreeNode:
+        def in_order_insertion(bst: TreeNode, cur: TreeNode) -> TreeNode:
             """In order traversal of BST to visit nodes in sorted order
 
             Args:
@@ -68,15 +70,15 @@ class Solution:
             if bst.left is None and bst.right is None:
                 cur.right = TreeNode(bst.val)
                 return cur.right
-            
+
             # handes left child
             if bst.left:
                 cur = in_order_insertion(bst.left, cur)
-            
+
             # handles root
             cur.right = TreeNode(bst.val)
             cur = cur.right
-            
+
             # handles right child
             if bst.right:
                 cur = in_order_insertion(bst.right, cur)
@@ -84,14 +86,15 @@ class Solution:
 
         in_order_insertion(root, dummy)
         return dummy.right
-        
-        
+
+
 # @lc code=end
+
 
 def main():
     sol = Solution()
 
-    lst = [5,3,6,2,4,null,8,1,null,null,null,7,9]
+    lst = [5, 3, 6, 2, 4, null, 8, 1, null, null, null, 7, 9]
     bst = build_bst(lst)
 
     ans = sol.increasingBST(bst)

@@ -53,11 +53,9 @@
 #
 #
 
-from typing import List
-
 # @lc code=start
 class Solution:
-    def rob(self, nums: List[int]) -> int:
+    def rob(self, nums: list[int]) -> int:
         """Return the maximum amount we can rob without triggering the alarm
 
         Idea:
@@ -72,7 +70,7 @@ class Solution:
             Final Results: OPT(n)
 
         Args:
-            nums (List[int]): Money stashes in houses
+            nums (list[int]): Money stashes in houses
 
         Returns:
             int: Max amount we can possibly rob

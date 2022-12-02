@@ -78,7 +78,7 @@ class LRUCache:
 
     def __init__(self, capacity: int):
         self.capacity = capacity
-        self.cache = OrderedDict()
+        self.cache: OrderedDict = OrderedDict()
 
     def get(self, key: int) -> int:
         if key in self.cache:

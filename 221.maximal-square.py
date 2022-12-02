@@ -53,7 +53,6 @@
 
 # @lc code=start
 from enum import Enum
-from typing import List
 
 approaches = Enum("approaches", "DP DP_OPT")
 APPROACH = approaches.DP
@@ -61,13 +60,14 @@ APPROACH = approaches.DP
 
 class Solution:
     # Don't fully understand especially the dp[j] = 0 part
-    def maximalSquare(self, A: List[List[str]]) -> int:
+    def maximalSquare(self, A: list[list[str]]) -> int:
         if APPROACH == approaches.DP:
             return self.maximalSquare_DP(A)
         elif APPROACH == approaches.DP_OPT:
             return self.maximalSquare_DP_OPT(A)
+        return 0  # never reached
 
-    def maximalSquare_DP(self, A: List[List[str]]) -> int:
+    def maximalSquare_DP(self, A: list[list[str]]) -> int:
         # if not A or not A[0]:
         #     return 0
 
@@ -81,9 +81,9 @@ class Solution:
                 if A[i - 1][j - 1] == "1":
                     dp[i][j] = min(dp[i - 1][j - 1], dp[i][j - 1], dp[i - 1][j]) + 1
                     size = max(size, dp[i][j])
-        return size ** 2
+        return size**2
 
-    def maximalSquare_DP_OPT(self, A: List[List[str]]) -> int:
+    def maximalSquare_DP_OPT(self, A: list[list[str]]) -> int:
 
         if not A or not A[0]:
             return 0
@@ -105,7 +105,7 @@ class Solution:
                     dp[j] = 0
 
                 prev = temp
-        return size ** 2
+        return size**2
 
 
 # @lc code=end

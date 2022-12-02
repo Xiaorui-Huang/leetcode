@@ -38,7 +38,6 @@
 # where n is the array's size.
 #
 #
-from typing import List
 
 # @lc code=start
 from enum import Enum
@@ -52,8 +51,8 @@ APPROACH = approaches.COUNTER_QUEUE
 class Solution:
     if APPROACH == approaches.SORTED_ZIP:
 
-        def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-            dic = {}
+        def topKFrequent(self, nums: list[int], k: int) -> list[int]:
+            dic: dict[int, int] = {}
             for num in nums:
                 dic[num] = dic.get(num, 0) + 1
 
@@ -63,7 +62,7 @@ class Solution:
 
     elif APPROACH == approaches.COUNTER_QUEUE:
         # ===================== official provided solution ===============
-        def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        def topKFrequent(self, nums: list[int], k: int) -> list[int]:
             # O(1) time
             if k == len(nums):
 
@@ -75,7 +74,7 @@ class Solution:
             # 2-3. build heap of top k frequent elements and
             # convert it into an output array
             # O(N log k) time
-            return nlargest(k, count.keys(), key=count.get)
+            return nlargest(k, count.keys(), key=count.get)  # type: ignore
 
 
 # @lc code=end

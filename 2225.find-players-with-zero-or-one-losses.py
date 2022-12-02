@@ -78,8 +78,8 @@ from bisect import insort
 class Solution:
     def findWinners(self, matches: list[list[int]]) -> list[list[int]]:
         records = {}
-        undefeated = []
-        lost_once = []
+        undefeated: list[int] = []
+        lost_once: list[int] = []
         for match in matches:
             winner, loser = match
             if winner not in records:

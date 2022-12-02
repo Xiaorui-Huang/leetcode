@@ -47,29 +47,28 @@ appr = Enum("approaches", "recursion dfs count")
 # count should basically just traverse in a spiral until the count is done.
 APPR = appr.dfs
 
-from typing import List
-
 
 class Solution:
-    def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
+    def spiralOrder(self, matrix: list[list[int]]) -> list[int]:
         if APPR == appr.recursion:
             return self.spiralOrder_recursion(matrix)
         if APPR == appr.dfs:
             return self.spiralOrder_dfs(matrix)
+        return []  # never reached
 
     # using the natural organization of dfs and "momentum" to simulate spiral order
-    # does not change direction until it has to 
-    def spiralOrder_dfs(self, matrix: List[List[int]]) -> List[int]:
+    # does not change direction until it has to
+    def spiralOrder_dfs(self, matrix: list[list[int]]) -> list[int]:
         MARK = "*"
         spiral = []
         rows = len(matrix)
         cols = len(matrix[0])
-        
+
         #             right,  down,   left,     up
         directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
         global direction
-         
-        def dfs(i = 0, j = 0, direction = 0) -> None: 
+
+        def dfs(i=0, j=0, direction=0) -> None:
             spiral.append(matrix[i][j])
             matrix[i][j] = MARK
 
@@ -77,15 +76,15 @@ class Solution:
                 row_offset, col_offset = directions[direction]
                 row = i + row_offset
                 col = j + col_offset
-                if row < 0 or row >= rows or col < 0  or col >= cols or matrix[row][col] == MARK: 
+                if row < 0 or row >= rows or col < 0 or col >= cols or matrix[row][col] == MARK:
                     direction = (direction + 1) % len(directions)
                     continue
                 dfs(row, col, direction)
-        
+
         dfs()
-        return spiral 
-        
-    def spiralOrder_recursion(self, matrix: List[List[int]]) -> List[int]:
+        return spiral
+
+    def spiralOrder_recursion(self, matrix: list[list[int]]) -> list[int]:
         spiral = []
         rows = len(matrix)
         cols = len(matrix[0])
@@ -99,7 +98,7 @@ class Solution:
         def traverse_border(row_start, row_end, col_start, col_end) -> None:
             col_width = col_end - col_start
             row_width = row_end - row_start
-                
+
             if col_width < 1 or row_width < 1:
                 return
 

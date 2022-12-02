@@ -43,34 +43,32 @@
 #
 #
 
-from typing import List
-
 # @lc code=start
 class Solution:
-    def searchRange(self, nums: List[int], target: int) -> List[int]:
+    def searchRange(self, nums: list[int], target: int) -> list[int]:
         def bs_left(nums, target):
             low, high = 0, len(nums) - 1
             while low <= high:
-                mid = (low  + high) //2
+                mid = (low + high) // 2
                 # looking for highest number less than target
                 if nums[mid] < target:
                     low = mid + 1
                 else:
                     # even if they equal, high is set one below
                     high = mid - 1
-            return low # the higher of the two
+            return low  # the higher of the two
 
         def bs_right(nums, target):
             low, high = 0, len(nums) - 1
             while low <= high:
-                mid = (low  + high) //2
+                mid = (low + high) // 2
                 # looking for the lowest number higher than target
                 if nums[mid] <= target:
                     low = mid + 1
                 else:
                     # even if they equal, high is set one below
                     high = mid - 1
-            return high # the higher of the two
+            return high  # the higher of the two
 
         low, high = bs_left(nums, target), bs_right(nums, target)
         return [low, high] if low <= high else [-1, -1]
@@ -84,7 +82,8 @@ def main():
     ans = sol.searchRange(
         # [5, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 10], 8
         # [1,3], 1
-        [1, 2, 3], 1,
+        [1, 2, 3],
+        1,
     )
     print(ans)
 

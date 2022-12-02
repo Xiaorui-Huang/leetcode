@@ -79,6 +79,7 @@ class Solution:
             return self.PredictTheWinner_DP(nums)
         elif APPR == appr.DP_SPACE:
             return self.PredictTheWinner_DP_Space(nums)
+        return False  # never reached
 
     def PredictTheWinner_DP_Space(self, nums: list[int]) -> bool:
         n = len(nums)

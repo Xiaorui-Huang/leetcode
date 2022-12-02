@@ -1,7 +1,7 @@
 #
 # @lc app=leetcode id=82 lang=python3
 #
-# [82] Remove Duplicates from Sorted List II
+# [82] Remove Duplicates from Sorted list II
 #
 # https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/description/
 #
@@ -42,13 +42,13 @@
 #
 #
 #
-from typing import List, Optional
+from typing import Optional
 
 
 class ListNode:
     def __init__(self, val=0, next=None):
-        self.val = val
-        self.next = next
+        self.val: int = val
+        self.next: Optional[ListNode] = next
 
     def __str__(self) -> str:
         if self.next is None:
@@ -62,32 +62,32 @@ class Solution:
     def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
         # a Dummy to keep the head
         sentinel = ListNode(0, head)
-        
+
         # the predecessor: anchor before the great duplicates
-        prede = sentinel
+        predecessor = sentinel
 
         while head:
             # skipping to the last of the duplicates
             if head.next and head.val == head.next.val:
                 while head.next and head.val == head.next.val:
                     head = head.next
-                # connecting the predecessor to the next LinkNode
-                prede.next = head.next
+                # connecting the predecessor to the next LinkNode prede.next = head.next
             else:
                 # no dups? move the prede like a normal person
-                prede = prede.next
+                predecessor = predecessor.next  # type: ignore
 
             # yep next
             head = head.next
-                
+
         return sentinel.next
+
 
 # @lc code=end
 
 
-def build_linked_list(vals: List[int]) -> Optional[ListNode]:
+def build_linked_list(vals: list[int]) -> Optional[ListNode]:
     if not vals:
-        return
+        return None
     head = ListNode()
     cur = head
     for i, val in enumerate(vals):

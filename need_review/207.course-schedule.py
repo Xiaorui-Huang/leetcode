@@ -59,34 +59,34 @@
 #
 # @lc code=start
 from enum import Enum
-from typing import List
 
 approaches = Enum("app", "DFS OPT_DFS")
 APPROACH = approaches.OPT_DFS
 
 
 class Solution:
-    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+    def canFinish(self, numCourses: int, prerequisites: list[list[int]]) -> bool:
         # build the adjacency matrix
         if APPROACH == approaches.DFS:
             return self.canFinish_DFS(numCourses, prerequisites)
         elif APPROACH == approaches.OPT_DFS:
             return self.canFinish_OPT_DFS(numCourses, prerequisites)
+        return False  # never reached
 
     # lc discussion sol src: https://leetcode.com/problems/course-schedule/discuss/58586/Python-20-lines-DFS-solution-sharing-with-explanation/60058
-    def canFinish_OPT_DFS(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+    def canFinish_OPT_DFS(self, numCourses: int, prerequisites: list[list[int]]) -> bool:
         """Return if the student can finish all the courses given the prerequisites
         This is really about building a graph and looking for directing
         cycles/rings in a graph
 
         Args:
             numCourses (int): number of courses
-            prerequisites (List[List[int,int]]): the prerequiste pairs
+            prerequisites (list[list[int,int]]): the prerequiste pairs
 
         Returns:
             bool: if the student can finishe all courses with prerequisites
         """
-        graph = [[] for _ in range(numCourses)]
+        graph: list[list[int]] = [[] for _ in range(numCourses)]
         visited = [0] * numCourses
         for x, y in prerequisites:
             graph[x].append(y)
@@ -114,9 +114,9 @@ class Solution:
                 return False
         return True
 
-    def canFinish_DFS(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+    def canFinish_DFS(self, numCourses: int, prerequisites: list[list[int]]) -> bool:
         courses = set()
-        adj = [[] for _ in range(numCourses)]
+        adj: list[list[int]] = [[] for _ in range(numCourses)]
         for pre in prerequisites:
             second, first = pre
             if first == second:
@@ -125,7 +125,7 @@ class Solution:
             courses.add(first)
             courses.add(second)
 
-        def dfs_util(cur: int, visited: List[bool]):
+        def dfs_util(cur: int, visited: list[bool]):
             for node in adj[cur]:
                 if not visited[node]:
                     # we mark the nodes later, as we only want the course to be

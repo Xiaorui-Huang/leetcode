@@ -3,5 +3,11 @@
     "cSpell.words": [
         "APPR"
     ],
-    "C_Cpp.default.configurationProvider": "ms-vscode.makefile-tools"
+    "C_Cpp.default.configurationProvider": "ms-vscode.makefile-tools",
+    "files.associations": {
+        "*.tcs": "glsl",
+        "*.fs": "glsl",
+        "*.tes": "glsl",
+        "vector": "cpp"
+    }
 }

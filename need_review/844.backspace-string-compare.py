@@ -57,8 +57,6 @@
 #
 
 # @lc code=start
-from typing import List
-
 from enum import Enum
 
 approaches = Enum("approaches", "LAZY_LST POINTERS")
@@ -71,69 +69,70 @@ class Solution:
             return self.backspaceCompare_lazy_lst(s, t)
         elif APPROACH == approaches.POINTERS:
             return self.backspaceCompare_pointers(s, t)
+        return False  # never reached
+
     def backspaceCompare_pointers(self, s: str, t: str) -> bool:
-        i = len(s) - 1			# Traverse from the end of the strings
+        i = len(s) - 1  # Traverse from the end of the strings
         j = len(t) - 1
 
-        skipS = 0              # The number of backspaces required till we arrive at a valid character
+        skipS = 0  # The number of backspaces required till we arrive at a valid character
         skipT = 0
 
         while i >= 0 or j >= 0:
-            while i >= 0:					# Ensure that we are comparing a valid character in S
-                if s[i] == "#" :
-                    skipS += 1				# If not a valid character, keep times we must backspace.
+            while i >= 0:  # Ensure that we are comparing a valid character in S
+                if s[i] == "#":
+                    skipS += 1  # If not a valid character, keep times we must backspace.
                     i = i - 1
 
                 elif skipS > 0:
-                    skipS -= 1				# Backspace the number of times calculated in the previous step
+                    skipS -= 1  # Backspace the number of times calculated in the previous step
                     i = i - 1
 
                 else:
                     break
 
-            while j >= 0:					# Ensure that we are comparing a valid character in T
-                    if t[j] == "#":
-                        skipT += 1			# If not a valid character, keep times we must backspace.
-                        j = j - 1
+            while j >= 0:  # Ensure that we are comparing a valid character in T
+                if t[j] == "#":
+                    skipT += 1  # If not a valid character, keep times we must backspace.
+                    j = j - 1
 
-                    elif skipT > 0:
-                        skipT -= 1			# Backspace the number of times calculated in the previous step
-                        j = j - 1
+                elif skipT > 0:
+                    skipT -= 1  # Backspace the number of times calculated in the previous step
+                    j = j - 1
 
-                    else:
-                        break
+                else:
+                    break
 
-            print("Comparing", s[i], t[j])		# Print out the characters for better understanding.
+            print("Comparing", s[i], t[j])  # Print out the characters for better understanding.
 
-            if i>= 0 and j >= 0 and s[i] != t[j]:    # Compare both valid characters. If not the same, return False.
+            if i >= 0 and j >= 0 and s[i] != t[j]:  # Compare both valid characters. If not the same, return False.
                 return False
 
-            if (i>=0) != (j>=0):		# Also ensure that both the character indices are valid. If it is not valid,
-                return False			#  it means that we are comparing a "#" with a valid character.
+            if (i >= 0) != (j >= 0):  # Also ensure that both the character indices are valid. If it is not valid,
+                return False  #  it means that we are comparing a "#" with a valid character.
 
             i = i - 1
             j = j - 1
 
-        return True					# This means both the strings are equivalent.
+        return True  # This means both the strings are equivalent.
 
-            
     def backspaceCompare_lazy_lst(self, s: str, t: str) -> bool:
         def actual_string(s: str):
-            char_lst:List = []
+            char_lst: list = []
             for c in s:
                 if c != "#":
                     char_lst.append(c)
                 else:
                     char_lst.pop() if char_lst else ""
             return "".join(char_lst)
+
         return actual_string(s) == actual_string(t)
+
 
 # @lc code=end
 def main():
     sol = Solution()
-    ans = sol.backspaceCompare(
-        "a#c", "b"
-    )
+    ans = sol.backspaceCompare("a#c", "b")
     print(ans)
 
 

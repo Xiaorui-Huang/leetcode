@@ -39,26 +39,27 @@
 #
 
 # @lc code=start
-from typing import Dict
 from enum import Enum
 
-approaches = Enum('approaches', 'DICT SORT')
+approaches = Enum("approaches", "DICT SORT")
 approach = approaches.DICT
+
+
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
         if approach == approaches.DICT:
             return self.anagram_hash(s, t)
         elif approach == approaches.SORT:
-            return self.anagram_sort(s,t)
-        else:
-            print('You fucked up the settings')
+            return self.anagram_sort(s, t)
+        print("You fucked up the settings")
+        return False  # never reached
 
-    def anagram_hash(self, s:str, t:str) -> bool:
+    def anagram_hash(self, s: str, t: str) -> bool:
         if len(s) != len(t):
             return False
 
-        def build_hash(s: str) -> Dict:
-            s_hash = {}
+        def build_hash(s: str) -> dict:
+            s_hash: dict[str, int] = {}
             for c in s:
                 s_hash[c] = s_hash.get(c, 0) + 1
             return s_hash
@@ -70,8 +71,10 @@ class Solution:
                 return False
         return True
 
-    def anagram_sort(self, s:str, t:str) -> bool:
+    def anagram_sort(self, s: str, t: str) -> bool:
         return sorted(s) == sorted(t)
+
+
 # @lc code=end
 
 sol = Solution()

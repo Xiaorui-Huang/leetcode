@@ -71,13 +71,15 @@
 #
 #
 
-from typing import List
 
 # @lc code=start
+from typing import Union
+
+
 class Solution:
     # complexity O(n log n) - binary search on dfs
     # space complexity O(n) - cost of binary search
-    def minimumEffortPath(self, heights: List[List[int]]) -> int:
+    def minimumEffortPath(self, heights: list[list[int]]) -> Union[int, float]:
         rows = len(heights)
         if not rows:
             return float("inf")
@@ -103,13 +105,7 @@ class Solution:
                 for row_offset, col_offset in [(0, 1), (1, 0), (-1, 0), (0, -1)]:
                     row, col = i + row_offset, j + col_offset
 
-                    if (
-                        row < 0
-                        or col < 0
-                        or rows <= row
-                        or cols <= col
-                        or (row, col) in visited
-                    ):
+                    if row < 0 or col < 0 or rows <= row or cols <= col or (row, col) in visited:
                         continue
                     effort = abs(heights[i][j] - heights[row][col])
                     # only dfs if within max_effort
@@ -154,7 +150,8 @@ class Solution:
     # failed attempt
     # complexity O(3^n) - worst case at each node there is 3 cases
     # space complexity O(n) - backtrack stack could visit all n nodes
-    def minimumEffortPath_backtrack(self, heights: List[List[int]]) -> int:
+
+    def minimumEffortPath_backtrack(self, heights: list[list[Union[int, str]]]) -> Union[int, float]:
         min_effort = float("inf")
         rows = len(heights)
 
@@ -176,16 +173,10 @@ class Solution:
                 row, col = i + row_offset, j + col_offset
 
                 # skip invalid traversal
-                if (
-                    row < 0
-                    or rows <= row
-                    or col < 0
-                    or cols <= col
-                    or heights[row][col] == "#"
-                ):
+                if row < 0 or rows <= row or col < 0 or cols <= col or heights[row][col] == "#":
                     continue
 
-                effort = abs(cur_height - heights[row][col])
+                effort = abs(cur_height - heights[row][col])  # type: ignore
 
                 # skip the routes with some effort more than the current min_effort
                 if effort < min_effort:

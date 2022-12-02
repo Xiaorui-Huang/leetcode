@@ -49,30 +49,29 @@
 #
 #
 
-from typing import List
 from enum import Enum
 
 approaches = Enum("approaches", "LC TWO_SEARCH")
 APPROACH = approaches.LC
 
 
-
 # @lc code=start
 class Solution:
-    def searchMatrix(self, A: List[List[int]], target: int) -> bool:
+    def searchMatrix(self, A: list[list[int]], target: int) -> bool:
         if APPROACH == approaches.LC:
             return self.searchMatrix_lc(A, target)
         elif APPROACH == approaches.TWO_SEARCH:
             return self.searchMatrix_two_search(A, target)
+        return False  # never reached
 
-    def searchMatrix_lc(self, A: List[List[int]], target: int) -> bool:
+    def searchMatrix_lc(self, A: list[list[int]], target: int) -> bool:
         if not A or target is None:
             return False
 
         rows, cols = len(A), len(A[0])
         # note high is row * cols - 1
         low, high = 0, rows * cols - 1
-        
+
         while low <= high:
             mid = (low + high) // 2
             num = A[mid // cols][mid % cols]
@@ -83,15 +82,16 @@ class Solution:
                 low = mid + 1
             else:
                 high = mid - 1
-        
+
         return False
 
-    def searchMatrix_two_search(self, A: List[List[int]], target: int) -> bool:
+    def searchMatrix_two_search(self, A: list[list[int]], target: int) -> bool:
         if not A or not A[0]:
             return False
         rows = len(A)
         cols = len(A[0])
-        def binary_row_search(A: List[List[int]], target: int) -> int:
+
+        def binary_row_search(A: list[list[int]], target: int) -> int:
             """Find the appropriate row to binary search next
 
             Find the highest number that is less than the target
@@ -110,7 +110,7 @@ class Solution:
 
             return up - 1
 
-        def binary_search(nums: List[int], target: int) -> int:
+        def binary_search(nums: list[int], target: int) -> bool:
             left, right = 0, cols - 1
             while left <= right:
                 mid = (left + right) // 2

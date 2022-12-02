@@ -68,7 +68,6 @@
 
 # @lc code=start
 from collections import deque
-from typing import List, Dict, Tuple
 
 EMPTY = 0
 FRESH = 1
@@ -76,7 +75,7 @@ ROTTEN = 2
 
 
 class Solution:
-    def orangesRotting(self, grid: List[List[int]]) -> int:
+    def orangesRotting(self, grid: list[list[int]]) -> int:
         rows = len(grid)
         cols = len(grid[0])
         locations = self.scan_grid(grid)
@@ -115,18 +114,18 @@ class Solution:
             return minute
         return -1
 
-    def scan_grid(self, grid: List[List[int]]) -> Dict[str, List[Tuple[int, int]]]:
+    def scan_grid(self, grid: list[list[int]]) -> dict[str, list[tuple[int, int]]]:
         """Scan the orange grid and return the location information of empty, fresh and rotten oranges initial location
 
         Args:
-            grid (List[List[int]]): grid of fresh/rotten oranges and empty spaces
+            grid (list[list[int]]): grid of fresh/rotten oranges and empty spaces
 
         Returns:
-            Dict[str, List[Tuple[int, int]]]: Dictionary containing a list of initial positions for the 3 types of items
+            dict[str, list[tuple[int, int]]]: Dictionary containing a list of initial positions for the 3 types of items
         """
         rows = len(grid)
         cols = len(grid[0])
-        locations = {"empty": [], "fresh": [], "rotten": []}
+        locations: dict[str, list[tuple[int, int]]] = {"empty": [], "fresh": [], "rotten": []}
 
         for x in range(rows):
             for y in range(cols):

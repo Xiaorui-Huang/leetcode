@@ -57,12 +57,9 @@
 #
 
 
-from typing import List
-
-
 # @lc code=start
 class Solution:
-    def coinChange(self, coins: List[int], amount: int) -> int:
+    def coinChange(self, coins: list[int], amount: int) -> int:
         """Return the minimum number of coins used to get the amount using the a given denomination of coins
 
             With a given amount i, we find the minimum by checking the amount
@@ -75,7 +72,7 @@ class Solution:
             to O(amount) as we are re-using a lot of previous results
 
         Args:
-            coins (List[int]): denomination of coins
+            coins (list[int]): denomination of coins
             amount (int): monetary amount needed to make up using coins
 
         Returns:
@@ -89,7 +86,7 @@ class Solution:
                 if i - coin >= 0:
                     # take the minimum of itself vs the amount less the coin (+1 for using the coin)
                     dp[i] = min(dp[i], dp[i - coin] + 1)
-        return -1 if dp[amount] == float("inf") else dp[amount]
+        return -1 if dp[amount] == float("inf") else dp[amount]  # type: ignore
 
 
 # @lc code=end

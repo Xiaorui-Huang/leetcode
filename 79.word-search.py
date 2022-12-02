@@ -61,19 +61,16 @@
 # larger board?
 #
 #
-from typing import Dict, List
-
 # @lc code=start
 from enum import Enum
+from typing import Union
 
-approaches = Enum(
-    "approaches", "BACKTRACK_SET BACKTRACK_HASH BACKTRACK_LC PRUNING BACKTRACK_TRIE"
-)
+approaches = Enum("approaches", "BACKTRACK_SET BACKTRACK_HASH BACKTRACK_LC PRUNING BACKTRACK_TRIE")
 APPROACH = approaches.BACKTRACK_TRIE
 
 
 class Solution:
-    def exist(self, board: List[List[str]], word: str) -> bool:
+    def exist(self, board: list[list[str]], word: str) -> bool:
         if APPROACH == approaches.BACKTRACK_LC:
             return self.exist_BT_LC(board, word)
         elif APPROACH == approaches.BACKTRACK_SET:
@@ -84,22 +81,23 @@ class Solution:
             return self.exist_STACK_PRUNING(board, word)
         elif APPROACH == approaches.BACKTRACK_TRIE:
             return self.exist_BT_TRIE(board, word)
+        return self.exist_BT_LC(board, word)
 
-    def exist_BT_TRIE(self, board: List[List[str]], word: str) -> bool:
+    def exist_BT_TRIE(self, board: list[list[str]], word: str) -> bool:
 
         rows = len(board)
         cols = len(board[0])
         if len(word) > rows * cols:
             return False
 
-        trie = {}
+        trie: dict = {}
         cur = trie
         for c in word:
             cur = cur.setdefault(c, {})
         # mark the end of the word
         cur["-"] = True
 
-        def backtrack(i: int, j: int, trie: Dict) -> bool:
+        def backtrack(i: int, j: int, trie: dict) -> bool:
             if board[i][j] not in trie:
                 return False
 
@@ -111,12 +109,7 @@ class Solution:
 
             for row_offset, col_offset in [(0, 1), (1, 0), (0, -1), (-1, 0)]:
                 row, col = i + row_offset, j + col_offset
-                if (
-                    row < 0  # ensure that the search is within bounds
-                    or rows <= row
-                    or col < 0
-                    or cols <= col
-                ):
+                if row < 0 or rows <= row or col < 0 or cols <= col:  # ensure that the search is within bounds
                     continue
                 # although not an issue here in an actual trie there may be multiple letters we can keep on searching for
                 # TODO:this can be optimized to not use a for loop... I'm just too lazy... refer to word search ii instead
@@ -132,7 +125,7 @@ class Solution:
                     return True
         return False
 
-    def exist_BT_HASH(self, board: List[List[str]], word: str) -> bool:
+    def exist_BT_HASH(self, board: list[list[str]], word: str) -> bool:
         rows = len(board)
         cols = len(board[0])
         if len(word) > rows * cols:
@@ -149,12 +142,7 @@ class Solution:
 
             for row_offset, col_offset in [(0, 1), (1, 0), (0, -1), (-1, 0)]:
                 row, col = i + row_offset, j + col_offset
-                if (
-                    row < 0  # ensure that the search is within bounds
-                    or rows <= row
-                    or col < 0
-                    or cols <= col
-                ):
+                if row < 0 or rows <= row or col < 0 or cols <= col:  # ensure that the search is within bounds
                     continue
                 if backtrack(row, col, index + 1):
                     return True
@@ -167,7 +155,7 @@ class Solution:
                     return True
         return False
 
-    def exist_BT_SET(self, board: List[List[str]], word: str) -> bool:
+    def exist_BT_SET(self, board: list[list[str]], word: str) -> bool:
 
         """Return if we can find the word in a sequential manner within the board (each letter is only allow to be used once)
 
@@ -187,7 +175,7 @@ class Solution:
             to search.
 
         Args:
-            board (List[List[str]]): the board of letters
+            board (list[list[str]]): the board of letters
             word (str): the word we can to find in the board
 
         Returns:
@@ -197,7 +185,7 @@ class Solution:
         cols = len(board[0])
         if len(word) > rows * cols:
             return False
-        visited = set()
+        visited: set[tuple[int, int]] = set()
 
         def backtrack(i: int, j: int, visited: set, index: int) -> bool:
             visited.add((i, j))
@@ -214,8 +202,7 @@ class Solution:
                     or rows <= row
                     or col < 0
                     or cols <= col
-                    or (row, col)
-                    in visited  # ensure that each letter is only visited once
+                    or (row, col) in visited  # ensure that each letter is only visited once
                 ):
                     continue
                 if backtrack(row, col, visited, index + 1):
@@ -286,9 +273,9 @@ class Solution:
                 stack.append([i, j - 1, index + 1])
         return False
 
-    def exist_BT_LC(self, board: List[List[str]], word: str) -> bool:
+    def exist_BT_LC(self, board: list[list[str]], word: str) -> bool:
         """
-        :type board: List[List[str]]
+        :type board: list[list[str]]
         :type word: str
         :rtype: bool
         """
@@ -303,13 +290,7 @@ class Solution:
                 return True
 
             # Check the current status, before jumping into backtracking
-            if (
-                row < 0
-                or row == rows
-                or col < 0
-                or col == cols
-                or board[row][col] != suffix[0]
-            ):
+            if row < 0 or row == rows or col < 0 or col == cols or board[row][col] != suffix[0]:
                 return False
 
             ret = False

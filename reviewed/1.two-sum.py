@@ -60,11 +60,10 @@
 #
 
 # @lc code=start
-from typing import List
 
 
 class Solution:
-    def twoSum(self, nums: List[int], target: int) -> List[int]:
+    def twoSum(self, nums: list[int], target: int) -> list[int]:
         """This works without a full hash index since even if the initial value
         that has a compliment didn't return because the later compliment wasn't
         in the hash yet, when we get the compliment later it will always find
@@ -74,13 +73,14 @@ class Solution:
 
         Return the pair of indices that adds to up to the target
         """
-        hashmap = {}
+        hashmap: dict[int, int] = {}
         for i, num in enumerate(nums):
             # check for complement first otherwise it maybe reusing the same number
             complement = target - num
             if complement in hashmap:
                 return [hashmap[complement], i]
             hashmap[num] = i
+        return []  # never reached
 
 
 def main():

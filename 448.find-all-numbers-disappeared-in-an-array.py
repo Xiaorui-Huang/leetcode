@@ -41,27 +41,30 @@
 #
 
 # @lc code=start
-from typing import List
 from enum import Enum
-appr= Enum("approaches", "set inplace")
+
+appr = Enum("approaches", "set inplace")
 APPR = appr.inplace
+
 
 class Solution:
     if APPR == appr.set:
-        def findDisappearedNumbers(self, nums: List[int]) -> List[int]:
-            """make a set of unseen numbers and remove every encounter as we go
-            """
+
+        def findDisappearedNumbers(self, nums: list[int]) -> list[int]:
+            """make a set of unseen numbers and remove every encounter as we go"""
             missing = set(range(1, 1 + len(nums)))
             for num in nums:
                 missing.discard(num)
-            return missing
+            return list(missing)
+
     elif APPR == appr.inplace:
-        def findDisappearedNumbers(self, nums: List[int]) -> List[int]:
+
+        def findDisappearedNumbers(self, nums: list[int]) -> list[int]:
             """change all encountered number to negative in place and return the indexs of the positive numbers
 
             2n or O(n) run time
             O(1) space
-            
+
             93% top tier space solver, 8% slow solver
             """
             for num in nums:

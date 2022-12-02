@@ -41,17 +41,16 @@
 #
 
 # @lc code=start
-from typing import List
 
 
 class Solution:
-    def threeSum(self, nums: List[int]) -> List[List[int]]:
+    def threeSum(self, nums: list[int]) -> list[list[int]]:
         """Hashmap 1 pass approach
 
         There is also two pointer approach, using sorted list
 
         """
-        hashmap = {}
+        hashmap: dict[int, int] = {}
         found, dup_val = set(), set()
 
         # O(n)
@@ -66,9 +65,9 @@ class Solution:
                 for j, val_j in enumerate(nums[i + 1 :]):
                     val_k = -(val_i + val_j)
                     if val_k in hashmap and hashmap[val_k] == i:
-                            found.add(tuple(sorted([val_i, val_j, val_k])))
+                        found.add(tuple(sorted([val_i, val_j, val_k])))
                     hashmap[val_j] = i
-        return found
+        return found  # type: ignore
 
 
 # @lc code=end

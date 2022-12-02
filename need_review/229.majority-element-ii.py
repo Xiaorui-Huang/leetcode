@@ -57,21 +57,19 @@
 # https://leetcode.com/problems/majority-element-ii/discuss/63520/Boyer-Moore-Majority-Vote-algorithm-and-my-elaboration
 
 # @lc code=start
-from itertools import count
-from typing import List
 
 
 class Solution:
-    def majorityElement(self, nums: List[int]) -> List[int]:
+    def majorityElement(self, nums: list[int]) -> list[int]:
         """Return all the elements that appears more than ⌊ n/3 ⌋ times.
         Uses Boyer-Moore algorithm, essentially keep track of the relative count
         instead of the absolute count
 
         Args:
-            nums (List[int]): list of elements
+            nums (list[int]): list of elements
 
         Returns:
-            List[int]: list of majority elements
+            list[int]: list of majority elements
         """
         # since we only want elements that appears more than ⌊ n/3 ⌋ times.
         # there is only a maximum of two potential candidates
@@ -94,11 +92,7 @@ class Solution:
                 count1 -= 1
                 count2 -= 1
 
-        return [
-            candidate
-            for candidate in (candidate1, candidate2)
-            if nums.count(candidate) > len(nums) // 3
-        ]
+        return [candidate for candidate in (candidate1, candidate2) if nums.count(candidate) > len(nums) // 3]  # type: ignore
 
 
 # @lc code=end

@@ -65,7 +65,7 @@ class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
         max_len = 0
         # a dictionary storing the last position we saw the letter
-        last_pos = {}
+        last_pos: dict[str, int] = {}
         # left and right pointer for the shifting window
         left_pt = 0
         for right_pt in range(len(s)):

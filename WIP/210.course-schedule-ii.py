@@ -70,20 +70,20 @@
 #
 #
 from enum import Enum
-from typing import List
 
 approaches = Enum("app", "DFS")
 APPROACH = approaches.DFS
 
 # @lc code=start
 class Solution:
-    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+    def findOrder(self, numCourses: int, prerequisites: list[list[int]]) -> list[int]:
         if APPROACH == approaches.DFS:
             return self.findOrder_DFS(numCourses, prerequisites)
+        return []  # never reached
 
-    def findOrder_DFS(self, n: int, prereq: List[List[int]]) -> List[int]:
+    def findOrder_DFS(self, n: int, prereq: list[list[int]]) -> list[int]:
         # refer to the lc 207. for decision problem implementation
-        graph = [[] for _ in range(n)]
+        graph: list[list[int]] = [[] for _ in range(n)]
         visited = [0] * n
 
         for post, pre in prereq:

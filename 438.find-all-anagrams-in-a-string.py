@@ -53,7 +53,6 @@
 #
 
 # @lc code=start
-from typing import List
 from collections import Counter
 
 from enum import Enum
@@ -63,13 +62,14 @@ APPROACH = approaches.SLIDING_WINDOW
 
 
 class Solution:
-    def findAnagrams(self, s: str, p: str) -> List[int]:
+    def findAnagrams(self, s: str, p: str) -> list[int]:
         if APPROACH == approaches.NAIVE:
             return self.findAnagrams_naive(s, p)
         elif APPROACH == approaches.SLIDING_WINDOW:
             return self.findAnagrams_naive(s, p)
+        return []  # never reached
 
-    def findAnagrams_sliding_window(self, s: str, p: str) -> List[int]:
+    def findAnagrams_sliding_window(self, s: str, p: str) -> list[int]:
         m, n = len(p), len(s)
         if m > n:
             return []
@@ -89,7 +89,7 @@ class Solution:
             l, r = l + 1, r + 1
         return indices
 
-    def findAnagrams_naive(self, s: str, p: str) -> List[int]:
+    def findAnagrams_naive(self, s: str, p: str) -> list[int]:
         """Complexity: O(mn)"""
         indices = []
         n = len(s)

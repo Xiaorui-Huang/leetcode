@@ -69,8 +69,11 @@
 
 # @lc code=start
 from enum import Enum
-approaches = Enum('Approaches', 'RECURSION NAIVE_DP DP MATH')
+
+approaches = Enum("Approaches", "RECURSION NAIVE_DP DP MATH")
 approach = approaches.DP
+
+
 class Solution:
     # ===== recursion ====
     def uniquePaths(self, m: int, n: int) -> int:
@@ -85,9 +88,9 @@ class Solution:
             left_paths = self.uniquePaths(m - 1, n)
             return right_paths + left_paths
 
-    # ====== naive bottom up dp =========
-    # handles edge cases when there is a straight path, but loop doesn't run
-    # or just change the dp to all 1 instead of 0
+        # ====== naive bottom up dp =========
+        # handles edge cases when there is a straight path, but loop doesn't run
+        # or just change the dp to all 1 instead of 0
         elif approach == approaches.NAIVE_DP:
             if m == 1 or n == 1:
                 return 1
@@ -105,8 +108,8 @@ class Solution:
 
             return dp[0][0]
 
-    # ====== linear space bottom up dp =========
-    # Note: constant space with dp is not possible... I tried
+        # ====== linear space bottom up dp =========
+        # Note: constant space with dp is not possible... I tried
         elif approach == approaches.DP:
             if m == 1 or n == 1:
                 return 1
@@ -124,21 +127,23 @@ class Solution:
 
             # usually its dp[0][0], but because of the column swap its dp[0][1]
             return dp[0][1]
-        
+
         # An aside... math solution
         elif approach == approaches.MATH:
             import math
 
             if not m or not n:
                 return 0
-            return math.factorial(m+n-2)/(math.factorial(n-1) * math.factorial(m-1))
+            return int(math.factorial(m + n - 2) / (math.factorial(n - 1) * math.factorial(m - 1)))
+
+        return 0  # never reached
 
 
 # Some other clean solutions
 
 # https://leetcode.com/problems/unique-paths/discuss/22975
 
-# # O(m*n) space   
+# # O(m*n) space
 # def uniquePaths2(self, m, n):
 #     if not m or not n:
 #         return 0
@@ -148,7 +153,7 @@ class Solution:
 #             dp[i][j] = dp[i-1][j] + dp[i][j-1]
 #     return dp[-1][-1]
 
-# # O(n) space 
+# # O(n) space
 # def uniquePaths(self, m, n):
 #     if not m or not n:
 #         return 0

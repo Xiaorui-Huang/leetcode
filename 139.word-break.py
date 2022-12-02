@@ -61,7 +61,6 @@
 #
 
 from enum import Enum
-from typing import List
 
 approaches = Enum("approaches", "DP DP_TRIE")
 APPROACH = approaches.DP_TRIE
@@ -69,13 +68,14 @@ APPROACH = approaches.DP_TRIE
 
 # @lc code=start
 class Solution:
-    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+    def wordBreak(self, s: str, wordDict: list[str]) -> bool:
         if APPROACH == approaches.DP:
             return self.wordBreak_DP(s, wordDict)
         elif APPROACH == approaches.DP_TRIE:
             return self.wordBreak_trie(s, wordDict)
+        return False  # never reached
 
-    def wordBreak_DP(self, s: str, wordDict: List[str]) -> bool:
+    def wordBreak_DP(self, s: str, wordDict: list[str]) -> bool:
         """
         Idea: define dp[i] as if we can separate string s[:1]
         dp[i] = dp[j] and remaining string is in wordDict; for some j, 0 <= j < i
@@ -89,7 +89,7 @@ class Solution:
 
         return dp[-1]
 
-    def wordBreak_trie(self, s: str, wordDict: List[str]) -> bool:
+    def wordBreak_trie(self, s: str, wordDict: list[str]) -> bool:
         """Idea: Same ideas as pure DP, but we change how we loop up a match of
         substring and a word in wordDict
 
@@ -97,7 +97,7 @@ class Solution:
 
         """
         # construct a regular trie from all the words
-        trie = {}
+        trie: dict = {}
 
         for w in wordDict:
             root = trie
@@ -135,7 +135,7 @@ class Solution:
                     # we just need to set this word at i once, so we don't
                     # need to continue looping
                     if None in root and dp[j + 1]:
-                        dp[i] = 1
+                        dp[i] = True
                         break
 
                     j += 1

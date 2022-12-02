@@ -56,7 +56,6 @@
 #
 
 # @lc code=start
-from typing import List
 from numpy.linalg import norm
 import heapq
 
@@ -65,20 +64,23 @@ from enum import Enum
 approaches = Enum("approaches", "ONELINER MINHEAP")
 APPROACH = approaches.MINHEAP
 
+heap = list[tuple[int, int, int]]
+
 
 class Solution:
-    def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
+    def kClosest(self, points: list[list[int]], k: int) -> list[list[int]]:
         if APPROACH == approaches.MINHEAP:
-            max_heap = []
+            max_heap: heap = []
             for x, y in points:
                 dist = -(x * x + y * y)
                 if len(max_heap) == k:
                     heapq.heappushpop(max_heap, (dist, x, y))
                 else:
                     heapq.heappush(max_heap, (dist, x, y))
-            return [(x, y) for _, x, y in max_heap]
+            return [[x, y] for _, x, y in max_heap]
         elif APPROACH == approaches.ONELINER:
             return heapq.nsmallest(k, points, key=lambda point: norm(point))
+        return [[]]  # never reached
 
     # @lc code=end
 

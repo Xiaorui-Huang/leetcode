@@ -51,13 +51,12 @@
 #
 #
 
-from typing import List
 
 # @lc code=start
 
 
 class Solution:
-    def search(self, nums: List[int], target: int) -> int:
+    def search(self, nums: list[int], target: int) -> int:
         """Idea: use a modified binary search to find the smallest element
         (based on the structure of the rotated sorted array)
 
@@ -69,7 +68,7 @@ class Solution:
             return -1
         first = nums[0]
 
-        def binary_search(nums: List[int], left: int, right: int, target: int) -> int:
+        def binary_search(nums: list[int], left: int, right: int, target: int) -> int:
             while left <= right:
                 mid = (left + right) // 2
                 val = nums[mid]
@@ -125,7 +124,7 @@ def main():
         # 9,
         # [3, 1],
         # 1,
-        [4,5,1,2,3],
+        [4, 5, 1, 2, 3],
         1,
     )
     print(ans)

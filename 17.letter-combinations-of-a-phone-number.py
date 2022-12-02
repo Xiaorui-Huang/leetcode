@@ -54,22 +54,20 @@
 #
 #
 
-from typing import List
-from unicodedata import digit
-
 # @lc code=start
 class Solution:
     mem = {
-        "2": ['a', 'b', 'c'],
-        "3": ['d', 'e', 'f'],
-        "4": ['g', 'h', 'i'],
-        "5": ['j', 'k', 'l'],
-        "6": ['m', 'n', 'o'],
-        "7": ['p', 'q', 'r', 's'],
-        "8": ['t', 'u', 'v'],
-        "9": ['w', 'x', 'y', 'z'],
+        "2": ["a", "b", "c"],
+        "3": ["d", "e", "f"],
+        "4": ["g", "h", "i"],
+        "5": ["j", "k", "l"],
+        "6": ["m", "n", "o"],
+        "7": ["p", "q", "r", "s"],
+        "8": ["t", "u", "v"],
+        "9": ["w", "x", "y", "z"],
     }
-    def letterCombinations(self, digits: str) -> List[str]:
+
+    def letterCombinations(self, digits: str) -> list[str]:
         if not digits:
             return []
         if digits in self.mem:
@@ -78,15 +76,15 @@ class Solution:
         for i in range(0, len(digits) - 1):
             comb = []
             cur_digit = digits[i]
-            sub_digits = digits[i + 1:]
+            sub_digits = digits[i + 1 :]
 
             sub_comb = self.letterCombinations(sub_digits)
             for letter in self.mem[cur_digit]:
                 for string_comb in sub_comb:
                     comb.append(letter + string_comb)
             self.mem[cur_digit + sub_digits] = comb
-            
-        return self.mem[digits]               
+
+        return self.mem[digits]
 
 
 # @lc code=end
