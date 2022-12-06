@@ -8,6 +8,8 @@
         "*.tcs": "glsl",
         "*.fs": "glsl",
         "*.tes": "glsl",
-        "vector": "cpp"
+        "vector": "cpp",
+        "algorithm": "cpp",
+        "cmath": "cpp"
     }
 }
