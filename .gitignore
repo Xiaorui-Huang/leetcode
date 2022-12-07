@@ -175,3 +175,6 @@ Info.plist
 *.exe
 *.out
 *.app
+
+# LeetCode 
+0.test-cases.txt

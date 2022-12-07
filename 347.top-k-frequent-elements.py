@@ -48,6 +48,7 @@ approaches = Enum("approaches", "SORTED_ZIP COUNTER_QUEUE")
 APPROACH = approaches.COUNTER_QUEUE
 
 
+# TODO: improve
 class Solution:
     if APPROACH == approaches.SORTED_ZIP:
 
