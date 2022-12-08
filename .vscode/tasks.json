@@ -38,13 +38,13 @@
             "options": {
                 "cwd": "${workspaceFolder}/tests/"
             },
-            "command": "./createtest.sh ${input:problem_id}",
+            "command": "./createtest.sh ${input:leetcode_problem_id}",
             "problemMatcher": [],
         }
     ],
     "inputs": [
         {
-            "id": "problem_id",
+            "id": "leetcode_problem_id",
             "description": "leetcode problem id",
             "type": "promptString"
         },

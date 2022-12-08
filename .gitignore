@@ -178,4 +178,5 @@ Info.plist
 
 # LeetCode 
 migrate.sh
-\!test-cases.txt
+\!leetcode-test-cases.txt
+
