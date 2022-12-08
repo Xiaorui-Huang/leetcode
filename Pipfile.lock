@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "15363e0b6e68e0a82e9f73a25e6c621b5229acfc7254f77a16183f17267b53f1"
+            "sha256": "c9b3f572e29b29323bbb5f7693d03261cbe4249fe612e02e08cbfa05ae5ccda0"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -45,6 +45,14 @@
                 "sha256:fbbce6a29f263178a1f7915c1940bde0ec2b2a967566fe1c65c1dfb7422bd255"
             ],
             "version": "==0.2.0"
+        },
+        "comm": {
+            "hashes": [
+                "sha256:788a4ec961956c1cb2b0ba3c21f2458ff5757bb2f552032b140787af88d670a3",
+                "sha256:f395ea64f4f261f35ffc2fbf80a62ec071375dac48cd3ea56092711e74dd063e"
+            ],
+            "markers": "python_version >= '3.6'",
+            "version": "==0.1.1"
         },
         "debugpy": {
             "hashes": [
@@ -110,11 +118,11 @@
         },
         "ipykernel": {
             "hashes": [
-                "sha256:3a9a1b2ad6dbbd5879855aabb4557f08e63fa2208bffed897f03070e2bb436f6",
-                "sha256:e178c1788399f93a459c241fe07c3b810771c607b1fb064a99d2c5d40c90c5d4"
+                "sha256:7aabde9e201c4a8f43000f4be0d057f91df13b906ea646acd9047fcb85600b9b",
+                "sha256:851aa3f9cbbec6918136ada733069a6709934b8106a743495070cf46917eb9a9"
             ],
             "index": "pypi",
-            "version": "==6.17.1"
+            "version": "==6.19.0"
         },
         "ipython": {
             "hashes": [
@@ -147,6 +155,10 @@
             ],
             "markers": "python_version >= '3.8'",
             "version": "==5.1.0"
+        },
+        "leetcode": {
+            "editable": true,
+            "path": "."
         },
         "matplotlib-inline": {
             "hashes": [
@@ -200,11 +212,11 @@
         },
         "packaging": {
             "hashes": [
-                "sha256:dd47c42927d89ab911e606518907cc2d3a1f38bbd026385970643f9c5b8ecfeb",
-                "sha256:ef103e05f519cdc783ae24ea4e2e0f508a9c99b2d4969652eed6a2e1ea5bd522"
+                "sha256:2198ec20bd4c017b8f9717e00f0c8714076fc2fd93816750ab48e2c41de2cfd3",
+                "sha256:957e2148ba0e1a3b282772e791ef1d8083648bc131c8ab0c1feba110ce1146c3"
             ],
-            "markers": "python_version >= '3.6'",
-            "version": "==21.3"
+            "markers": "python_version >= '3.7'",
+            "version": "==22.0"
         },
         "parso": {
             "hashes": [

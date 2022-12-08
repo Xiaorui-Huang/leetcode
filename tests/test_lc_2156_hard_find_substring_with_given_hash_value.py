@@ -1,6 +1,5 @@
 import pytest
-
-from python3.lc_2156_hard_find_substring_with_given_hash_value import Solution
+from lc_2156_hard_find_substring_with_given_hash_value import Solution
 
 
 # fixtures
