@@ -61,26 +61,32 @@ from enum import Enum
 approaches = Enum("approaches", "BITMASK_CALC BITMASK_HIGHEST_PROPAGATE")
 APPROACH = approaches.BITMASK_HIGHEST_PROPAGATE
 
+
 class Solution:
     if APPROACH == approaches.BITMASK_CALC:
+
         def findComplement(self, num: int) -> int:
             # uses xor to flip the bits against all 1's
             # 2^bits - 1 is all ones
             return num ^ (2 ** (num.bit_length()) - 1)
+
     elif APPROACH == approaches.BITMASK_HIGHEST_PROPAGATE:
-        def findComplement(self, num):
+
+        def findComplement(self, num: int) -> int:
             # bitmask has the same length as num and contains only ones 1...1
             # This propagatest the highest bit down to the all less significant bits
             bitmask = num
-            bitmask |= (bitmask >> 1)
-            bitmask |= (bitmask >> 2)
-            bitmask |= (bitmask >> 4)
-            bitmask |= (bitmask >> 8)
-            bitmask |= (bitmask >> 16)
+            bitmask |= bitmask >> 1
+            bitmask |= bitmask >> 2
+            bitmask |= bitmask >> 4
+            bitmask |= bitmask >> 8
+            bitmask |= bitmask >> 16
             # flip all bits
             return bitmask ^ num
 
+
 # @lc code=end
+
 
 def main():
     sol = Solution()
