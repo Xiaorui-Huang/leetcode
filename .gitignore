@@ -177,5 +177,5 @@ Info.plist
 *.app
 
 # LeetCode 
-0.test-cases.txt
 migrate.sh
+\!test-cases.txt

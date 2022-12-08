@@ -11,5 +11,8 @@
         "vector": "cpp",
         "algorithm": "cpp",
         "cmath": "cpp"
-    }
+    },
+    "python.testing.pytestArgs": [],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
 }
