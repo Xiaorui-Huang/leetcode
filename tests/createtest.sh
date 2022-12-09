@@ -18,6 +18,7 @@ then
         # match and get file name
         name="${BASH_REMATCH[1]}"
         touch test_${name}.py
+        code test_${name}.py
         echo "created test_${name}.py"
     else
         echo "regex didn't match original question file"
