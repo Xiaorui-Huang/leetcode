@@ -93,16 +93,16 @@ def build_bst(node_lst: list[Any]) -> Optional[TreeNode]:
     while index < n:
         cur = q.popleft()
 
-        # index + 1 should exist by the stucture of the input (i.e. if the last
-        # leaf in empty should give null and not ommit it)
+        # index + 1 should exist by the structure of the input (i.e. if the last
+        # leaf in empty should give null and not omit it)
         left = node_lst[index]
-        right = node_lst[index + 1]
+        right = node_lst[index + 1] if index + 1 < n else None
 
         # check None, if not null add to tree and put on queue for processing
-        if left:
+        if left is not None:
             cur.left = TreeNode(left)
             q.append(cur.left)
-        if right:
+        if right is not None:
             cur.right = TreeNode(right)
             q.append(cur.right)
 
