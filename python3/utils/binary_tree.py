@@ -1,3 +1,4 @@
+from __future__ import annotations
 from typing import Any, Optional
 from collections import deque
 
@@ -27,9 +28,13 @@ class TreeNode:
             else:
                 self.right.insert(val)
 
+    def __eq__(self, other: TreeNode) -> bool:
+        # use recursive value equals or equality:)
+        return self.val == other.val and self.left == other.left and self.right == self.right
+
     # BST display code source
     # https://stackoverflow.com/questions/34012886/print-binary-tree-level-by-level-in-python
-    def __str__(self):
+    def __str__(self) -> str:
         lines, *_ = self._display_aux()
         return "\n".join(lines)
 
@@ -45,7 +50,7 @@ class TreeNode:
 
         # Only left child.
         if self.right is None:
-            lines, n, p, x = self.left._display_aux()
+            lines, n, p, x = self.left._display_aux()  # type: ignore
             s = "%s" % self.val
             u = len(s)
             first_line = (x + 1) * " " + (n - x - 1) * "_" + s
@@ -86,8 +91,7 @@ def build_bt(node_lst: list[Any]) -> Optional[TreeNode]:
         return None
     root = TreeNode(node_lst[0])
 
-    q: deque = deque()
-    q.append(root)
+    q: deque = deque([root])
 
     index = 1
     while index < n:
