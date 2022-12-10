@@ -41,7 +41,7 @@
 #
 #
 
-from utils.bst import TreeNode, build_bst, null  # type: ignore
+from utils.binary_tree import TreeNode, build_bt, null  # type: ignore
 
 # @lc code=start
 # Definition for a binary tree node.
@@ -95,7 +95,7 @@ def main():
     sol = Solution()
 
     lst = [5, 3, 6, 2, 4, null, 8, 1, null, null, null, 7, 9]
-    bst = build_bst(lst)
+    bst = build_bt(lst)
 
     ans = sol.increasingBST(bst)
     print(ans)

@@ -79,7 +79,7 @@ class TreeNode:
         return lines, n + m + u, max(p, q) + 2, n + u // 2
 
 
-def build_bst(node_lst: list[Any]) -> Optional[TreeNode]:
+def build_bt(node_lst: list[Any]) -> Optional[TreeNode]:
     # empty tree
     n = len(node_lst)
     if not n:
