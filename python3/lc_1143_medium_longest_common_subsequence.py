@@ -141,7 +141,7 @@ class Solution:
     # always been told to use bottom up... just need to worry about the structure
     def longestCommonSubsequence_DP_top_down(self, s1: str, s2: str) -> int:
         @lru_cache(maxsize=None)
-        def memo_solve(p1: int, p2: int):
+        def memo_solve(p1: int, p2: int) -> int:
 
             # Base case: If either string is now empty, we can't match
             # up anymore characters.
@@ -160,7 +160,7 @@ class Solution:
 
 
 # @lc code=end
-def main():
+def main() -> None:
     sol = Solution()
     # s1 = "dknkdizqxkdczafixidorgfcnkrirmhmzqbcfuvojsxwraxe"  # 4,5
     # s2 = "dulixqfgvipenkfubgtyxujixspoxmhgvahqdmzmlyhajerqz"  # 6,7

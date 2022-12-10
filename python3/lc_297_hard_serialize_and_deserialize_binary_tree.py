@@ -118,7 +118,7 @@ class Codec:
             return None
         root = TreeNode(node_lst[0])
 
-        q: deque = deque([root])
+        q: deque[TreeNode] = deque([root])
 
         index = 1
         while index < n:

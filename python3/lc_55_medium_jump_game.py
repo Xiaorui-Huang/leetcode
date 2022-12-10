@@ -93,7 +93,7 @@ class Solution:
 # @lc code=end
 
 
-def main():
+def main() -> None:
     sol = Solution()
     ans = sol.canJump([0])
     print(ans)

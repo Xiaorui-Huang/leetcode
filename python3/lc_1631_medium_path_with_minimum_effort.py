@@ -97,7 +97,7 @@ class Solution:
             """
             visited = set()
 
-            def dfs_helper(i, j, max_effort) -> bool:
+            def dfs_helper(i: int, j: int, max_effort: int) -> bool:
                 if (i, j) == target:
                     return True
 
@@ -191,7 +191,7 @@ class Solution:
 # @lc code=end
 
 
-def main():
+def main() -> None:
     sol = Solution()
     matrix = [
         [8, 3, 2, 5, 2, 10, 7, 1, 8, 9],

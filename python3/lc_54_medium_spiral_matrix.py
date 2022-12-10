@@ -68,15 +68,15 @@ class Solution:
         directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
         global direction
 
-        def dfs(i=0, j=0, direction=0) -> None:
+        def dfs(i: int = 0, j: int = 0, direction: int = 0) -> None:
             spiral.append(matrix[i][j])
-            matrix[i][j] = MARK
+            matrix[i][j] = MARK  # type: ignore
 
             for _ in range(len(directions)):
                 row_offset, col_offset = directions[direction]
                 row = i + row_offset
                 col = j + col_offset
-                if row < 0 or row >= rows or col < 0 or col >= cols or matrix[row][col] == MARK:
+                if row < 0 or row >= rows or col < 0 or col >= cols or matrix[row][col] == MARK:  # type: ignore
                     direction = (direction + 1) % len(directions)
                     continue
                 dfs(row, col, direction)
@@ -95,7 +95,7 @@ class Solution:
         # base cases in order:
         # case 1: col_start > col_end
         # case 2: row_start > row_end
-        def traverse_border(row_start, row_end, col_start, col_end) -> None:
+        def traverse_border(row_start: int, row_end: int, col_start: int, col_end: int) -> None:
             col_width = col_end - col_start
             row_width = row_end - row_start
 
@@ -132,7 +132,7 @@ class Solution:
 # @lc code=end
 
 
-def main():
+def main() -> None:
     sol = Solution()
     matrix = [
         # [1,2,3],

@@ -50,15 +50,15 @@
 #
 
 from typing import Optional
-from utils.linked_list import ListNode, linked_list  # type: ignore
+from utils.linked_list import ListNode, linked_list
 
 
 # @lc code=start
 class Solution:
-    def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
+    def swapPairs(self, head: ListNode | None) -> ListNode | None:
         sentinel = ListNode()
         if head and head.next:
-            res = head.next
+            res: ListNode | None = head.next
         else:
             res = head
         while head and head.next:
@@ -82,7 +82,7 @@ class Solution:
 
 
 # @lc code=end
-def main():
+def main() -> None:
     sol = Solution()
     lst = [1, 2, 3, 4, 5]
     ans = sol.swapPairs(linked_list(lst))

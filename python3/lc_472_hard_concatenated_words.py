@@ -99,7 +99,7 @@ class Solution:
 # @lc code=end
 
 
-def main():
+def main() -> None:
     sol = Solution()
     words = ["cat", "cats", "catsdogcats", "dog", "dogcatsdog", "hippopotamuses", "rat", "ratcatdogcat"]
     ans = sol.findAllConcatenatedWordsInADict(words)

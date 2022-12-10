@@ -19,5 +19,5 @@ def solution() -> Solution:
         ([1, 100, 50, 51], 2650),
     ],
 )
-def test_dividePlayers(solution: Solution, skill: list[int], expected) -> None:
+def test_dividePlayers(solution: Solution, skill: list[int], expected: int) -> None:
     assert solution.dividePlayers(skill) == expected

@@ -68,7 +68,7 @@ class Solution:
         def findComplement(self, num: int) -> int:
             # uses xor to flip the bits against all 1's
             # 2^bits - 1 is all ones
-            return num ^ (2 ** (num.bit_length()) - 1)
+            return num ^ int(2 ** (num.bit_length()) - 1)
 
     elif APPROACH == approaches.BITMASK_HIGHEST_PROPAGATE:
 
@@ -88,7 +88,7 @@ class Solution:
 # @lc code=end
 
 
-def main():
+def main() -> None:
     sol = Solution()
     num = 4738
     ans = sol.findComplement(num)

@@ -41,7 +41,7 @@
 #
 #
 
-from utils.binary_tree import TreeNode, build_bt, null  # type: ignore
+from utils.binary_tree import TreeNode, build_bt, null
 
 # @lc code=start
 # Definition for a binary tree node.
@@ -53,7 +53,9 @@ from utils.binary_tree import TreeNode, build_bt, null  # type: ignore
 
 
 class Solution:
-    def increasingBST(self, root: TreeNode) -> TreeNode:
+    def increasingBST(self, root: TreeNode | None) -> TreeNode | None:
+        if not root:
+            return None
         # dummy root for the increasing TreeNode
         dummy = TreeNode()
 
@@ -91,7 +93,7 @@ class Solution:
 # @lc code=end
 
 
-def main():
+def main() -> None:
     sol = Solution()
 
     lst = [5, 3, 6, 2, 4, null, 8, 1, null, null, null, 7, 9]

@@ -175,7 +175,7 @@ class Solution:
 
 
 # @lc code=end
-def main():
+def main() -> None:
     sol = Solution()
     nums = [1, 1, 1]
     k = 1

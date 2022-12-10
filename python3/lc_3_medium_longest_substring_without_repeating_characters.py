@@ -86,7 +86,7 @@ class Solution:
 
 
 # @lc code=end
-def main():
+def main() -> None:
     sol = Solution()
     a = sol.lengthOfLongestSubstring("abcabcbb")
     print(a)

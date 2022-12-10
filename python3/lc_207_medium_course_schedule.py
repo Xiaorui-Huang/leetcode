@@ -91,7 +91,7 @@ class Solution:
         for x, y in prerequisites:
             graph[x].append(y)
 
-        def dfs_util(i):
+        def dfs_util(i: int) -> bool:
             # if ith node is marked as being visited, then a cycle is found
             if visited[i] == -1:
                 return False
@@ -125,7 +125,7 @@ class Solution:
             courses.add(first)
             courses.add(second)
 
-        def dfs_util(cur: int, visited: list[bool]):
+        def dfs_util(cur: int, visited: list[bool]) -> bool:
             for node in adj[cur]:
                 if not visited[node]:
                     # we mark the nodes later, as we only want the course to be
@@ -146,7 +146,7 @@ class Solution:
 # @lc code=end
 
 
-def main():
+def main() -> None:
     sol = Solution()
     a = sol.canFinish(5, [[1, 4], [2, 4], [3, 1], [3, 2]])
     print(a)

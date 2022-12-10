@@ -50,16 +50,16 @@
 
 # @lc code=start
 class DSU:
-    def __init__(self, n):
+    def __init__(self, n: int) -> None:
         self.parent = [i for i in range(n)]
         self.rank = [0 for _ in range(n)]
 
-    def find(self, x):
+    def find(self, x: int) -> int:
         if self.parent[x] != x:
             self.parent[x] = self.find(self.parent[x])
         return self.parent[x]
 
-    def union(self, x, y):
+    def union(self, x: int, y: int) -> None:
         xset = self.find(x)
         yset = self.find(y)
         if xset == yset:

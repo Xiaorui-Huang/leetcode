@@ -89,7 +89,7 @@ class Solution:
         for post, pre in prereq:
             graph[pre].append(post)
 
-        def dfs(i):
+        def dfs(i: int) -> bool:
             if visited[i] == -1:
                 return False
             if visited[i] == 1:
@@ -127,7 +127,7 @@ class Solution:
 # @lc code=end
 
 
-def main():
+def main() -> None:
     sol = Solution()
     a = sol.findOrder(5, [[1, 4], [2, 4], [3, 1], [3, 2]])
     print(a)

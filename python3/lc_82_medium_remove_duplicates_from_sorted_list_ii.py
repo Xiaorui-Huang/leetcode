@@ -45,16 +45,7 @@
 from typing import Optional
 
 
-class ListNode:
-    def __init__(self, val=0, next=None):
-        self.val: int = val
-        self.next: Optional[ListNode] = next
-
-    def __str__(self) -> str:
-        if self.next is None:
-            return str(self.val)
-        return f"{self.val} -> {self.next}"
-
+from utils.linked_list import ListNode
 
 # @lc code=start
 # Definition for singly-linked list.
@@ -100,7 +91,7 @@ def build_linked_list(vals: list[int]) -> Optional[ListNode]:
     return head
 
 
-def main():
+def main() -> None:
     sol = Solution()
     linked_list = build_linked_list(
         [1, 1, 2, 2, 3, 4, 8, 8, 10, 11, 11]

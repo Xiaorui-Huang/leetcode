@@ -92,7 +92,7 @@ class Solution:
 # @lc code=end
 
 
-def main():
+def main() -> None:
     sol = Solution()
     a = sol.coinChange([2, 5, 10, 1], 27)
     print(a)

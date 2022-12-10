@@ -63,9 +63,10 @@ class Solution:
         Returns:
             int: len of shortest subarry with the same degree
         """
-        count: dict = {}
-        left: dict = {}
-        right: dict = {}
+        count: dict[int, int] = {}
+        left: dict[int, int] = {}
+        right: dict[int, int] = {}
+
         for i, num in enumerate(nums):
             if num not in left:
                 left[num] = i

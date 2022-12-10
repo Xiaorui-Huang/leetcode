@@ -115,7 +115,7 @@ class Solution:
 # @lc code=end
 
 
-def main():
+def main() -> None:
     sol = Solution()
     ans = sol.search(
         # [4, 5, 6, 7, 8, 1, 2, 3],

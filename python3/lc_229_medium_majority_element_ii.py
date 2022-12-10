@@ -96,7 +96,7 @@ class Solution:
 
 
 # @lc code=end
-def main():
+def main() -> None:
     sol = Solution()
     lst = [1, 2]
     ans = sol.majorityElement(lst)

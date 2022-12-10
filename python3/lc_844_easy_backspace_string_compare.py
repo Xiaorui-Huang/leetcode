@@ -117,8 +117,8 @@ class Solution:
         return True  # This means both the strings are equivalent.
 
     def backspaceCompare_lazy_lst(self, s: str, t: str) -> bool:
-        def actual_string(s: str):
-            char_lst: list = []
+        def actual_string(s: str) -> str:
+            char_lst: list[str] = []
             for c in s:
                 if c != "#":
                     char_lst.append(c)
@@ -130,7 +130,7 @@ class Solution:
 
 
 # @lc code=end
-def main():
+def main() -> None:
     sol = Solution()
     ans = sol.backspaceCompare("a#c", "b")
     print(ans)

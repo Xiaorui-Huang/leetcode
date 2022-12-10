@@ -111,7 +111,7 @@ class Solution:
 # @lc code=end
 
 
-def main():
+def main() -> None:
     sol = Solution()
     ans = sol.PredictTheWinner([1, 5, 233, 7])
     print(ans)

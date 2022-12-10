@@ -58,7 +58,7 @@ class Solution:
         if len(s) != len(t):
             return False
 
-        def build_hash(s: str) -> dict:
+        def build_hash(s: str) -> dict[str, int]:
             s_hash: dict[str, int] = {}
             for c in s:
                 s_hash[c] = s_hash.get(c, 0) + 1

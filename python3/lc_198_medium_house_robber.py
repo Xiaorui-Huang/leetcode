@@ -94,7 +94,7 @@ class Solution:
 
 
 # @lc code=end
-def main():
+def main() -> None:
     sol = Solution()
     ans = sol.rob([2, 1, 1, 2])
     print(ans)

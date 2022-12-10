@@ -62,8 +62,14 @@
 #
 
 # @lc code=start
+from typing import TypeAlias
+
+
+Matrix: TypeAlias = list[list[int]]
+
+
 class Solution:
-    def rotate(self, A: list[list[int]]) -> None:
+    def rotate(self, A: Matrix) -> None:
         """
         Do not return anything, modify matrix in-place instead.
         Best solutions: https://leetcode.com/problems/rotate-image/discuss/18884
@@ -99,27 +105,27 @@ class Solution:
             self.transpose(A)
             self.reflect(A)
 
-    def transpose(self, matrix):
-        n = len(matrix)
+    def transpose(self, mat: Matrix) -> None:
+        n = len(mat)
         for i in range(n):
             for j in range(i + 1, n):
-                matrix[j][i], matrix[i][j] = matrix[i][j], matrix[j][i]
+                mat[j][i], mat[i][j] = mat[i][j], mat[j][i]
 
-    def reflect(self, matrix):
-        n = len(matrix)
+    def reflect(self, mat: Matrix) -> None:
+        n = len(mat)
         for i in range(n):
             for j in range(n // 2):
-                matrix[i][j], matrix[i][-j - 1] = matrix[i][-j - 1], matrix[i][j]
+                mat[i][j], mat[i][-j - 1] = mat[i][-j - 1], mat[i][j]
 
 
 # @lc code=end
 
 
-def main():
+def main() -> None:
     sol = Solution()
     A = [[5, 1, 9, 11, 12], [2, 4, 8, 10, 13], [13, 3, 6, 7, 88], [15, 14, 12, 16, 32], [1, 2, 3, 4, 5]]
-    ans = sol.rotate(A)
-    print(ans)
+    sol.rotate(A)
+    print(A)
 
 
 if __name__ == "__main__":

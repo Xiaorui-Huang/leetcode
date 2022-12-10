@@ -87,7 +87,7 @@ class Solution:
 
 
 # @lc code=end
-def main():
+def main() -> None:
     sol = Solution()
     num = -7463847412
     assert -(2**31) <= num <= 2**31 - 1

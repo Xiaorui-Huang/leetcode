@@ -72,7 +72,7 @@ class Solution:
         count = 0
 
         if APPROACH == approaches.BFS:
-            q: Queue = Queue()
+            q: Queue[int] = Queue()
             # BFS loop every node and search
             for i in range(n):
                 if not visited[i]:
@@ -88,7 +88,7 @@ class Solution:
                     count += 1
         elif APPROACH == approaches.DFS:
 
-            def dfs_util(node, visited, adj_mat):
+            def dfs_util(node: int, visited: list[int], adj_mat: list[list[int]]) -> None:
                 visited[node] = 1
                 for i in range(n):
                     if adj_mat[node][i] and not visited[i]:
@@ -102,7 +102,7 @@ class Solution:
         return count
 
 
-def main():
+def main() -> None:
     s = Solution()
     a = s.findCircleNum([[1, 1, 0], [1, 1, 0], [0, 0, 1]])
     print(a)

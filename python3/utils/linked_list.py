@@ -1,13 +1,14 @@
+from __future__ import annotations
 from typing import Any, Optional
 
 
 class ListNode:
-    def __init__(self, val=0, next=None) -> None:
+    def __init__(self, val: int = 0, next: ListNode | None = None) -> None:
         self.val = val
         self.next = next
 
     def __str__(self) -> str:
-        head = self
+        head: ListNode | None = self
         res = ""
         while head:
             res += str(head.val)

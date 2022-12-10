@@ -57,9 +57,12 @@
 
 # @lc code=start
 from enum import Enum
+from typing import Any, TypeAlias
 
 approaches = Enum("approaches", "LC OWN")
 APPROACH = approaches.OWN
+
+Trie: TypeAlias = dict[str | None, Any]
 
 
 class Solution:
@@ -72,20 +75,19 @@ class Solution:
 
     def findWords_OWN(self, board: list[list[str]], words: list[str]) -> list[str]:
         # constructing a trie
-        trie: dict = {}
+        trie: Trie = {}
+
         for word in words:
             cur = trie
             for letter in word:
                 cur = cur.setdefault(letter, {})
             cur[None] = None  # marks the end of a word
 
-        del word, letter, cur  # clean ups from trie construction
-
         rows = len(board)
         cols = len(board[0])
         found = list()
 
-        def backtrack(i: int, j: int, parent_trie: dict, prefix: str) -> None:
+        def backtrack(i: int, j: int, parent_trie: Trie, prefix: str) -> None:
             letter = board[i][j]
             cur_trie = parent_trie[letter]
             word = prefix + letter
@@ -122,7 +124,7 @@ class Solution:
         WORD_KEY = "$"
 
         # smart! implementing the word as the word ending marker
-        trie: dict = {}
+        trie: Trie = {}
         for word in words:
             cur = trie
             for letter in word:
@@ -131,14 +133,12 @@ class Solution:
             # mark the existence of a word in trie node
             cur[WORD_KEY] = word  # NB
 
-        del cur, word, letter
-
         rows = len(board)
         cols = len(board[0])
 
         matched = []
 
-        def backtracking(row, col, parent):
+        def backtracking(row: int, col: int, parent: Trie) -> None:
 
             letter = board[row][col]
             currNode = parent[letter]
@@ -183,7 +183,7 @@ class Solution:
 
 
 # @lc code=end
-def main():
+def main() -> None:
     sol = Solution()
     ans = sol.findWords(
         # [

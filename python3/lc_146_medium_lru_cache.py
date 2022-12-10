@@ -78,7 +78,7 @@ class LRUCache:
 
     def __init__(self, capacity: int):
         self.capacity = capacity
-        self.cache: OrderedDict = OrderedDict()
+        self.cache: OrderedDict[int, int] = OrderedDict()
 
     def get(self, key: int) -> int:
         if key in self.cache:
@@ -108,7 +108,7 @@ class LRUCache:
 # @lc code=end
 
 
-def main():
+def main() -> None:
     lru = LRUCache(2)
     lru.put(1, 1)
     lru.put(2, 2)

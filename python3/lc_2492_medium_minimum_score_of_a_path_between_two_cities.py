@@ -1,3 +1,4 @@
+# type: ignore
 #
 # @lc app=leetcode id=2492 lang=python3
 #

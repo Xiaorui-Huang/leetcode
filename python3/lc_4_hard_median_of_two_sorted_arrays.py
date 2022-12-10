@@ -96,7 +96,7 @@ class Solution:
 # @lc code=end
 
 
-def main():
+def main() -> None:
     sol = Solution()
     # # 1,1,2,2,3,3   (3.5)   4,5,6,6,7,8
     # arr1 = [1, 2, 3, 4]
@@ -107,7 +107,7 @@ def main():
     # arr1 = [1, 2, 3, 5]
     # arr2 = [1, 2, 3, 4, 6, 6, 7, 8, 10, 11, 12]
 
-    arr1 = []
+    arr1: list[int] = []
     arr2 = [1]
     ans = sol.findMedianSortedArrays(arr1, arr2)
     print(ans)

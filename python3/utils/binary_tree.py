@@ -6,12 +6,12 @@ null: None = None
 
 
 class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
+    def __init__(self, val: Any = 0, left: TreeNode | None = None, right: TreeNode | None = None) -> None:
         self.val = val
         self.left = left
         self.right = right
 
-    def insert(self, val: Any):
+    def insert(self, val: Any) -> None:
         # already exist => do nothing
         if self.val == val:
             return
@@ -28,8 +28,10 @@ class TreeNode:
             else:
                 self.right.insert(val)
 
-    def __eq__(self, other: TreeNode) -> bool:
+    def __eq__(self, other: object) -> bool:
         # use recursive value equals or equality:)
+        if not isinstance(other, TreeNode):
+            return NotImplemented
         return self.val == other.val and self.left == other.left and self.right == self.right
 
     # BST display code source
@@ -38,7 +40,7 @@ class TreeNode:
         lines, *_ = self._display_aux()
         return "\n".join(lines)
 
-    def _display_aux(self):
+    def _display_aux(self) -> tuple[list[str], int, int, int]:
         """Returns list of strings, width, height, and horizontal coordinate of the root."""
         # No child.
         if self.right is None and self.left is None:
@@ -91,7 +93,7 @@ def build_bt(node_lst: list[Any]) -> Optional[TreeNode]:
         return None
     root = TreeNode(node_lst[0])
 
-    q: deque = deque([root])
+    q: deque[TreeNode] = deque([root])
 
     index = 1
     while index < n:

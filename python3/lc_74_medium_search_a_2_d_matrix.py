@@ -134,7 +134,7 @@ class Solution:
 # @lc code=end
 
 
-def main():
+def main() -> None:
     sol = Solution()
     ans = sol.searchMatrix(
         # test examples

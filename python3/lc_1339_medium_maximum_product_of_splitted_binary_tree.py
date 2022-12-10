@@ -75,7 +75,7 @@ class Solution:
             """return the sum of this Binary tree rooted at node and add to partial sum"""
             if root is None:
                 return 0
-            tree_sum = traverse_sums(root.left) + root.val + traverse_sums(root.right)
+            tree_sum = traverse_sums(root.left) + int(root.val) + traverse_sums(root.right)
             partial_sums.append(tree_sum)
             return tree_sum
 

@@ -74,7 +74,7 @@ class Solution:
 # @lc code=end
 
 
-def main():
+def main() -> None:
     sol = Solution()
     ans = sol.findPeakElement([1, 2, 1, 3, 5, 6, 4])
     print(ans)

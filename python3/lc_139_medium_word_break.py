@@ -47,9 +47,7 @@
 # Output: false
 #
 #
-#
 # Constraints:
-#
 #
 # 1 <= s.length <= 300
 # 1 <= wordDict.length <= 1000
@@ -61,6 +59,7 @@
 #
 
 from enum import Enum
+from typing import Any
 
 approaches = Enum("approaches", "DP DP_TRIE")
 APPROACH = approaches.DP_TRIE
@@ -97,7 +96,7 @@ class Solution:
 
         """
         # construct a regular trie from all the words
-        trie: dict = {}
+        trie: dict[str | None, Any] = {}
 
         for w in wordDict:
             root = trie
@@ -147,7 +146,7 @@ class Solution:
 # @lc code=end
 
 
-def main():
+def main() -> None:
     sol = Solution()
     ans = sol.wordBreak("applepenapple", ["apple", "pen"])
     print(ans)

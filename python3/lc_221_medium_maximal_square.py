@@ -111,7 +111,7 @@ class Solution:
 # @lc code=end
 
 
-def main():
+def main() -> None:
     pass
 
 

@@ -64,6 +64,7 @@
 
 # @lc code=start
 from enum import Enum
+from typing import Any
 
 approaches = Enum("approaches", "NAIVE FAST")
 APPROACH = approaches.FAST
@@ -71,10 +72,9 @@ APPROACH = approaches.FAST
 
 class Trie:
     if APPROACH == approaches.FAST:
-        trie: dict
 
-        def __init__(self):
-            self.trie: dict = {}
+        def __init__(self) -> None:
+            self.trie: dict[str, Any] = {}
 
         def insert(self, word: str) -> None:
             trie = self.trie
@@ -106,8 +106,8 @@ class Trie:
 
     elif APPROACH == approaches.NAIVE:
 
-        def __init__(self):
-            self.tries: dict[tuple[Trie, bool]] = {}
+        def __init__(self) -> None:
+            self.tries: dict[str, tuple[Trie, bool]] = {}
 
         def insert(self, word: str) -> None:
             if not word:
@@ -162,7 +162,7 @@ class Trie:
 # @lc code=end
 
 
-def main():
+def main() -> None:
     trie = Trie()
 
     trie.insert("app")

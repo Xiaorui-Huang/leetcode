@@ -141,7 +141,7 @@ class Solution:
             return s[start : end + 1]
 
 
-def main():
+def main() -> None:
     sol = Solution()
     ans = sol.longestPalindrome("babad")
     print(ans)

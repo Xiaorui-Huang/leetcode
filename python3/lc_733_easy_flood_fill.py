@@ -128,7 +128,7 @@ class Solution:
 
 
 # @lc code=end
-def main():
+def main() -> None:
     sol = Solution()
     # grid = [[1, 1, 1], [1, 1, 0], [1, 0, 1]]
     grid = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]

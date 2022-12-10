@@ -121,14 +121,14 @@ class Solution:
             self.nums = nums
             return nums[bisect(self, False, 0, len(nums))]  # type: ignore
 
-    def __getitem__(self, i):
+    def __getitem__(self, i: int) -> bool:
         return self.nums[i] <= self.nums[-1]
 
 
 # @lc code=end
 
 
-def main():
+def main() -> None:
     sol = Solution()
     ans = sol.findMin(
         # test examples

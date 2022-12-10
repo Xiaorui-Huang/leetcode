@@ -53,7 +53,7 @@ APPR = appr.DISJOINT_SET
 
 
 class Solution:
-    def __init__(self):
+    def __init__(self) -> None:
         if APPR == appr.HASH:
             self.longestConsecutive = self.longestConsecutive_hash_implicit_disjoint_set
         elif APPR == appr.DISJOINT_SET:
@@ -94,19 +94,19 @@ class Solution:
 
 
 class Node:
-    def __init__(self, val):
+    def __init__(self, val: int) -> None:
         self.val = val
         self.parent = self
         self.size = 1
 
 
 class DisjointSet:
-    def find(self, node):
+    def find(self, node: Node) -> Node:
         if node.parent != node:
             node.parent = self.find(node.parent)
         return node.parent
 
-    def union(self, node1, node2):
+    def union(self, node1: Node, node2: Node) -> int:
         parent_1 = self.find(node1)
         parent_2 = self.find(node2)
         if parent_1 != parent_2:
@@ -118,7 +118,7 @@ class DisjointSet:
 # @lc code=end
 
 
-def main():
+def main() -> None:
     sol = Solution()
     nums = [0, 3, 7, 2, 5, 8, 4, 6, 0, 1]
     ans = sol.longestConsecutive(nums)

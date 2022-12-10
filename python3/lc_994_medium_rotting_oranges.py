@@ -68,10 +68,14 @@
 
 # @lc code=start
 from collections import deque
+from typing import TypeAlias
 
 EMPTY = 0
 FRESH = 1
 ROTTEN = 2
+
+
+Coord: TypeAlias = tuple[int, int]
 
 
 class Solution:
@@ -88,8 +92,8 @@ class Solution:
 
         q = deque(locations["rotten"])  # represent the queue at this minute
 
-        def process_minute(cur_q):
-            next_q = deque()  # represent the queue at next minute
+        def process_minute(cur_q: deque[Coord]) -> deque[Coord]:
+            next_q: deque[Coord] = deque()  # represent the queue at next minute
             while cur_q:
                 x, y = cur_q.popleft()
                 for x_offset, y_offset in [(1, 0), (0, 1), (-1, 0), (0, -1)]:
@@ -141,7 +145,7 @@ class Solution:
 # @lc code=end
 
 
-def main():
+def main() -> None:
     sol = Solution()
     grid = [
         # [2, 1, 0],

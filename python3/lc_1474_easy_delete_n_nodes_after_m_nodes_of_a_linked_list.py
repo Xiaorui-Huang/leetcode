@@ -1,3 +1,4 @@
+# type: ignore
 #
 # @lc app=leetcode id=1474 lang=python3
 #
@@ -61,7 +62,7 @@
 #
 #
 
-from utils.linked_list import ListNode, linked_list  # type: ignore
+from utils.linked_list import ListNode, linked_list
 
 # @lc code=start
 # Definition for singly-linked list.
@@ -72,7 +73,7 @@ from utils.linked_list import ListNode, linked_list  # type: ignore
 class Solution:
     def deleteNodes(self, head: ListNode, m: int, n: int) -> ListNode:
         sentinel = ListNode(0, head)
-        prev = sentinel
+        prev: ListNode | None = sentinel
         while head:
             # keep
             for _ in range(m):
@@ -96,7 +97,7 @@ class Solution:
 
 
 # @lc code=end
-def main():
+def main() -> None:
     sol = Solution()
     link = linked_list(list(range(1, 14 + 1)))
     ans = sol.deleteNodes(link, 1, 12)

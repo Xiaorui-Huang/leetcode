@@ -63,7 +63,7 @@ class Solution:
     # use two pointer to achieve O(1) space instead of O(n)
     def isPalindrome(self, s: str) -> bool:
         # convert string to all lower and remove non-alpha characters
-        s_new = [letter for letter in s.lower() if letter.isalnum() ]
+        s_new = [letter for letter in s.lower() if letter.isalnum()]
         n = len(s_new)
         for i in range(n):
             if s_new[i] != s_new[-i - 1]:
@@ -72,7 +72,7 @@ class Solution:
 
 
 # @lc code=end
-def main():
+def main() -> None:
     sol = Solution()
     s = "0P"
     ans = sol.isPalindrome(s)

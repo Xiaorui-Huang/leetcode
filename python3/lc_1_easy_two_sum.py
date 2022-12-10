@@ -83,7 +83,7 @@ class Solution:
         return []  # never reached
 
 
-def main():
+def main() -> None:
     sol = Solution()
     ans = sol.twoSum(
         # [2, 7, 11, 15],

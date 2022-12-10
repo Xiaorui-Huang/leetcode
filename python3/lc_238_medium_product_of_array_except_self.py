@@ -78,7 +78,7 @@ class Solution:
 # @lc code=end
 
 
-def main():
+def main() -> None:
     sol = Solution()
     arr = [-1, 1, 0, -3, 3]
     ans = sol.productExceptSelf(arr)

@@ -2018,5 +2018,5 @@ def solution() -> Solution:
         ),
     ],
 )
-def test_maxProduct(solution: Solution, root: TreeNode, expected) -> None:
+def test_maxProduct(solution: Solution, root: TreeNode, expected: int) -> None:
     assert solution.maxProduct(root) == expected

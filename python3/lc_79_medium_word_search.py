@@ -63,10 +63,14 @@
 #
 # @lc code=start
 from enum import Enum
-from typing import Union
+from typing import Any, TypeAlias, Union
 
 approaches = Enum("approaches", "BACKTRACK_SET BACKTRACK_HASH BACKTRACK_LC PRUNING BACKTRACK_TRIE")
 APPROACH = approaches.BACKTRACK_TRIE
+
+Trie: TypeAlias = dict[str, Any]
+Coord: TypeAlias = tuple[int, int]
+Matrix: TypeAlias = list[list[str]]
 
 
 class Solution:
@@ -90,14 +94,14 @@ class Solution:
         if len(word) > rows * cols:
             return False
 
-        trie: dict = {}
+        trie: Trie = {}
         cur = trie
         for c in word:
             cur = cur.setdefault(c, {})
         # mark the end of the word
         cur["-"] = True
 
-        def backtrack(i: int, j: int, trie: dict) -> bool:
+        def backtrack(i: int, j: int, trie: Trie) -> bool:
             if board[i][j] not in trie:
                 return False
 
@@ -185,9 +189,9 @@ class Solution:
         cols = len(board[0])
         if len(word) > rows * cols:
             return False
-        visited: set[tuple[int, int]] = set()
+        visited: set[Coord] = set()
 
-        def backtrack(i: int, j: int, visited: set, index: int) -> bool:
+        def backtrack(i: int, j: int, visited: set[Coord], index: int) -> bool:
             visited.add((i, j))
             if board[i][j] != word[index]:
                 return False
@@ -219,11 +223,11 @@ class Solution:
                 visited.remove((i, j))
         return False
 
-    def exist_STACK_PRUNING(self, board, word):
+    def exist_STACK_PRUNING(self, board: Matrix, word: str) -> bool:
         rows = len(board)
         cols = len(board[0])
         stack = []
-        board_counter = {}
+        board_counter: dict[str, int] = {}
 
         # O(mn)
         for i in range(rows):
@@ -234,7 +238,7 @@ class Solution:
                 board_counter[char] = board_counter.get(char, 0) + 1
 
         # O(L)
-        word_counter = {}
+        word_counter: dict[str, int] = {}
         for char in word:
             if char not in board_counter:
                 return False
@@ -246,7 +250,7 @@ class Solution:
                 return False
 
         # Confused AF
-        visited = []
+        visited: list[Coord] = []
         while stack:
             i, j, index = stack.pop()
 
@@ -254,7 +258,7 @@ class Solution:
                 visited = visited[:index]
 
             # inefficiency? no?
-            if [i, j] in visited:
+            if (i, j) in visited:
                 continue
 
             if index == len(word) - 1:
@@ -262,7 +266,7 @@ class Solution:
                     return True
                 continue
 
-            visited.append([i, j])
+            visited.append((i, j))
             if i < rows - 1 and board[i + 1][j] == word[index + 1]:
                 stack.append([i + 1, j, index + 1])
             if i > 0 and board[i - 1][j] == word[index + 1]:
@@ -273,7 +277,7 @@ class Solution:
                 stack.append([i, j - 1, index + 1])
         return False
 
-    def exist_BT_LC(self, board: list[list[str]], word: str) -> bool:
+    def exist_BT_LC(self, board: Matrix, word: str) -> bool:
         """
         :type board: list[list[str]]
         :type word: str
@@ -282,7 +286,7 @@ class Solution:
         rows = len(board)
         cols = len(board[0])
 
-        def backtrack(row, col, suffix):
+        def backtrack(row: int, col: int, suffix: str) -> bool:
             # Backtracking by altering the board along a search path, then reverting it back
 
             # bottom case: we find match for each letter in the word
@@ -321,7 +325,7 @@ class Solution:
 # @lc code=end
 
 
-def main():
+def main() -> None:
     sol = Solution()
     ans = sol.exist(
         # [["A", "B", "C", "E"], ["S", "F", "C", "S"], ["A", "D", "E", "E"]], "ABZ"
