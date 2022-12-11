@@ -1,17 +1,17 @@
 from __future__ import annotations
-from typing import Any, Optional
+from typing import Optional
 from collections import deque
 
 null: None = None
 
 
 class TreeNode:
-    def __init__(self, val: Any = 0, left: TreeNode | None = None, right: TreeNode | None = None) -> None:
+    def __init__(self, val: int = 0, left: TreeNode | None = None, right: TreeNode | None = None) -> None:
         self.val = val
         self.left = left
         self.right = right
 
-    def insert(self, val: Any) -> None:
+    def insert(self, val: int) -> None:
         # already exist => do nothing
         if self.val == val:
             return
@@ -86,12 +86,12 @@ class TreeNode:
         return lines, n + m + u, max(p, q) + 2, n + u // 2
 
 
-def build_bt(node_lst: list[Any]) -> Optional[TreeNode]:
+def build_bt(node_lst: list[int | None]) -> Optional[TreeNode]:
     # empty tree
     n = len(node_lst)
     if not n:
         return None
-    root = TreeNode(node_lst[0])
+    root = TreeNode(node_lst[0])  # type: ignore
 
     q: deque[TreeNode] = deque([root])
 
