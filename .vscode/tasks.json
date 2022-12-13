@@ -40,6 +40,24 @@
             },
             "command": "./createtest.sh ${input:leetcode_problem_id}",
             "problemMatcher": [],
+        },
+        {
+            "label": "Create c++ leetcode google tests",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceFolder}/cpp_tests/"
+            },
+            "command": "./createtest.sh ${input:leetcode_problem_id}",
+            "problemMatcher": [],
+        },
+        {
+            "label": "Create c++ leetcode main entry point file",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceFolder}/cpp/"
+            },
+            "command": "./createmain.sh ${input:leetcode_problem_id}",
+            "problemMatcher": [],
         }
     ],
     "inputs": [
