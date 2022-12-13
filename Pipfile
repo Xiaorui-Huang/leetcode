@@ -5,13 +5,13 @@ name = "pypi"
 
 [packages]
 numpy = "*"
-ipykernel = "*"
 pytest = "*"
 mypy = "*"
 leetcode = {editable = true, path = "."}
 
 [dev-packages]
 black = "*"
+ipykernel = "*"
 
 [requires]
 python_version = "3.11"
