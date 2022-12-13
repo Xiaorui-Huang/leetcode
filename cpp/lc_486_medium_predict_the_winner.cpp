@@ -1,3 +1,5 @@
+#ifndef LC_486_MEDIUM_PREDICT_THE_WINNER_H
+#define LC_486_MEDIUM_PREDICT_THE_WINNER_H
 /*
  * @lc app=leetcode id=486 lang=cpp
  *
@@ -60,6 +62,8 @@
  *
  *
  */
+
+// @lc code=start
 #include <iostream>
 #include <limits>
 #include <vector>
@@ -70,14 +74,16 @@ template <typename S> ostream &operator<<(ostream &os, const vector<S> &vector) 
         os << element << " ";
     return os;
 }
+// class Solution {
+//   public:
+//     bool PredictTheWinner(vector<int> &nums);
+// };
 
-// @lc code=start
 class Solution {
   public:
     bool PredictTheWinner(vector<int> &nums) {
         size_t n = nums.size();
         int dp[n];
-
         for (int row = n - 1; row >= 0; row--) {
             dp[row] = nums[row];
             for (size_t col = row + 1; col < n; col++) {
@@ -90,9 +96,4 @@ class Solution {
     }
 };
 // @lc code=end
-
-int main() {
-    vector<int> nums{1, 5, 233, 7};
-    auto ans = Solution().PredictTheWinner(nums);
-    std::cout << std::boolalpha << ans << std::endl;
-}
+#endif

@@ -106,10 +106,3 @@ class Solution {
     }
 };
 // @lc code=end
-
-int main() {
-    vector<string> wordDict{"apple", "pen"};
-    string s = "applepenapple";
-    auto ans = Solution().wordBreak(s, wordDict);
-    std::cout << std::boolalpha << ans << std::endl;
-}

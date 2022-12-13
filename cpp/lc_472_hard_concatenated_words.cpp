@@ -100,9 +100,3 @@ class Solution {
     }
 };
 // @lc code=end
-
-int main() {
-    vector<string> arr{"cat", "cats", "catsdogcats", "dog", "dogcatsdog", "hippopotamuses", "rat", "ratcatdogcat"};
-    auto ans = Solution().findAllConcatenatedWordsInADict(arr);
-    std::cout << ans << std::endl;
-}

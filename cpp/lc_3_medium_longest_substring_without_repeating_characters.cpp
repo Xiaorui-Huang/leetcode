@@ -93,8 +93,3 @@ class Solution {
     }
 };
 // @lc code=end
-
-int main() {
-    auto ans = Solution().lengthOfLongestSubstring("abcabcbb");
-    std::cout << ans << std::endl;
-}

@@ -78,10 +78,3 @@ class Solution {
     }
 };
 // @lc code=end
-
-int main() {
-    vector<int> nums{1, 2, 3, 4};
-    auto ans = Solution().productExceptSelf(nums);
-    std::cout << ans << std::endl;
-    return 0;
-}
