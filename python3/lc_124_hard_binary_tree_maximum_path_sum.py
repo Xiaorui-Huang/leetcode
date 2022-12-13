@@ -61,6 +61,7 @@ from utils.binary_tree import TreeNode
 #         self.val = val
 #         self.left = left
 #         self.right = right
+# NB reimplement in C++ and write proof for, in particular either left or right but not both
 class Solution:
     def maxPathSum(self, root: TreeNode) -> int:
         max_path_sum = root.val
