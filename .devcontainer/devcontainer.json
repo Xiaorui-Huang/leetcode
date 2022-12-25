@@ -7,10 +7,9 @@
         "version":"3.11"
      },
     "ghcr.io/devcontainers-contrib/features/pipenv:1": {},
-    "ghcr.io/devcontainers-contrib/features/mypy:1": {},
-    "ghcr.io/devcontainers-contrib/features/black:1": {},
     "ghcr.io/devcontainers/features/git:1": {},
     "ghcr.io/devcontainers/features/github-cli:1": {},
-    "ghcr.io/guiyomh/features/vim:0": {}
+    "ghcr.io/guiyomh/features/vim:0": {},
+    "ghcr.io/meaningful-ooo/devcontainer-features/homebrew:2": {}
   }
 }
