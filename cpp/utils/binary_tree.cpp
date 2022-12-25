@@ -11,6 +11,7 @@
  */
 #include "binary_tree.h"
 #include <queue>
+#include <tuple>
 
 using std::string;
 using std::vector;

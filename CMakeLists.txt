@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.25) 
+cmake_minimum_required(VERSION 3.22) 
 project(leetcode)
 
 # Avoid warning about DOWNLOAD_EXTRACT_TIMESTAMP in CMake 3.24:
@@ -19,17 +19,15 @@ file(GLOB UTILFILES ${CMAKE_CURRENT_SOURCE_DIR}/cpp/utils/*.cpp) # utility class
 # create libraries for tests from source
 add_library(core ${SRCFILES})
 add_library(utils ${UTILFILES})
-foreach(FILE ${SRCFILES})
+foreach(MAIN ${MAINFILES})
     #get_filename_component(FILENAME ${FILE} NAME_WLE) # this get the filename without the extension
     #add_executable(${FILENAME} ${FILE})
-    string(REGEX MATCH "[0-9]+" PROBLEM_ID ${FILE}) # match only up to the problem id
-    string(REPLACE "lc" "mains/main" MAIN ${FILE}) # use the file name to get path to main file
+    string(REGEX MATCH "[0-9]+" PROBLEM_ID ${MAIN}) # match only up to the problem id
+    string(REPLACE "mains/main" "lc" FILE ${MAIN}) # use the file name to get path to main file
     # if there is a main file then create executable & library then link lib to exe
-    if(EXISTS ${MAIN})
-         add_executable(${PROBLEM_ID} ${FILE}) # e.g. add executable 124 <- lc_124_hard_binary_tree_maximum_path_sum.cpp
-         add_library(${PROBLEM_ID}_LIB ${MAIN}) # e.g. add library 124_LIB <- main_124_hard_binary_tree_maximum_path_sum.cpp
-         target_link_libraries(${PROBLEM_ID} utils ${PROBLEM_ID}_LIB) # e.g. link 124 <- 124_LIB 
-    endif()
+    add_executable(${PROBLEM_ID} ${MAIN}) # e.g. add executable 124 <- lc_124_hard_binary_tree_maximum_path_sum.cpp
+    add_library(${PROBLEM_ID}_LIB ${FILE}) # e.g. add library 124_LIB <- main_124_hard_binary_tree_maximum_path_sum.cpp
+    target_link_libraries(${PROBLEM_ID} utils ${PROBLEM_ID}_LIB) # e.g. link 124 <- 124_LIB 
 endforeach()
 
 ## temporary: for utils library development and testing

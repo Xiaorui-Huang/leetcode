@@ -79,10 +79,10 @@ impl Solution {
                     lo = mid + 1
                 }
             }
-            return lo as i32
+            lo as i32
         };
 
-        return queries.iter().map(|query|bisect(query) as i32).collect();
+        return queries.iter().map(|query|bisect(query)).collect();
         //return queries.iter().map(|query|lib_bisect(& prefix_sum, query) as i32).collect();
     }
 

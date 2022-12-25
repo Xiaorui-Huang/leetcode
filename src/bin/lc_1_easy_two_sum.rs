@@ -66,12 +66,13 @@ impl Solution {
         use std::collections::HashMap;
         let mut mem = HashMap::new();
 
-        for i in 0..nums.len(){
-            let complement = target - nums[i];
+        for (i, num) in nums.iter().enumerate(){
+            let complement = target - num;
             if mem.contains_key(&complement) {return vec![i as i32, *mem.get(&complement).unwrap() as i32]}
-            mem.insert(nums[i], i);
+            mem.insert(num, i);
         }
-        return vec![]; // never reached
+
+        vec![] // never reached
     }
 }
 // @lc code=end

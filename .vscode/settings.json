@@ -76,7 +76,8 @@
         "initializer_list": "cpp",
         "sstream": "cpp",
         "stdexcept": "cpp",
-        "optional": "cpp"
+        "optional": "cpp",
+        "iostream": "cpp"
     },
     "python.testing.pytestArgs": [],
     "python.testing.unittestEnabled": false,

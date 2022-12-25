@@ -44,9 +44,11 @@
  *
  *
  */
+#include <algorithm>
 #include <iostream>
 #include <limits>
 #include <vector>
+
 using namespace std;
 // Enable to print vectors just by calling its name
 template <typename S> ostream &operator<<(ostream &os, const vector<S> &vector) {
