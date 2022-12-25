@@ -71,8 +71,8 @@ impl Solution {
         
         for edge in edges.iter() {
             let (a, b) = (edge[0] as usize, edge[1] as usize);
-            graph[a].push(b) ;
-            graph[b].push(a) ;
+            graph[a].push(b);
+            graph[b].push(a);
         }
         
         let mut counts = vec![0; n as usize];
@@ -90,7 +90,8 @@ impl Solution {
         }
         fn dfs_infer_dist(node:usize, parent: Option<usize>, graph: &Vec<Vec<usize>>, counts: &Vec<usize>, ans: &mut Vec<usize>, n: usize) {
             for &child in graph[node].iter(){
-                if parent.is_some() && parent.unwrap() as usize == child {continue} 
+                if parent.unwrap_or_default() == child {continue} // skip parents
+                //if parent.is_some() && parent.unwrap() as usize == child {continue} // skip parents
                 ans[child] = ans[node] - counts[child] + (n - counts[child]);
                 dfs_infer_dist(child, Some(node), graph, counts, ans, n);
             }
