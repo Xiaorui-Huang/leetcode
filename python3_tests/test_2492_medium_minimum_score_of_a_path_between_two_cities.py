@@ -1,5 +1,5 @@
 import pytest
-from lc_2492_medium_minimum_score_of_a_path_between_two_cities import Solution
+from lc_2492_medium_minimum_score_of_a_path_between_two_cities import Solution  # type: ignore
 
 
 # fixtures
