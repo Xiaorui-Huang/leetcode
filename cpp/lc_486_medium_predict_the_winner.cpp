@@ -83,7 +83,7 @@ class Solution {
   public:
     bool PredictTheWinner(vector<int> &nums) {
         size_t n = nums.size();
-        int dp[n];
+        vector<int> dp(n, 0);
         for (int row = n - 1; row >= 0; row--) {
             dp[row] = nums[row];
             for (size_t col = row + 1; col < n; col++) {

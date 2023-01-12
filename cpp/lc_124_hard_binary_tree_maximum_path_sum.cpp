@@ -54,20 +54,9 @@
  *
  */
 #include "binary_tree.h"
-#include <algorithm>
-#include <cmath>
-#include <iostream>
-#include <limits>
-#include <unordered_map>
-#include <unordered_set>
+#include <functional>
 #include <vector>
 using namespace std;
-// Enable to print vectors just by calling its name
-template <typename S> ostream &operator<<(ostream &os, const vector<S> &vector) {
-    for (auto element : vector)
-        os << element << " ";
-    return os;
-}
 
 // @lc code=start
 class Solution {
