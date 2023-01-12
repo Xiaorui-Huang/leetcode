@@ -53,7 +53,18 @@
 # @lc code=start
 class Solution:
     def maxProduct(self, nums: list[int]) -> int:
-        pass
+        min_cur = max_cur = max_prod = 1
+
+        for num in nums:
+            if num < 0:
+                min_cur, max_cur = max_cur, min_cur
+
+            min_cur = min(num, min_cur * num)
+            max_cur = max(num, max_cur * num)
+
+            max_prod = max(max_prod, max_cur)
+
+        return max_prod
 
 
 # @lc code=end
