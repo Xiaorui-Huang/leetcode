@@ -54,6 +54,7 @@
 
 from utils.binary_tree import TreeNode
 
+
 # @lc code=start
 # Definition for a binary tree node.
 # class TreeNode:
@@ -73,11 +74,12 @@ class Solution:
 
             left_gain = max(path_gain(node.left), 0)
             right_gain = max(path_gain(node.right), 0)
+            # maybe the case that path connected by the root from left and right is the max, so update it if so
             max_path_sum = max(max_path_sum, left_gain + right_gain + node.val)
 
             return node.val + max(left_gain, right_gain)
-
         path_gain(root)
+
         return max_path_sum
 
 
