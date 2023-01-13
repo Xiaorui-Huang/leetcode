@@ -39,6 +39,9 @@
                 "cwd": "${workspaceFolder}/python3_tests/"
             },
             "command": "./createtest.sh ${input:leetcode_problem_id}",
+            "windows": {
+                "command": "bash createtest.sh ${input:leetcode_problem_id}",
+            },
             "problemMatcher": [],
         },
         {
@@ -48,6 +51,9 @@
                 "cwd": "${workspaceFolder}/cpp_tests/"
             },
             "command": "./createtest.sh ${input:leetcode_problem_id}",
+            "windows": {
+                "command": "bash createtest.sh ${input:leetcode_problem_id}",
+            },
             "problemMatcher": [],
         },
         {
@@ -57,6 +63,9 @@
                 "cwd": "${workspaceFolder}/cpp/"
             },
             "command": "./createmain.sh ${input:leetcode_problem_id}",
+            "windows": {
+                "command": "bash createmain.sh ${input:leetcode_problem_id}",
+            },
             "problemMatcher": [],
         }
     ],
