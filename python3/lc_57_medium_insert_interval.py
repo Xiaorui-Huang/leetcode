@@ -84,16 +84,16 @@ class Solution:
             return lo
 
         start_insert_i, end_insert_i = binary_search(start), binary_search(end)
-        start_interval_start, start_interval_end = intervals[start_insert_i]
+        interval_start, interval_end = intervals[start_insert_i]
 
-        if start_interval_end < start:
+        if interval_end < start:  # after the interval - insert at the next index
             start_insert_i += 1
         else:  # in the interval - overlapping
-            start = min(start_interval_start, start)
+            start = min(interval_start, start)
 
-        end_interval_start, end_interval_end = intervals[end_insert_i]
-        if end_interval_start <= end <= end_interval_end:  # in the interval - overlapping
-            end = end_interval_end
+        interval_start, interval_end = intervals[end_insert_i]
+        if interval_start <= end <= interval_end:  # in the interval - overlapping
+            end = interval_end
 
         res = intervals[:start_insert_i] + [[start, end]] + intervals[end_insert_i + 1 :]
         return res
