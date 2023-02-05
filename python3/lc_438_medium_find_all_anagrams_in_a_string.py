@@ -57,8 +57,8 @@ from collections import Counter
 
 from enum import Enum
 
-approaches = Enum("approaches", "NAIVE SLIDING_WINDOW")
-APPROACH = approaches.SLIDING_WINDOW
+approaches = Enum("approaches", "NAIVE SLIDING_WINDOW key_hole")
+APPROACH = approaches.key_hole
 
 
 class Solution:
@@ -67,7 +67,38 @@ class Solution:
             return self.findAnagrams_naive(s, p)
         elif APPROACH == approaches.SLIDING_WINDOW:
             return self.findAnagrams_naive(s, p)
+        elif APPROACH == approaches.key_hole:
+            return self.findAnagrams_key_hole(s, p)
         return []  # never reached
+
+    def findAnagrams_key_hole(self, s: str, p: str) -> list[int]:
+        m, n = len(p), len(s)
+        if m > n:
+            return []
+
+        key_hole = Counter(p)
+        key: Counter[str] = Counter([])
+        pins = left = 0
+        indices = []
+
+        for right, ch_right in enumerate(s):
+            # pins leaving the key hole - update the key
+            if m < right - left + 1:
+                ch_left = s[left]
+                if key[ch_left] == key_hole[ch_left]:
+                    pins -= 1
+                key[ch_left] -= 1
+                left += 1
+
+            # new pin for keyhole - update the key
+            key[ch_right] += 1
+            if key[ch_right] == key_hole[ch_right]:
+                pins += 1
+
+            # key hole matched, record it
+            if pins == len(key_hole):
+                indices.append(left)
+        return indices
 
     def findAnagrams_sliding_window(self, s: str, p: str) -> list[int]:
         m, n = len(p), len(s)
@@ -80,6 +111,7 @@ class Solution:
         for i in range(n - m + 1):
             if p_count == s_count:
                 indices.append(i)
+
             if s_count[s[l]] == 1:
                 s_count.pop(s[l])
             else:
