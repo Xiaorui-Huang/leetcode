@@ -175,7 +175,10 @@ class Solution:
 
 I met the follow up question in a microsoft interview. Assuming you have got a
 constructed quad tree, now you are required to implement a public Node
-set(int[][] grid, int x, int y, int val) to reconstruct the quad tree. """
+set(int[][] grid, int x, int y, int val) to reconstruct the quad tree. 
+
+posted it here: https://leetcode.com/problems/construct-quad-tree/description/comments/1816089
+"""
 
 
 class QuadTree:
