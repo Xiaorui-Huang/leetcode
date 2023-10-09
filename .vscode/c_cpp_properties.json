@@ -12,11 +12,9 @@
                 "UNICODE",
                 "_UNICODE"
             ],
-            "windowsSdkVersion": "10.0.22000.0",
-            "compilerPath": "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.34.31933/bin/Hostx64/x64/cl.exe",
             "cStandard": "c17",
             "cppStandard": "c++17",
-            "intelliSenseMode": "windows-msvc-x64"
+            "intelliSenseMode": "${default}"
         },
         {
             "name": "Mac",
@@ -34,7 +32,7 @@
             "cStandard": "c17",
             "intelliSenseMode": "macos-clang-x64",
             "cppStandard": "c++17"
-        },
+        }
     ],
     "version": 4
 }

@@ -1,7 +1,7 @@
 {
     "tasks": [
         {
-            "type": "cppbuild",
+            "type": "process",
             "label": "C/C++: g++ build active file",
             "command": "/usr/bin/g++",
             "args": [
@@ -40,7 +40,7 @@
             },
             "command": "./createtest.sh ${input:leetcode_problem_id}",
             "windows": {
-                "command": "bash createtest.sh ${input:leetcode_problem_id}",
+                "command": "bash --norc createtest.sh ${input:leetcode_problem_id}",
             },
             "problemMatcher": [],
         },
@@ -52,7 +52,7 @@
             },
             "command": "./createtest.sh ${input:leetcode_problem_id}",
             "windows": {
-                "command": "bash createtest.sh ${input:leetcode_problem_id}",
+                "command": "bash --norc createtest.sh ${input:leetcode_problem_id}",
             },
             "problemMatcher": [],
         },
@@ -64,7 +64,7 @@
             },
             "command": "./createmain.sh ${input:leetcode_problem_id}",
             "windows": {
-                "command": "bash createmain.sh ${input:leetcode_problem_id}",
+                "command": "bash --norc createmain.sh ${input:leetcode_problem_id}",
             },
             "problemMatcher": [],
         }

@@ -21,14 +21,16 @@ then
         main_file=${entry_point_folder}/main_${name}.cpp
         touch $main_file
         echo "#include \"lc_${name}.cpp\"" >> $main_file
-        echo -e \
-"\n// Enable to print vectors just by calling its name\n \
-template <typename S> ostream &operator<<(ostream &os, const vector<S> &vector) {\n \
-    for (auto element : vector)\n \
-        os << element << \" \";\n \
-    return os;\n \
-}\n" \ >> $main_file
-        code $main_file
+#         echo -e \
+# "\n// Enable to print vectors just by calling its name\n \
+# template <typename S> ostream &operator<<(ostream &os, const vector<S> &vector) {\n \
+#     for (auto element : vector)\n \
+#         os << element << \" \";\n \
+#     return os;\n \
+# }\n" \ >> $main_file
+
+        echo -e '\nint main() {}' >> $main_file
+
         echo "created main_${name}.cpp"
     else
         echo "regex didn't match original question file"
