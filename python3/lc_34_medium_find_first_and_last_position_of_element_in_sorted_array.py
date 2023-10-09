@@ -47,30 +47,50 @@
 class Solution:
     def searchRange(self, nums: list[int], target: int) -> list[int]:
         def bs_left(nums: list[int], target: int) -> int:
+            """ Return the index of the lowest number >= to target """
             low, high = 0, len(nums) - 1
             while low <= high:
                 mid = (low + high) // 2
                 # looking for highest number less than target
+                # then shift the index to the right, to get to target if it exists, or the index's nums value that is OVER THE TARGET
                 if nums[mid] < target:
                     low = mid + 1
                 else:
                     # even if they equal, high is set one below
+                    # NB: the number that equals target will be in high if target exists
                     high = mid - 1
-            return low  # the higher of the two
+
+            # low - 1 would be the highest number less than target
+            # and low would be the lowest number equal to target
+            # *if target exists
+            
+            # intuitively, low is pushed down until low and high crosses (low > high)
+            return low 
 
         def bs_right(nums: list[int], target: int) -> int:
+            """ Return the index of the highest number <= to target """
             low, high = 0, len(nums) - 1
             while low <= high:
                 mid = (low + high) // 2
                 # looking for the lowest number higher than target
+                # then shift the index to the left, to get to target if it exists, or the index's nums value that is UNDER THE TARGET
                 if nums[mid] <= target:
+                    # even if they equal, low is set one above
                     low = mid + 1
                 else:
-                    # even if they equal, high is set one below
                     high = mid - 1
-            return high  # the higher of the two
+                    
+            
+            # high + 1 would be the lowest number higher than target
+            # and high would be the highest number equal to target
+            # *if target exists
+            
+            # intuitively, high is pushed up until low and high crosses (low > high)
+            return high  
 
         low, high = bs_left(nums, target), bs_right(nums, target)
+        
+        # if low > high, that means target is not in nums, since the low and high are crossed
         return [low, high] if low <= high else [-1, -1]
 
 
