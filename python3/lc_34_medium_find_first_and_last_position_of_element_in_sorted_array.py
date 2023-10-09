@@ -47,7 +47,11 @@
 class Solution:
     def searchRange(self, nums: list[int], target: int) -> list[int]:
         def bs_left(nums: list[int], target: int) -> int:
-            """ Return the index of the lowest number >= to target """
+            """ Return the lowest index of the element == target if target exists
+            
+            if not, return index to element that is just higher than target
+            """
+
             low, high = 0, len(nums) - 1
             while low <= high:
                 mid = (low + high) // 2
@@ -55,6 +59,7 @@ class Solution:
                 # then shift the index to the right, to get to target if it exists, or the index's nums value that is OVER THE TARGET
                 if nums[mid] < target:
                     low = mid + 1
+                    # ^ low is what we are tracking
                 else:
                     # even if they equal, high is set one below
                     # NB: the number that equals target will be in high if target exists
@@ -68,7 +73,10 @@ class Solution:
             return low 
 
         def bs_right(nums: list[int], target: int) -> int:
-            """ Return the index of the highest number <= to target """
+            """ Return the highest index of the element == target if target exists
+            
+            if not, return index to element that is just lower than target
+            """
             low, high = 0, len(nums) - 1
             while low <= high:
                 mid = (low + high) // 2
@@ -79,6 +87,7 @@ class Solution:
                     low = mid + 1
                 else:
                     high = mid - 1
+                    # ^ high is what we are tracking
                     
             
             # high + 1 would be the lowest number higher than target
