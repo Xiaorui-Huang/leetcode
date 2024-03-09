@@ -11,7 +11,8 @@
  * Dislikes: 236
  * Total Accepted:    157.2K
  * Total Submissions: 343.4K
- * Testcase Example:  '["cat","cats","catsdogcats","dog","dogcatsdog","hippopotamuses","rat","ratcatdogcat"]'
+ * Testcase Example:
+ * '["cat","cats","catsdogcats","dog","dogcatsdog","hippopotamuses","rat","ratcatdogcat"]'
  *
  * Given an array of strings words (without duplicates), return all the
  * concatenated words in the given list of words.
@@ -57,7 +58,8 @@
 #include <vector>
 using namespace std;
 // Enable to print vectors just by calling its name
-template <typename S> ostream &operator<<(ostream &os, const vector<S> &vector) {
+template <typename S>
+ostream &operator<<(ostream &os, const vector<S> &vector) {
     for (auto element : vector)
         os << element << " ";
     return os;
@@ -91,8 +93,9 @@ class Solution {
         dp[0] = true;
 
         for (size_t i = 1; i < n + 1; i++)
-            // (n == i) ? 1 : 0 prevents checking self. e.g. s = "leet" and word_dict = [...,"leet",...] returning true
-            // !dp[i] acts like a break after dp[i] is set to true
+            // (n == i) ? 1 : 0 prevents checking self. e.g. s = "leet" and
+            // word_dict = [...,"leet",...] returning true !dp[i] acts like a
+            // break after dp[i] is set to true
             for (size_t j = (n == i ? 1 : 0); !dp[i] && j < i; j++)
                 dp[i] = dp[j] && word_dict.count(s.substr(j, i - j));
 

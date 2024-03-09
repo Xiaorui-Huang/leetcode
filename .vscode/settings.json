@@ -16,6 +16,8 @@
         "*.tcs": "glsl",
         "*.fs": "glsl",
         "*.tes": "glsl",
+        "*.cu": "cuda-cpp",
+        "*.cuh": "cuda-cpp",
         "vector": "cpp",
         "algorithm": "cpp",
         "cmath": "cpp",
@@ -79,7 +81,10 @@
         "sstream": "cpp",
         "stdexcept": "cpp",
         "optional": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "array": "cpp",
+        "map": "cpp",
+        "xstring": "cpp"
     },
     "python.testing.pytestArgs": [],
     "python.testing.unittestEnabled": false,
