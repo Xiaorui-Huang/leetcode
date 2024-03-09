@@ -47,22 +47,7 @@ ostream &operator<<(ostream &os, const vector<S> &vector) {
     return os;
 }
 
-// not used because of complexity
-/**
- * @brief Insert item into sorted vector
- *
- * @tparam T
- * @param vec the vector
- * @param item the item to be inserted
- * @return std::vector<T>::iterator at which the item is inserted
- */
-template <typename T>
-typename std::vector<T>::iterator insert_sorted(std::vector<T> &vec,
-                                                T const &item) {
-    return vec.insert(std::upper_bound(vec.begin(), vec.end(), item), item);
-}
 // @lc code=start
-//
 
 #define SLIDING_WINDOW 1
 #define BINARY_SEARCH 2
@@ -122,31 +107,6 @@ class Solution {
 #endif
 };
 
-/* class Solution {
-  public:
-    vector<vector<int>> findWinners(vector<vector<int>> &matches) {
-        std::unordered_map<int, int> records;
-        vector<int> undefeated{}, lost_once{};
-        for (auto &&match : matches) {
-            auto &winner = match[0], &loser = match[1];
-            if (records.find(winner) == records.end()) // not in records
-                records[winner] = 0;
-
-            if (records.find(loser) == records.end()) // not in records
-                records[loser] = 0;
-            records[loser]++;
-        }
-        for (auto &&record : records) {
-            if (record.second == 0)
-                undefeated.emplace_back(record.first);
-            if (record.second == 1)
-                lost_once.emplace_back(record.first);
-        }
-        sort(undefeated.begin(), undefeated.end());
-        sort(lost_once.begin(), lost_once.end());
-        return vector<vector<int>>{undefeated, lost_once};
-    }
-}; */
 // @lc code=end
 
 #endif

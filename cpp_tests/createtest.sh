@@ -31,7 +31,7 @@ if filepath=$(ls ../${language}/lc_${number}_* 2>/dev/null); then
         echo "
 TEST(LeetCode, $lc_${name}) {
     auto sol = Solution();
-    # EXPECT_EQ(sol.<function>(*args), <expected>);
+    // EXPECT_EQ(sol.<function>(*args), <expected>);
 }" >> $testfile
 
         # wrap header file in header guard
