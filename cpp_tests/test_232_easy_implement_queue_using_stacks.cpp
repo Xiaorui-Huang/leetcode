@@ -1,7 +1,7 @@
 #include "lc_232_easy_implement_queue_using_stacks.cpp"
 #include <gtest/gtest.h>
 
-TEST(LeetCode, lc_232_easy_implement_queue_using_stacks) {
+TEST(LeetCode, 232_easy_implement_queue_using_stacks) {
 
     MyQueue *q = new MyQueue();
     EXPECT_TRUE(q->empty());
