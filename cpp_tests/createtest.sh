@@ -29,9 +29,9 @@ if filepath=$(ls ../${language}/lc_${number}_* 2>/dev/null); then
         echo "#include \"${file}\"" >>$testfile
 
         echo "
-TEST(LeetCode, $lc_${name}) {
+TEST(LeetCode, ${name}) {
     auto sol = Solution();
-    // EXPECT_EQ(sol.<function>(*args), <expected>);
+    // EXPECT_EQ(sol. //<EXPECTED>);
 }" >> $testfile
 
         # wrap header file in header guard
