@@ -51,7 +51,8 @@
 #include <vector>
 using namespace std;
 
-template <typename S> ostream &operator<<(ostream &os, const vector<S> &vector) {
+template <typename S>
+ostream &operator<<(ostream &os, const vector<S> &vector) {
     // Printing all the elements
     // using <<
     for (auto element : vector) {
@@ -63,15 +64,32 @@ template <typename S> ostream &operator<<(ostream &os, const vector<S> &vector) 
 class Solution {
   public:
     vector<int> productExceptSelf(vector<int> &nums) {
-        vector<int> res(nums.size(), 1);
-        auto nums_reverse = nums.rbegin(), res_reverse = res.rbegin();
-        int prefixProd = 1, suffixProd = 1;
+        // This problem can be thought of fixing number at index i
+        // we multiply the prod of left (prefix prod) and
+        // multiply the prod of the right (suffix prod)
+        
+        // ...left prod... i ...right prod...
 
-        for (size_t i = 1; i < nums.size(); i++) {
-            prefixProd *= nums[i - 1];
-            suffixProd *= nums_reverse[i - 1];
-            res[i] *= prefixProd;
-            res_reverse[i] *= suffixProd;
+        // initialize to 1 (identity for prod)
+        auto res = vector<int>(nums.size(), 1);
+
+        // get a const reversed reference iterator for nums - non-mutatble
+        auto nums_rev = nums.crbegin();
+        // get a non-const reverse iterator for res - mutatble
+        auto res_rev = res.rbegin();
+
+        // initialize identity for prod
+        int left_prod = 1;
+        int right_prod = 1;
+
+        for (size_t i = 0; i < nums.size(); i++) {
+            // the current res at i -> which is 1
+            res[i] *= left_prod;      // times left
+            res_rev[i] *= right_prod; // time right (res_rev[i] is equivalent to
+                                      // res[n-1-i])
+            // accumulate left and right prod
+            left_prod *= nums[i];
+            right_prod *= nums_rev[i];
         }
 
         return res;
