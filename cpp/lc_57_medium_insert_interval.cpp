@@ -68,6 +68,7 @@
 #include <vector>
 using namespace std;
 
+// @lc code=start
 class solution {
   public:
     // max position less than target
@@ -103,10 +104,10 @@ class solution {
 
     /**
      * @brief Could have just did a linear search pass ...
-     * 
-     * @param intervals 
-     * @param newInterval 
-     * @return vector<vector<int>> 
+     *
+     * @param intervals
+     * @param newInterval
+     * @return vector<vector<int>>
      */
     vector<vector<int>> insert(vector<vector<int>> &intervals,
                                vector<int> &newInterval) {
@@ -152,3 +153,4 @@ class solution {
         return res;
     }
 };
+// @lc code=end

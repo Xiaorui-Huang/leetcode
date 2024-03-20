@@ -46,10 +46,10 @@
  *
  */
 
-// @lc code=start
 #include <iostream>
 #include <vector>
 using namespace std;
+// @lc code=start
 
 template <typename S>
 ostream &operator<<(ostream &os, const vector<S> &vector) {
