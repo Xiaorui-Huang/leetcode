@@ -69,7 +69,12 @@
 using namespace std;
 
 // @lc code=start
-class solution {
+
+/**
+ * @brief NB: can be done in O(n) time, but this is a O(logn + n) solution
+ * 
+ */
+class Solution {
   public:
     // max position less than target
     int binary_search_left(vector<vector<int>> &nums, int target, int pos) {
@@ -123,8 +128,8 @@ class solution {
         //                                             end comared to starts
         int end_idx = binary_search_left(intervals, newInterval[1], 0) +
                       1; // possible n search max less than starts
-        cout << start_idx << ", " << end_idx << endl;
-        assert(start_idx <= end_idx);
+        // cout << start_idx << ", " << end_idx << endl;
+        // assert(start_idx <= end_idx);
 
         vector<vector<int>> res;
         for (int i = 0; i < start_idx; i++)

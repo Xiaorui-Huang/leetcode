@@ -84,7 +84,9 @@
         "iostream": "cpp",
         "array": "cpp",
         "map": "cpp",
-        "xstring": "cpp"
+        "xstring": "cpp",
+        "set": "cpp",
+        "xtree": "cpp"
     },
     "python.testing.pytestArgs": [],
     "python.testing.unittestEnabled": false,
