@@ -1,2 +1,9 @@
+BasedOnStyle: LLVM
 IndentWidth: 4
-AlwaysBreakTemplateDeclarations: Yes
+ColumnLimit: 100
+AlignAfterOpenBracket: Align
+BinPackParameters: false
+BinPackArguments: false
+BinPackBracedInitList: false
+AllowAllParametersOfDeclarationOnNextLine: false
+ReflowComments: false

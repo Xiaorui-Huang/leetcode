@@ -1,4 +1,4 @@
-#include "lc_122_best_time_to_buy_and_sell_stock_ii.cpp"
+#include "lc_122_medium_best_time_to_buy_and_sell_stock_ii.cpp"
 #include <gtest/gtest.h>
 
 TEST(LeetCode, 122_best_time_to_buy_and_sell_stock_ii_Example1) {

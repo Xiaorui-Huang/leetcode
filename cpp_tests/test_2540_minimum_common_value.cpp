@@ -1,4 +1,4 @@
-#include "lc_2540_minimum_common_value.cpp"
+#include "lc_2540_easy_minimum_common_value.cpp"
 #include <gtest/gtest.h>
 
 TEST(LeetCode, 2540_minimum_common_value_1) {

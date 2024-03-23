@@ -89,24 +89,25 @@ class Solution {
         q.push(0);
         visited[0] = true;
 
+        // Place holder code
         // BFS to find the longest path
-        while (!q.empty()) {
-            int node = q.front();
-            q.pop();
-            for (auto &neighbor : graph[node]) {
-                if (!visited[neighbor]) {
-                    q.push(neighbor);
-                    visited[neighbor] = true;
-                }
-            }
-        }
+        // while (!q.empty()) {
+        //     int node = q.front();
+        //     q.pop();
+        //     for (auto &neighbor : graph[node]) {
+        //         if (!visited[neighbor]) {
+        //             q.push(neighbor);
+        //             visited[neighbor] = true;
+        //         }
+        //     }
+        // }
 
-        // Check if all nodes are visited
-        for (auto &node : visited) {
-            if (!node) {
-                return -1;
-            }
-        }
+        // // Check if all nodes are visited
+        // for (auto &node : visited) {
+        //     if (!node) {
+        //         return -1;
+        //     }
+        // }
 
         // Return the number of vertices on the longest path
         return n - 1;

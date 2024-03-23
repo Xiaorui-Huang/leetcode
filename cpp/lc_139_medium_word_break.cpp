@@ -63,6 +63,7 @@
 #include <iostream>
 #include <limits>
 #include <unordered_map>
+#include <unordered_set>
 #include <vector>
 using namespace std;
 // Enable to print vectors just by calling its name
@@ -81,27 +82,29 @@ class Solution {
      *
      * @param s the string to check if break up is possible
      * @param wordDict dictionary of word splits
-     * @return return true if s can be segmented into a space-separated sequence of one or more
-     * dictionary words.
+     * @return return true if s can be segmented into a space-separated sequence
+     * of one or more dictionary words.
      */
     bool wordBreak(string s, vector<string> &wordDict) {
         /**
          * DP solution:
          *      let dp[i] be if s[:i] can be separated using wordDict
          *          dp[i] = dp[j] and s[j:] is in wordDict, for 0 <= j < i
-         *          dp[0] = True, since empty string can stand in place for any word in wordDict
-         *              e.g. "" + "leetcode" -> "leetcode"
+         *          dp[0] = True, since empty string can stand in place for any
+         * word in wordDict e.g. "" + "leetcode" -> "leetcode"
          */
         int n = s.length();
         vector<bool> dp(n + 1, false);
+        unordered_set<string> dict = unordered_set<string>(wordDict.begin(), wordDict.end());
         dp[0] = true;
 
         // i is the length of the substring from 0
-        for (size_t i = 0; i <= n; i++)
-            // j counts up to j, so as to check the partitioning of the substring
+        for (size_t i = 0; i < n + 1; i++)
+            // j counts up to i, so as to check the partitioning of the substring
             for (size_t j = 0; !dp[i] && j < i; j++)
-                if (dp[j] && find(wordDict.begin(), wordDict.end(), s.substr(j, i - j)) != wordDict.end())
+                if (dp[j] && dict.count(s.substr(j, i - j)))
                     dp[i] = true;
+
         return dp[n];
     }
 };

@@ -1,4 +1,4 @@
-#include "lc_92_reverse_linked_list_ii.cpp"
+#include "lc_92_medium_reverse_linked_list_ii.cpp"
 #include <gtest/gtest.h>
 
 TEST(LeetCode, 92_reverse_linked_list_ii) {
