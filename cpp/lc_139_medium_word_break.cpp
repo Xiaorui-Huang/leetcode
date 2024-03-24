@@ -62,6 +62,7 @@
 #include <algorithm>
 #include <iostream>
 #include <limits>
+#include <string_view>
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
@@ -95,14 +96,22 @@ class Solution {
          */
         int n = s.length();
         vector<bool> dp(n + 1, false);
-        unordered_set<string> dict = unordered_set<string>(wordDict.begin(), wordDict.end());
         dp[0] = true;
+
+        unordered_set<string_view> dict;
+        
+        // we create read-only view stirng that can substring and check membership without copying
+        auto s_view = string_view(s);
+        auto str_to_view = [](const string &str) { return string_view(str); };
+        // use transform to map string to string_view
+        std::transform(wordDict.begin(), wordDict.end(), inserter(dict, dict.end()), str_to_view);
 
         // i is the length of the substring from 0
         for (size_t i = 0; i < n + 1; i++)
             // j counts up to i, so as to check the partitioning of the substring
-            for (size_t j = 0; !dp[i] && j < i; j++)
-                if (dp[j] && dict.count(s.substr(j, i - j)))
+            for (size_t j = 0; j < i; j++)
+                // if (dp[j] && dict.count(s.substr(j, i - j)))
+                if (dp[j] && dict.count(s_view.substr(j, i - j)))
                     dp[i] = true;
 
         return dp[n];
