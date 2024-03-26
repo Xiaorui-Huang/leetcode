@@ -67,13 +67,6 @@
 #include <unordered_set>
 #include <vector>
 using namespace std;
-// Enable to print vectors just by calling its name
-template <typename S> ostream &operator<<(ostream &os, const vector<S> &vector) {
-    for (auto element : vector)
-        os << element << " ";
-    return os;
-}
-
 // @lc code=start
 class Solution {
   public:
