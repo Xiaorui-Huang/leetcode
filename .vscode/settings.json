@@ -86,7 +86,8 @@
         "map": "cpp",
         "xstring": "cpp",
         "set": "cpp",
-        "xtree": "cpp"
+        "xtree": "cpp",
+        "stack": "cpp"
     },
     "python.testing.pytestArgs": [],
     "python.testing.unittestEnabled": false,

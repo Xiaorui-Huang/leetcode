@@ -35,6 +35,9 @@ endforeach()
     #add_executable(${FILENAME} ${UTIL})
 #endforeach()
 
+# suppress warnings for Google Test in gtest-port.h for undefined macros 
+add_definitions(-DGTEST_CREATE_SHARED_LIBRARY=0)
+add_definitions(-DGTEST_LINKED_AS_SHARED_LIBRARY=0)
 
 # Load Google Test
 option(PACKAGE_TESTS "Build the tests" ON)

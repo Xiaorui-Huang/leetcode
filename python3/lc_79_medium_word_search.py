@@ -139,7 +139,7 @@ class Solution:
             if board[i][j] != word[index]:
                 return False
             # if we dfs to the last index of the word and the last letter equals
-            if ~index == -len(word):  # (redundant check) and board[i][j] == word[-1]:
+            if ~index == -len(word):  # (same as index + 1 == len(word)) (redundant check) and board[i][j] == word[-1]:
                 return True
 
             board[i][j] = "#"  # mark as exploring
