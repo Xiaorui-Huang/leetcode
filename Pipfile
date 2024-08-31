@@ -8,6 +8,7 @@ numpy = "*"
 pytest = "*"
 mypy = "*"
 leetcode = {editable = true, path = "."}
+matplotlib = "*"
 
 [dev-packages]
 black = "*"
