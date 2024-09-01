@@ -39,7 +39,7 @@ macro(package_add_test_with_libraries TESTNAME)
 endmacro()
 
 # Set up dependencies
-SET(REQUIRED_LIBRARIES core utils)
+SET(REQUIRED_LIBRARIES core libs)
 
 # list of tests
 file(GLOB TESTFILES ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
