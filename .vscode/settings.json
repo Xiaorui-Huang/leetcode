@@ -88,7 +88,8 @@
         "set": "cpp",
         "xtree": "cpp",
         "stack": "cpp",
-        "assert.h": "c"
+        "assert.h": "c",
+        "vector.h": "c"
     },
     "python.testing.pytestArgs": [],
     "python.testing.unittestEnabled": false,
