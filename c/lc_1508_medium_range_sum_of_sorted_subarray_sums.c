@@ -63,42 +63,45 @@
  * 
  */
 
+#include "quick_sort.h"
 #include <stdlib.h>
 // @lc code=start
 
 // quick sort
-void swap(int *a, int *b) {
-    int temp = *a;
-    *a = *b;
-    *b = temp;
-}
+// void swap(int *a, int *b) {
+//     int temp = *a;
+//     *a = *b;
+//     *b = temp;
+// }
 
-int partition(int arr[], int low, int high) {
-    int pivot = arr[high];
-    int swap_idx = low;
+// int partition(int arr[], int low, int high) {
+//     int pivot = arr[high];
+//     int swap_idx = low;
 
-    for (int i = low; i < high; i++) {
-        if (arr[i] < pivot) {
-            swap(&arr[i], &arr[swap_idx++]);
-        }
-    }
+//     for (int i = low; i < high; i++) {
+//         if (arr[i] < pivot) {
+//             swap(&arr[i], &arr[swap_idx++]);
+//         }
+//     }
 
-    swap(&arr[high], &arr[swap_idx]);
-    return swap_idx;
-}
+//     swap(&arr[high], &arr[swap_idx]);
+//     return swap_idx;
+// }
 
-void quick_sort(int arr[], int low, int high) {
-    if (low >= high)
-        return;
-    int pivot_idx = partition(arr, low, high);
+// void quick_sort(int arr[], int low, int high) {
+//     if (low >= high)
+//         return;
+//     int pivot_idx = partition(arr, low, high);
 
-    quick_sort(arr, low, pivot_idx - 1);
-    quick_sort(arr, pivot_idx + 1, high);
-}
+//     quick_sort(arr, low, pivot_idx - 1);
+//     quick_sort(arr, pivot_idx + 1, high);
+// }
+
+QUICKSORT_IMPL(int)
 
 int rangeSum(int *nums, int numsSize, int n, int left, int right) {
     int num_ele = n * (n + 1) / 2, count = 0, sum = 0;
-    int* arr = (int *)malloc(sizeof(int) * num_ele);
+    int *arr = (int *)malloc(sizeof(int) * num_ele);
 
     for (int i = 0; i < n; i++) {
         sum = 0;
@@ -108,7 +111,8 @@ int rangeSum(int *nums, int numsSize, int n, int left, int right) {
         }
     }
 
-    quick_sort(arr, 0, num_ele - 1);
+    // quick_sort(arr, 0, num_ele - 1);
+    quick_sort_int(arr, 0, num_ele - 1);
 
     sum = 0;
     for (int i = left - 1; i < right; i++) {
