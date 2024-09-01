@@ -89,7 +89,8 @@
         "xtree": "cpp",
         "stack": "cpp",
         "assert.h": "c",
-        "vector.h": "c"
+        "vector.h": "c",
+        "quick_sort.h": "c"
     },
     "python.testing.pytestArgs": [],
     "python.testing.unittestEnabled": false,
