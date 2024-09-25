@@ -84,6 +84,7 @@ using namespace std;
 
 // @lc code=start
 
+// this is a general trie, should have just used a char[26]
 struct TrieNode {
     unordered_map<char, TrieNode *> children;
     bool is_end_of_word = false;
