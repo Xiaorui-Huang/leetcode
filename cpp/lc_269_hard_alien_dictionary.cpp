@@ -63,49 +63,82 @@
  *
  */
 
-#include <algorithm>
-#include <cmath>
-#include <iostream>
-#include <limits>
-#include <unordered_map>
-#include <unordered_set>
+// @lc code=start
+
+#include <functional>
+#include <string>
 #include <vector>
 using namespace std;
-// Enable to print vectors just by calling its name
-template <typename S> ostream &operator<<(ostream &os, const vector<S> &vector) {
-    for (auto element : vector)
-        os << (char)element << " ";
-    return os;
-}
-
-// @lc code=start
 
 class Solution {
   public:
     string alienOrder(vector<string> &words) {
-        /* 1. build the graph from words directed
-         * 2. detect cycle in the graph
-         * 3. topological sort
-         *    - post order traversal using stack (dfs)
-         *    - what's is indegree? Kahn's algorithm
-         */
-
+        // adjacency matrix
+        bool nodes[26] = {0};
         vector<vector<bool>> graph(26, vector<bool>(26, false));
 
+        // Build the graph
         for (size_t i = 1; i < words.size(); i++) {
             auto word1 = words[i - 1];
             auto word2 = words[i];
+
             if (word1.size() > word2.size() && word2 == word1.substr(0, word2.size()))
                 return "";
 
-            for (size_t i = 0; i < min(word1.size(), word2.size()); i++) {
-                if (word1[i] != word2[i]) {
-                    graph[word1[i] - 'a'][word2[i] - 'a'] = true;
+            for (size_t j = 0; j < min(word1.size(), word2.size()); j++) {
+                if (word1[j] != word2[j]) {
+                    graph[word1[j] - 'a'][word2[j] - 'a'] = true;
+                    nodes[word1[j] - 'a'] = true;
+                    nodes[word2[j] - 'a'] = true;
+                    break; // only the first different character between the two words will help us find the order
                 }
             }
         }
 
-        return "";
+        // Count the number of nodes in the graph
+        int graph_size = 0;
+        for (size_t i = 0; i < 26; i++)
+            if (nodes[i])
+                graph_size++;
+
+        // DFS - stack based
+        bool visited[26] = {0};
+        bool on_path[26] = {0}; // to detect cycles
+        string final_dict = "";
+
+        std::function<bool(int)> dfs = [&](int node) -> bool {
+            if (on_path[node])
+                return false; // cycle detected
+            if (visited[node])
+                return true;
+
+            visited[node] = true;
+            on_path[node] = true;
+
+            for (size_t i = 0; i < 26; i++) {
+                if (graph[node][i]) {
+                    if (!dfs(i))
+                        return false;
+                }
+            }
+
+            on_path[node] = false;
+            final_dict.push_back(node + 'a');
+            return true;
+        };
+
+        // Perform DFS for each node
+        for (size_t i = 0; i < 26; i++) {
+            if (nodes[i] && !visited[i]) {
+                if (!dfs(i))
+                    return ""; // cycle detected
+            }
+        }
+
+        // Reverse the final dictionary to get the correct order
+        reverse(final_dict.begin(), final_dict.end());
+
+        return final_dict.size() == graph_size ? final_dict : "";
     }
 };
 
