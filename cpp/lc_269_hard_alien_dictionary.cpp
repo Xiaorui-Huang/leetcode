@@ -73,11 +73,35 @@ using namespace std;
 class Solution {
   public:
     string alienOrder(vector<string> &words) {
+        /* 1. build the graph from words directed
+         * 2. detect cycle in the graph
+         * 3. topological sort
+         *    - post order traversal with dfs 
+         *    - while eliminating cycles
+         *    - what's is indegree? Kahn's algorithm
+         */
         // adjacency matrix
         bool nodes[26] = {0};
         vector<vector<bool>> graph(26, vector<bool>(26, false));
 
         // Build the graph
+
+        // parse the first word into the graph
+        for (size_t i = 1; i < words[0].size(); i++) {
+            auto idx1 = words[0][i - 1] - 'a';
+            auto idx2 = words[0][i] - 'a';
+
+            // "for cases like" aaa, aab, where its just a trivial cycle in itself (not really a cycle strictly)
+            if (idx1 == idx2) {
+                nodes[idx1] = true;
+                continue;
+            }
+            graph[idx1][idx2] = true;
+
+            nodes[idx1] = true;
+            nodes[idx2] = true;
+        }
+
         for (size_t i = 1; i < words.size(); i++) {
             auto word1 = words[i - 1];
             auto word2 = words[i];
@@ -122,7 +146,7 @@ class Solution {
                 }
             }
 
-            on_path[node] = false;
+            on_path[node] = false; // backtrack path
             final_dict.push_back(node + 'a');
             return true;
         };
