@@ -234,7 +234,7 @@ double maxProbability(int n,
     memset(max_probs, 0, sizeof(double) * n);
     max_probs[start_node] = 1;
 
-    for (int _ = 1; _ <= n - 1; _++) {
+    for (int _ = 1; _ <= n - 1; _++) { // V - 1 iterations, since the longest path length in G(V, E) is V - 1
         bool updated = false;
         for (int i = 0; i < edgesSize; i++) {
             int u = edges[i][0], v = edges[i][1];

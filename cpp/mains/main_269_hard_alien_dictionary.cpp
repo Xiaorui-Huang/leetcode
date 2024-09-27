@@ -30,8 +30,9 @@ int main() {
     vector<string> input6 = {"aac", "aabb"};
     cout << "Test Case 6: " << sol.alienOrder(input6) << endl; // Expected Output: "acb"
 
-        vector<string> input7 = {"abc", "abd", "bda"};
-    cout << "Test Case 7: " << sol.alienOrder(input7) << endl; // Expected Output: "acbd" (or any valid order like "abcd")
+    vector<string> input7 = {"abc", "abd", "bda"};
+    cout << "Test Case 7: " << sol.alienOrder(input7)
+         << endl; // Expected Output: "acbd" (or any valid order like "abcd")
 
     // Test Case 8: All characters same in words
     vector<string> input8 = {"aaa", "aaa"};
@@ -49,5 +50,11 @@ int main() {
     vector<string> input13 = {"zxy", "zxz", "yzx", "xzy"};
     cout << "Test Case 13: " << sol.alienOrder(input13) << endl; // Expected Output: ""  invalid
 
-                                                                 
+    vector<string> input14 = {"z", "z"};
+    cout << "Test Case 14: " << sol.alienOrder(input14) << endl; // Expected Output: ""  invalid
+
+    // Test Case 15: Valid order with multiple words
+    vector<string> input15 = {"ab", "adc"};
+    cout << "Test Case 15: " << sol.alienOrder(input15)
+         << endl; // Expected Output: "abcd" (or any valid order like "abdc")
 }

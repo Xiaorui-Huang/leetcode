@@ -18,6 +18,11 @@ using namespace std;
 // shortest paths from a single source to all other nodes in a graph represented
 // as an adjacency list of weighted edges.
 //
+
+// Complexity of dijkstra is - O(log V) per PQ operation
+// V number of Nodes that require PQ operation
+// E number of edge relaxation also triggering PQ operations 
+// -> O((V + E) log V)
 vector<int> dijkstra(int n, int source, vector<pair<int, int>> G[]) {
     // Define "infinity" as a large number to represent unreachable distances
     // initially.
@@ -52,7 +57,8 @@ vector<int> dijkstra(int n, int source, vector<pair<int, int>> G[]) {
                 // and insert the new distance into the set.
 
                 // First, remove the old pair associated with v if it exists.
-                if (D[v] != INF)
+                // We remove since, this is a priority queue and remove -> insert maintains the datastructure (can't just modify)
+                if (D[v] != INF) // check for existence - set with INF is not in Q yet
                     Q.erase({D[v], v});
 
                 // Update the distance to v.
