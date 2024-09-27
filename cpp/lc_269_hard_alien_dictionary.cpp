@@ -85,26 +85,16 @@ class Solution {
         vector<vector<bool>> graph(26, vector<bool>(26, false));
 
         // Build the graph
+        // Mark all characters as existing nodes
+        // important to note that within a word there is no evidence for any lexicographic relations
+        // only in between words. the mere existence only tells you that they exists
+        for (auto &word : words)
+            for (char c : word)
+                nodes[c - 'a'] = true;
 
-        // parse the first word into the graph
-        for (size_t i = 1; i < words[0].size(); i++) {
-            auto idx1 = words[0][i - 1] - 'a';
-            auto idx2 = words[0][i] - 'a';
-
-            // "for cases like" aaa, aab, where its just a trivial cycle in itself (not really a cycle strictly)
-            if (idx1 == idx2) {
-                nodes[idx1] = true;
-                continue;
-            }
-            graph[idx1][idx2] = true;
-
-            nodes[idx1] = true;
-            nodes[idx2] = true;
-        }
-
-        for (size_t i = 1; i < words.size(); i++) {
-            auto word1 = words[i - 1];
-            auto word2 = words[i];
+        for (size_t i = 0; i < words.size() - 1; i++) {
+            auto word1 = words[i];
+            auto word2 = words[i + 1];
 
             if (word1.size() > word2.size() && word2 == word1.substr(0, word2.size()))
                 return "";
@@ -112,8 +102,6 @@ class Solution {
             for (size_t j = 0; j < min(word1.size(), word2.size()); j++) {
                 if (word1[j] != word2[j]) {
                     graph[word1[j] - 'a'][word2[j] - 'a'] = true;
-                    nodes[word1[j] - 'a'] = true;
-                    nodes[word2[j] - 'a'] = true;
                     break; // only the first different character between the two words will help us find the order
                 }
             }

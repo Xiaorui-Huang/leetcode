@@ -90,7 +90,9 @@
         "stack": "cpp",
         "assert.h": "c",
         "vector.h": "c",
-        "quick_sort.h": "c"
+        "quick_sort.h": "c",
+        "format": "cpp",
+        "xutility": "cpp"
     },
     "python.testing.pytestArgs": [],
     "python.testing.unittestEnabled": false,
