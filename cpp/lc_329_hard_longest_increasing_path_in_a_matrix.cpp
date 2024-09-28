@@ -96,6 +96,7 @@ class Solution {
         vector<vector<int>> outdegrees(rows, vector<int>(cols, 0));
         vector<pair<int, int>> directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
+        // O(mn)
         // Calculate outdegrees based on neighbors
         for (int row = 0; row < rows; row++)
             for (int col = 0; col < cols; col++)
@@ -106,6 +107,7 @@ class Solution {
                         outdegrees[row][col]++;
                 }
 
+        // O(mn)
         // Start BFS from nodes with outdegree == 0
         vector<pair<int, int>> queue;
         for (int row = 0; row < rows; row++)
@@ -113,6 +115,7 @@ class Solution {
                 if (outdegrees[row][col] == 0)
                     queue.push_back({row, col});
 
+        // O(mn) -> on the worst case we have an Edge between all, and that is bounded by mn in a matrix
         int layers = 0; // or path length, depending on the analogy
         while (!queue.empty()) {
             vector<pair<int, int>> next_queue;
