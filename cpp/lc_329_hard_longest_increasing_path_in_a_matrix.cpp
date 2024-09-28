@@ -71,68 +71,70 @@ class Solution {
   public:
     int longestIncreasingPath(vector<vector<int>> &matrix) {
         // 1. Count the outdegrees of each node (based on increase in value to neighbour)
-        // 2. for every outdegree that is 0 we process all the dir that is an out going node and reduce it's outdegree and enqueue these nodes for the next level
-        // 3. everytime we do 2. it increases the path length by 1 (all possible path +1 together)
-        // 4. repeat this until all outdegree is 0
+        // 2. for every outdegree that is 0 we process all the dir that is an outgoing node
+        //    and reduce its outdegree and enqueue these nodes for the next level.
+        // 3. every time we do 2, it increases the path length by 1 (all possible path +1 together)
+        // 4. repeat this until all outdegrees are 0
         //
-        // sidenote: no need to check for cycles, since strictly increasing will always have be a DAG
-        // Normally in Matrix DFS you can't use topological search, since there is a trivial cycle almost always
-        // Question, can we solve this with DFS based topological search? (instead of Kanh's algorithm)  and what' the complexity difference
+        // sidenote: no need to check for cycles, since strictly increasing will always be a DAG.
+        // Normally in Matrix DFS you can't use topological search, since there is a trivial cycle almost always.
 
-        // implementation detail, we add buffer around the matrix so that number of edges in buffed graph == number of node in path (think of the case with max len of 1)
-        size_t rows, cols;
-        rows = matrix.size();
-        cols = matrix[0].size();
+        // Question: can we solve this with DFS-based topological search? (instead of Kahn's algorithm) and what's the complexity difference?
 
-        // padding
-        for (auto &row : matrix) {
-            row.insert(row.begin(), INT_MIN);
-            row.push_back(INT_MIN);
-        }
-        matrix.insert(matrix.begin(), vector<int>(cols + 2, INT_MIN));
-        matrix.push_back(vector<int>(cols + 2, INT_MIN));
-        rows += 2;
-        cols += 2;
+        // implementation detail, we add buffer around the matrix so that number of edges in the buffed graph
+        // equals the number of nodes in the path (think of the case with max len of 1).
 
+        int rows = matrix.size();
+        if (rows == 0)
+            return 0;
+        int cols = matrix[0].size();
+
+        // Inline helper for bound check
+        auto in_bounds = [&](int x, int y) { return x >= 0 && x < rows && y >= 0 && y < cols; };
+
+        // outdegrees array
         vector<vector<int>> outdegrees(rows, vector<int>(cols, 0));
-        vector<pair<int, int>> dir = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
-        for (size_t row = 1; row < rows - 1; row++) {
-            for (size_t col = 1; col < cols - 1; col++) {
-                for (auto &[dx, dy] : dir) {
+        vector<pair<int, int>> directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+
+        // Calculate outdegrees based on neighbors
+        for (int row = 0; row < rows; row++)
+            for (int col = 0; col < cols; col++)
+                for (auto &[dx, dy] : directions) {
                     int x = row + dx;
                     int y = col + dy;
-                    if (matrix[row][col] < matrix[x][y])
+                    if (in_bounds(x, y) && matrix[row][col] < matrix[x][y])
                         outdegrees[row][col]++;
                 }
-            }
-        }
 
-        vector<pair<int, int>> q, q_swaps;
-        for (size_t row = 1; row < rows - 1; row++)
-            for (size_t col = 1; col < cols - 1; col++)
+        // Start BFS from nodes with outdegree == 0
+        vector<pair<int, int>> queue;
+        for (int row = 0; row < rows; row++)
+            for (int col = 0; col < cols; col++)
                 if (outdegrees[row][col] == 0)
-                    q.push_back({row, col});
+                    queue.push_back({row, col});
 
-        int layers = 0; // or path length, depending on the analody
-        while (!q.empty()) {
+        int layers = 0; // or path length, depending on the analogy
+        while (!queue.empty()) {
+            vector<pair<int, int>> next_queue;
             layers++;
-            for (auto &[r, c] : q) {
-                // [r, c] has outdegree 0
-                // we check for all neighours that that points to [r, c] and check cheir out degree
-                // i.e. [r, c] is the sink, flowing from [x, y]
-                // check if matrix[r, c] > matrix[x, y]
-                for (auto &[dx, dy] : dir) {
-                    int x = r + dx, y = c + dy;
-                    if (matrix[x][y] < matrix[r][c] && --outdegrees[x][y] == 0)
-                        q_swaps.push_back({x, y});
+
+            // anchor at rc, probe it's neighbors [x, y] = [r + dx, c + dy]
+            for (auto &[r, c] : queue)
+                for (auto &[dx, dy] : directions) {
+                    // [r, c] has outdegree 0
+                    // We check for all neighbors that point to [r, c] and reduce their outdegree.
+                    // [r, c] is the sink, flowing from [x, y]. We check if matrix[r, c] > matrix[x, y].
+                    int x = r + dx;
+                    int y = c + dy;
+                    if (in_bounds(x, y) && matrix[x][y] < matrix[r][c] && --outdegrees[x][y] == 0)
+                        next_queue.push_back({x, y});
                 }
-            }
-            q.clear();
-            q = q_swaps;
-            q_swaps.clear();
+
+            queue = std::move(next_queue); // Avoid copying vectors by using std::move
         }
 
         return layers;
-    };
+    }
 };
+
 // @lc code=end
