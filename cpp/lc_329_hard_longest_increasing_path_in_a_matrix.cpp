@@ -66,10 +66,17 @@
 #include <vector>
 using namespace std;
 
+#define KAHN_ALGO 0
+#define DFS_MEMO 1
+
+#define APPR DFS_MEMO
+
 // @lc code=start
 class Solution {
   public:
+    vector<pair<int, int>> dir = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
     int longestIncreasingPath(vector<vector<int>> &matrix) {
+#if APPR == KAN_ALGO
         // 1. Count the outdegrees of each node (based on increase in value to neighbour)
         // 2. for every outdegree that is 0 we process all the dir that is an outgoing node
         //    and reduce its outdegree and enqueue these nodes for the next level.
@@ -94,13 +101,12 @@ class Solution {
 
         // outdegrees array
         vector<vector<int>> outdegrees(rows, vector<int>(cols, 0));
-        vector<pair<int, int>> directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
         // O(mn)
         // Calculate outdegrees based on neighbors
         for (int row = 0; row < rows; row++)
             for (int col = 0; col < cols; col++)
-                for (auto &[dx, dy] : directions) {
+                for (auto &[dx, dy] : dir) {
                     int x = row + dx;
                     int y = col + dy;
                     if (in_bounds(x, y) && matrix[row][col] < matrix[x][y])
@@ -123,7 +129,7 @@ class Solution {
 
             // anchor at rc, probe it's neighbors [x, y] = [r + dx, c + dy]
             for (auto &[r, c] : queue)
-                for (auto &[dx, dy] : directions) {
+                for (auto &[dx, dy] : dir) {
                     // [r, c] has outdegree 0
                     // We check for all neighbors that point to [r, c] and reduce their outdegree.
                     // [r, c] is the sink, flowing from [x, y]. We check if matrix[r, c] > matrix[x, y].
@@ -137,6 +143,41 @@ class Solution {
         }
 
         return layers;
+#elif APPR == DFS_MEMO
+        // Directions for moving in the matrix: right, left, down, up
+
+        int longestIncreasingPath(vector<vector<int>> & matrix) {
+
+            int rows = matrix.size(), cols = matrix[0].size();
+            // Memoization table to store the longest path starting from each cell
+            vector<vector<int>> memo(rows, vector<int>(cols, 0));
+
+            int maxPath = 0;
+            // Try DFS from each cell
+            for (int r = 0; r < rows; ++r)
+                for (int c = 0; c < cols; ++c)
+                    maxPath = max(maxPath, dfs(matrix, memo, r, c));
+            return maxPath;
+        }
+
+        int dfs(const vector<vector<int>> &matrix, vector<vector<int>> &memo, int r, int c) {
+            // If this cell is already visited, return the stored result
+            if (memo[r][c] != 0)
+                return memo[r][c];
+
+            int maxLength = 1; // The length of the path starting from this cell (itself)
+            for (auto [dx, dy] : dir) {
+                int x = r + dx, y = c + dy;
+                // Ensure we stay within bounds and the next cell has a strictly greater value
+                if (x >= 0 && x < matrix.size() && y >= 0 && y < matrix[0].size())
+                    if (matrix[x][y] > matrix[r][c])
+                        maxLength = max(maxLength, 1 + dfs(matrix, memo, x, y));
+            }
+
+            memo[r][c] = maxLength; // Store the result for future calls
+            return maxLength;
+        }
+#endif
     }
 };
 
