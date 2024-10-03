@@ -57,7 +57,7 @@ vector<int> dijkstra(int n, int source, vector<pair<int, int>> G[]) {
                 // and insert the new distance into the set.
 
                 // First, remove the old pair associated with v if it exists.
-                // We remove since, this is a priority queue and remove -> insert maintains the datastructure (can't just modify)
+                // Weremove since, this is a priority queue and remove -> insert maintains the datastructure (can't just modify)
                 if (D[v] != INF) // check for existence - set with INF is not in Q yet
                     Q.erase({D[v], v});
 
