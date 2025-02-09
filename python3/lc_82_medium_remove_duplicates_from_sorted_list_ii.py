@@ -44,8 +44,8 @@
 #
 from typing import Optional
 
-
 from utils.linked_list import ListNode
+
 
 # @lc code=start
 # Definition for singly-linked list.

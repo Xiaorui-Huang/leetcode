@@ -78,6 +78,7 @@ class Solution:
             max_path_sum = max(max_path_sum, left_gain + right_gain + node.val)
 
             return node.val + max(left_gain, right_gain)
+
         path_gain(root)
 
         return max_path_sum
