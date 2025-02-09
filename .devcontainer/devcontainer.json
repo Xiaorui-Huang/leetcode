@@ -9,9 +9,11 @@
     "ghcr.io/jungaretti/features/make:1": {},
     "ghcr.io/devcontainers-extra/features/cmake:1": {},
     "ghcr.io/devcontainers-contrib/features/pipenv:1": {},
+    "ghcr.io/devcontainers/features/conda:1": {},
+    "ghcr.io/devcontainers/features/node:1": {},
     "ghcr.io/devcontainers/features/git:1": {},
     "ghcr.io/devcontainers/features/github-cli:1": {},
-    "ghcr.io/guiyomh/features/vim:0": {},
+    "ghcr.io/devcontainers-extra/features/neovim-apt-get:1": {},
     "ghcr.io/meaningful-ooo/devcontainer-features/homebrew:2": {}
   }
 }
